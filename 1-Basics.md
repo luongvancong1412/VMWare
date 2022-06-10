@@ -5,12 +5,14 @@
 - [Tổng quan](#tổng-quan)
   - [1. Virtual Machines](#1-virtual-machines)
   - [2. Lợi ích của việc sử dụng máy ảo](#2-lợi-ích-của-việc-sử-dụng-máy-ảo)
+    - [2.1 Lý do sử dụng Virtual machine: Vmware](#21-lý-do-sử-dụng-virtual-machine-vmware)
+    - [2.2 IT problems in scope](#22-it-problems-in-scope)
   - [3. Các loại ảo hóa](#3-các-loại-ảo-hóa)
     - [3.1. Desktop](#31-desktop)
     - [3.2. Application](#32-application)
     - [3.3. Server](#33-server)
-  - [3.4. Storage](#34-storage)
-  - [3.5. Network](#35-network)
+    - [3.4. Storage](#34-storage)
+    - [3.5. Network](#35-network)
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 # Tổng quan
@@ -29,19 +31,66 @@ Phần mềm ảo hóa ( virtualization software) chuyển đổi máy vật lý
     - Parallel và serial ports
 
 ## 2. Lợi ích của việc sử dụng máy ảo
-<h3>Máy vật lý:</h3>
+### 2.1 Lý do sử dụng Virtual machine: Vmware
+<h4>For Better Hardware utilization</h4>
 
-- Khó di chuyển hoặc sao chép
-- Liên kết với một tập hợp các thành phần phần cứng cụ thể
-- Thường có vòng đời ngắn
-- Cần tác động trực tiếp để nâng cấp phần cứng
+- Sử dụng phần cứng tốt hơn
+- Giả sử tạo 500 máy ảo, ví dụ cấu hình 10 vms trên 1 máy chủ thì ta cần 50 box thay vì 500 máy chủ vật lý
+- Có giới hạn về dung lượng bộ nhớ cho mỗi máy chủ lưu trữ
+https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207.0&categories=1-0,2-0
+<h4>Financial Benefit</h4>
 
-<h3>Máy ảo:</h3>
+- Lợi ích tài chính
 
-- Dễ dàng di chuyển hoặc sao chép
-- Độc lập với phần cứng vật lý vì máy ảo được đóng gói thành tệp
-- Cách ly với các máy ảo khác chạy trên cùng một phần cứng vật lý
-- Không bị ảnh hưởng bởi những thay đổi phần cứng vật lý
+<h4>Datacentre space</h4>
+
+- Không gian trung tâm dữ liệu
+- Ví dụ họ mua đất để duy trì nhiều server 
+- Khi số lượng máy chủ của bạn giảm từ 500 xuống 50, điều đó có nghĩa là bạn giảm 450 máy chủ, không gian trung tâm dữ liệu cũng giảm
+
+<h4>AMC- Anual Maintenance Cost</h4>
+
+- Về tiền điện, giả sử hoá đơn tiền điện trước đó cho 500 máy chủ, nếu máy chủ của bạn giảm xuống 50 thì hoá đơn tiền điện được tiết kiệm, này gọi chung là chi phí bảo trì hằng năm
+- Giảm chi phí bảo hành hàng năm Chi phí bảo trì hàng năm, điện cung cấp không gián đoạn, khi giảm kích thước thiết bị thì điện cũng giảm
+<h4>UPS - Uninterruptible Power Supply</h4>
+
+- Có một nguồn điện riêng biệt
+<h4>Network equipment</h4>
+
+- Khi số lượng máy chủ giảm từ 500 xuống 50 thì số lượng thiết bị mạng cũng sẽ giảm xuống.
+<h4>Storage</h4>
+
+- Cũng tương tự như trên
+
+**=>Chi phí cơ sở hạ tầng giảm**
+
+### 2.2 IT problems in scope 
+Những thách thức lớn mà VMware đã giải quyết:
+<h4>High CAPEX for dedicated infrastructure</h4>
+
+- Chi phí cao cho những thiết bị chuyên dụng
+- Khi mua Laptop sẽ có các mẫu bộ vi xử lý i3 i5 i7, cấu hình nào tốt nhất , thương hiệu nào tốt hơn,...
+- Khi bắt đầu 1 dự án, trong giai đoạn ban đầu họ sẽ xác định cần bao nhiêu máy chủ cho dự án mới này,... Nếu không có ảo hoá, cần đầu tư chi phí cao cho toàn bộ cơ sở hạ tầng vật lý, data center,...
+- Nếu sử dụng ảo hoá, không cần đầu tư nhiều dung lượng cao mà có thể sử dụng ít hơn và có thể duy trì data center của mình
+<h4>Single point of failure</h4>
+
+- Một điểm lỗi duy nhất.
+- Ví dụ: Giả sử có 200 máy chủ trong tổ chức, nếu 1 máy chủ gặp sự cố chắc chắn sẽ ảnh hưởng đến hoạt động sản xuất. Nếu bạn có 1 data center hoàn chỉnh thì đó cũng được coi là **Single point of failure**.
+- VMware cung cấp toàn bộ đều là máy ảo, máy sẽ hoạt động liên tục. Về kỹ thuật được gọi là tính khả dụng, tính sẵn sàng cao
+<h4>Long wait time for hardware purchases</h4>
+
+- Thời gian chờ đợi dài để mua phần cứng
+  - Khi mua Laptop ta có thể đến cửa hàng mua, nhưng khi nói đến máy chủ, nếu muốn mua 100 máy chủ phải đặt hàng trước, mất một thời gian để cung cấp 100 máy chủ
+  - Giả sử nếu có 1 hộp Exsa cấu hình cao, ta có thể tạo nhiều máy ảo trên đó và có thể tạo máy ảo một cách nhanh chóng, cài hệ điều hành tương tự như máy thật, không phải chờ đợi lâu cho **Long wait time for hardware purchases** 
+<h4>Unexpected infrastructure outages</h4>
+- Cơ sở hạ tầng ngừng hoạt động không mong muốn
+<h4>Performance bottlenecks</h4>
+
+- Tắc nghẽn hiệu suất
+- Tất cả hiệu suất đều có giới hạn
+<h4>Not enough data center resources or space</h4>
+- Không đủ tài nguyên hoặc dung lượng của trung tâm dữ liệu
+
 
 ## 3. Các loại ảo hóa
 
@@ -88,239 +137,20 @@ Tạo một máy chủ ảo thay cho máy chủ vật lý, cho phép quản lý 
 - Trong các loại ảo hoá, **Server Virtualization** có tỷ lệ sử dụng cao nhất thay cho máy chủ vật lý. Máy chủ ảo này thường bao gồm một máy ảo được trang bị CPU, RAM và phần cứng ảo để bắt trước một máy chủ truyền thống trên cloud
 
 - Cho phép người quản trị hệ thống nhanh chóng thêm nhiều máy ảo hơn, loại bỏ thời gian và chi phí là mua một máy tính vật lý mới.
-## 3.4. Storage
+### 3.4. Storage
 Lưu trữ dữ liệu của doanh nghiệp trong một cloud an toàn, loại bỏ nhu cầu lưu trữ dữ liệu vật lý  và có khả năng giảm chi phí liên quan đến không gian trong trung tâm dữ liệu
 
 - Có 2 loại Storage Virtualization
   - Internal (nội bộ)
   - External (bên ngoài)
 
-## 3.5. Network
+### 3.5. Network
 Sử dụng các thành phần vật lý và ảo để tạo ra một mạng lai (hybrid network), cho phép quản trị mạng thông qua các switch phần mềm
 
 - Là sự kết hợp giữa mạng vật lý và mạng ảo, sử dụng thành phần của cả 2 để tạo ra một môi trường dễ quản lý hơn nhiều so với một môi trường vật lý nghiêm ngặt
 - Giúp thử nghiệm các ứng dụng mới được phát trển trên mạng ảo trước khi phát hành để phát hiện các sai sót và lỗi tiềm ẩn, tối ưu hoá hiệu suất của ứng dụng dựa trên cách nó hoạt động trên môi trường ảo
 
 
-
-Giới thiệu về Software-Defined Data Center (Trung tâm dữ liệu do phần mềm xác định)
-Trong Software-Defined Data Center (SDDC), tất cả cơ sở hạ tầng đều được ảo hóa và việc kiểm soát trung tâm dữ liệu được tự động hóa bằng phần mềm. vSphere là người sáng lập của SDDC
-
-Giới thiệu vSphere
-
-vSphere và Điện toán đám mây
-Điện toán đám mây khai thác sự hiệu quả của cơ sở hạ tầng ảo theo yêu cầu, tự quản lý
-
-
-
-
-II. vSphere – Ảo hóa tài nguyên
-Virtual Machine: Guest và Consumer of ESXi Host
-Mọi ứng dụng trong bất kỳ hệ điều hành được hỗ trợ nào đều có thể chạy trong máy ảo (Guest) và sử dụng CPU, bộ nhớ, đĩa và mạng từ các tài nguyên dựa trên máy chủ
-
-
-
-Physical và Virtual Architecture
-Công nghệ ảo hóa trừu tượng hóa các thành phần vật lý thành các thành phần phần mềm và là giải pháp cho nhiều vấn đề CNTT
-
-
-
- 
-
-Physical Resource Sharing
-Nhiều máy ảo, chạy trên một máy chủ vật lý, chia sẻ tài nguyên tính toán, bộ nhớ, mạng và lưu trữ của máy chủ lưu trữ
-
-
-
- 
-
-CPU Virtualization
-Trong môi trường physical, hệ điều hành được quyền sở hữu của tất cả các CPU vật lý trong hệ thống.
-
-CPU virtualization nhấn mạnh vào hiệu suất và chạy trực tiếp trên các CPU có sẵn
-
-Giới thiệu vSphere
-
-Physical và Virtualized Host Memory Usage
-Trong môi trường physical, hệ điều hành được quyền sở hữu của tất cả bộ nhớ vật lý trong hệ thống.
-
-Memory virtualization nhấn mạnh vào hiệu suất và chạy trực tiếp trên các RAM có sẵn
-
-Giới thiệu vSphere
-
- 
-
-Physical và Virtual Networking
-Virtual Ethernet adapters and virtual switches là các thành phần mạng ảo chính
-
-Giới thiệu vSphere
-
-Physical File Systems và Datastores
-vSphere VMFS cung cấp một kiến trúc lưu trữ phân tán, trong đó nhiều máy chủ ESXi có thể đọc hoặc ghi đồng thời vào bộ lưu trữ dùng chung.
-
-Giới thiệu vSphere
-
-GPU Virtualization
-GPU graphics tối ưu hóa các hoạt động đồ họa phức tạp. Các hoạt động này có thể chạy ở hiệu suất cao mà không làm CPU quá tải.
-
-GPU ảo có thể được thêm vào máy ảo cho các trường hợp sử dụng sau:
-
-• Rich 2D and 3D graphics
-• VMware Horizon virtual desktops
-• Graphics-intensive applications, chẳng hạn như những kiến trúc sư và kỹ sư sử dụng
-• Server applications cho các tác vụ song song hàng loạt, chẳng hạn như các ứng dụng tính toán khoa học
-
-Bạn có thể định cấu hình máy ảo với tối đa bốn thiết bị vGPU để đáp ứng các trường hợp sử dụng yêu cầu nhiều GPU.
-
-VMware hỗ trợ card đồ họa AMD và NVIDIA.
-
-
-III. vSphere – Giao diện người dùng
-Bạn có thể sử dụng vSphere Client, PowerCLI, VMware Host Client và ESXCLI để tương tác với môi trường vSphere.
-
-Để biết thông tin về các cổng và giao thức, hãy xem http://ports.vmware.com.
-
-Giới thiệu vSphere
-
-Giới thiệu về VMware Host Client
-VMware Host Client là giao diện người dùng dựa trên HTML5 mà bạn có thể sử dụng để quản lý trực tiếp các máy chủ ESXi riêng lẻ khi máy chủ vCenter không khả dụng.
-
-VMware Host Client từ ESXi và bạn truy cập nó từ  trình duyệt tại https://ESXi_FQDN_or_IP_Address/ui
-
- 
-
-
-
- 
-
-Giới thiệu vSphere Client
-vSphere Client là ứng dụng khách dựa trên HTML5. Bạn quản lý môi trường vSphere với vSphere Client bằng cách kết nối với vCenter Server Appliance.
-
-Bạn truy cập vSphere Client từ  trình duyệt tại https://vCenter_Server_Appliance_FQDN_or_IP_Address /ui
-
-
-
- 
-
-Giới thiệu về PowerCLI và ESXCLI
-PowerCLI là một công cụ dòng lệnh và tập lệnh được xây dựng trên Windows PowerShell:
-• Cung cấp giao diện PowerShell cho vSphere API
-• Cung cấp hơn 700 cmdlet để quản lý và tự động hóa vSphere
-
-Công cụ ESXCLI cho phép quản lý từ xa các máy chủ ESXi bằng cách sử dụng bộ lệnh ESXCLI:
-• Có thể tải xuống ESXCLI từ trang VMware {code} tại https://code.vmware.com/web/tool/7.0/esxcli
-• Các lệnh ESXCLI có thể được chạy trên hệ thống vCenter Server và nhắm mục tiêu đến bất kỳ hệ thống ESXi nào.
-
-
-IV. Tổng quan ESXi
-Về ESXi
-ESXi là một hypervisor mà bạn có thể mua với vSphere hoặc tải xuống phiên bản miễn phí. ESXi có các tính năng sau:
-
-• Bảo mật cao:
-— Host-based firewall
-— Memory hardening
-— Kernel module integrity
-— Trusted Platform Module (TPM 2.0)
-— UEFI secure boot
-— Encrypted core dumps
-• Sử dụng dung lượng disk nhỏ
-• Khởi động nhanh để vá và nâng cấp nhanh hơn
-• Có thể cài đặt trên đĩa cứng, SAN LUN, SSD, thiết bị USB, thẻ SD, SATADOM và máy chủ không ổ đĩa
-
-Cấu hình ESXi host
-DCUI là giao diện người dùng dựa trên văn bản với tương tác chỉ dùng bàn phím
-
-Giới thiệu vSphere
-
-Root Access
-Quản trị viên sử dụng DCUI để cấu hình cài đặt quyền truy cập root:
-• Đặt mật khẩu root (chỉ những mật khẩu phức tạp).
-• Bật hoặc tắt chế độ khóa:
-– Giới hạn quản lý ESXi host với chỉ sử dụng vCenter
-– Chỉ có thể được định cấu hình cho hosts được quản lý bởi vCenter
-
-
-
-Management Network
-Sử dụng DCUI, bạn có thể sửa đổi cài đặt mạng:
-
-• Hostname
-• IP configuration (IP address, subnet mask, default gateway)
-• DNS servers
-
-Giới thiệu vSphere
-
-Các thiết lập khác
-Sử dụng DCUI, bạn có thể định cấu hình bố cục bàn phím, bật dịch vụ khắc phục sự cố, xem thông tin hỗ trợ và xem nhật ký hệ thống
-
-Giới thiệu vSphere
-
- 
-
-Kiểm soát quyền truy cập từ xa vào máy chủ ESXi
-Bạn có thể sử dụng vSphere Client để tùy chỉnh các cài đặt bảo mật thiết yếu giúp kiểm soát quyền truy cập từ xa vào máy chủ ESXi:
-• Tường lửa ESXi được bật theo mặc định:
-– Tường lửa chặn lưu lượng đến và đi, ngoại trừ lưu lượng được bật trong cài đặt tường lửa của máy chủ.
-• Các dịch vụ, chẳng hạn như NTP client và SSH client, có thể được quản lý bởi quản trị viên.
-• Chế độ Lockdown ngăn người dùng từ xa đăng nhập trực tiếp vào máy chủ. Máy chủ chỉ có thể truy cập thông qua DCUI hoặc vCenter Server.
-
-Giới thiệu vSphere
-
- 
-
-Quản lý tài khoản người dùng: Best Practices
-Khi chỉ định tài khoản người dùng để truy cập máy chủ ESXi hoặc hệ thống máy chủ vCenter, hãy đảm bảo rằng bạn tuân theo các nguyên tắc bảo mật sau:
-
-• Kiểm soát chặt chẽ các đặc quyền root đối với các máy chủ ESXi.
-• Tạo mật khẩu tài khoản root mạnh, có ít nhất tám ký tự. Sử dụng các ký tự đặc biệt, thay đổi chữ hoa chữ thường và số. Thay đổi mật khẩu định kỳ.
-• Quản lý các máy chủ ESXi một cách tập trung thông qua vCenter bằng cách sử dụng vSphere Client
-• Giảm thiểu việc sử dụng local user trên các máy chủ ESXi:
-– Thêm máy chủ ESXi vào Active Directory và thêm người dùng quản trị viên có liên quan vào ESX Admins domain group Theo mặc định, người dùng trong ESX Admins domain group quyền root trên máy chủ ESXi.
-– Nếu local users được tạo, hãy quản lý họ một cách tập trung bằng lệnh esxcli trong vSphere CLI.
-
-NTP Client cho ESXi Host
-Máy chủ ESXi có thể được cấu hình như một NTP Client. Nó có thể đồng bộ thời gian với máy chủ NTP trên Internet hoặc máy chủ NTP của công ty bạn.
-
-
-
-Vậy là chúng ta đã hoàn thành xong bài giới thiệu vSphere, các thành phần bên trong, và Software Defined Data Center
-
- Bài 1: Giới thiệu khóa học – Tự học VMware vSphere 7: Install, Configure, Manage
-Bài 3: Máy ảo (Virtual Machine) – Tự học Vmware vSphere 7 
-Leave a Reply 
-Your email address will not be published. Required fields are marked *
-
-Comment
-
-Name *
-
-Email *
-
-Website
-
- Save my name, email, and website in this browser for the next time I comment.
-
-Bài viết mới nhất
-Hướng dẫn mở case lấy bản mềm chứng chỉ Cisco
-Hướng dẫn đổi tên chứng chỉ Cisco
-Các khái niệm về bảo mật mạng LAN
-Ebook RedHat Linux Networking and System Administration
-Ebook Programming and Automating Cisco Networks
-
- info@itexamviet.com
-Những series, chủ đề hay
-Tự học AWS
-Tự học VMware vSphere 7
-Tự học CCNA v7 200-301
-Tự học Linux
-Lý do chọn ITexamViet
-Hướng dẫn thi thử trên ITexamViet
-Hướng dẫn mua dump trên ITexamViet 
-Hướng dẫn thi chứng chỉ online trên PEARSON VUE
-Chiến thuật luyện thi
-© 2022 ITexamViet
-
-Liên hệ Về chúng tôi Privacy Policy
 
 # Tài liệu tham khảo 
 
