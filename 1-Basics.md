@@ -83,12 +83,14 @@ Những thách thức lớn mà VMware đã giải quyết:
   - Khi mua Laptop ta có thể đến cửa hàng mua, nhưng khi nói đến máy chủ, nếu muốn mua 100 máy chủ phải đặt hàng trước, mất một thời gian để cung cấp 100 máy chủ
   - Giả sử nếu có 1 hộp Exsa cấu hình cao, ta có thể tạo nhiều máy ảo trên đó và có thể tạo máy ảo một cách nhanh chóng, cài hệ điều hành tương tự như máy thật, không phải chờ đợi lâu cho **Long wait time for hardware purchases** 
 <h4>Unexpected infrastructure outages</h4>
+
 - Cơ sở hạ tầng ngừng hoạt động không mong muốn
 <h4>Performance bottlenecks</h4>
 
 - Tắc nghẽn hiệu suất
 - Tất cả hiệu suất đều có giới hạn
 <h4>Not enough data center resources or space</h4>
+
 - Không đủ tài nguyên hoặc dung lượng của trung tâm dữ liệu
 
 
