@@ -12,6 +12,7 @@
 - [6. Input/Output (I/O)](#6-inputoutput-io)
 - [7. Operating system (OS):](#7-operating-system-os)
 - [8. Applications (Apps):](#8-applications-apps)
+- [9. Cấu hình Windows Server 2022 Active Directory (AD)](#9-cấu-hình-windows-server-2022-active-directory-ad)
 
 # 1. Server
 ## 1.1 Cốt lõi của cơ sở hạ tầng CNTT
@@ -109,3 +110,7 @@ Phần mềm quản lý tài nguyên phần cứng và phần mềm của máy t
 
 # 8. Applications (Apps):
 Một gói phần mềm thực hiện một chức năng cụ thể trực tiếp cho người dùng cuối hoặc một ứng dụng khác
+
+
+> [VMware Compatibility Guide](https://www.vmware.com/resources/compatibility/search.php?deviceCategory=server&details=1&partner=1_bpartner&page=1&display_interval=10&sortColumn=Partner&sortOrder=Asc)
+# 9. Cấu hình Windows Server 2022 Active Directory (AD)
