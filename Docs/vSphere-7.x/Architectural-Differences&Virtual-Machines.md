@@ -1,14 +1,36 @@
-Các loại ảo hoá, đặc điểm, 5 chức năng, 4 mô hình triển khai, 5 tính năng
-public cloud, private cloud
-- Đọc kvm trước
-============================================================================
-Buổi 3
+<h1>Architectural Differences, Virtual Machines</h1>
+
+<h2> Summary</h2>
+
+- [Nội dung chính](#nội-dung-chính)
+- [Architectural Differences](#architectural-differences)
+  - [Kiến trúc vật lý](#kiến-trúc-vật-lý)
+  - [Kiến trúc dựa trên máy chủ](#kiến-trúc-dựa-trên-máy-chủ)
+  - [Kiến trúc kim loại trần](#kiến-trúc-kim-loại-trần)
+- [Virtual Machine Concepts - Các khái niệm về máy ảo](#virtual-machine-concepts---các-khái-niệm-về-máy-ảo)
+  - [Virtual Machine Components - Các thành phần của máy ảo](#virtual-machine-components---các-thành-phần-của-máy-ảo)
+- [About Virtual Machine Files](#about-virtual-machine-files)
+- [Physical Resource Sharing - Chia sẻ tài nguyên vật lý](#physical-resource-sharing---chia-sẻ-tài-nguyên-vật-lý)
+- [Benefits of Using Virtual Machine](#benefits-of-using-virtual-machine)
+  - [Physical Machine](#physical-machine)
+  - [Virtual Machine](#virtual-machine)
+- [Lợi ích của việc sử dụng Máy ảo](#lợi-ích-của-việc-sử-dụng-máy-ảo)
+  - [Máy vật lý](#máy-vật-lý)
+  - [Máy ảo](#máy-ảo)
+- [VM Creation - Real time Scenario](#vm-creation---real-time-scenario)
+  - [Thực hiện trước](#thực-hiện-trước)
+  - [Thủ tục triển khai](#thủ-tục-triển-khai)
+  - [Các bước thực hiện sau](#các-bước-thực-hiện-sau)
+- [Tài liệu tham khảo](#tài-liệu-tham-khảo)
+
+---
+Bài trước: [Basic Server Fundamentals](../2-Basic-Server-Fundamentals.md)
 
 - Tổng quan về ảo hoá, lý do sử dụng ảo hoá máy chủ vmware
 - Nguyên tắc cơ bản về máy chủ
 
-Hôm nay:
-# Nội dung bài chính:
+Bài này:
+# Nội dung chính
 - Architectural Differences
 - Virtual Machine Concepts
 - Benefits of Using Virtual Machine(s)
@@ -156,4 +178,47 @@ muốn thay đổi nhưng khi nói đến kịch bản máy ảo, chúng tôi kh
 Host add có nghĩa là nó cho phép bạn thêm đĩa nhớ, cpu và nsa trong khi máy ảo bật nguồn, chúng tôi không cần tắt nguồn vm
 mà chúng tôi chỉ trong khi vm đang lên và chạy, bạn có thể chỉ cần nhấp chuột phải vào cài đặt chỉnh sửa vm và bạn có thể tăng đĩa nhớ cpu bất kỳ thành phần phần cứng nào bạn muốn thêm vào đều được
 
-Nhược điểm: Hạn chế về khả năng tương thích ví dụ phần cứng của model như thế hệ thứ 9 hỗ trợ lên đến esxi 6.5 OS chỉ khi bản muốn sử dung esx 6.7 hoặc esxi 7.0 
+Nhược điểm: Hạn chế về khả năng tương thích ví dụ phần cứng của model như thế hệ thứ 9 hỗ trợ lên đến esxi 6.5 OS chỉ khi bản muốn sử dung esx 6.7 hoặc esxi 7.0
+
+# VM Creation - Real time Scenario
+3 Bước:
+- Thực hiện trước
+- Thủ tục triển khai
+- THực hiện sau
+
+## Thực hiện trước
+- Giả sử tại văn phòng công ty, khách hàng yêu cầu tạo một máy ảo mới
+- Trước khi tạo vm cho lab hoặc client,.. chúng ta đưa ra quy ước đặt tên cụ thể theo tiêu chuẩn cty
+Ví dụ: VM-app001, nên tuân thủ quy ước khi đặt tên
+- vCPU(s) - số cpu khách hàng yêu cầu
+- vMem - Số ram yc
+- VDisk -1
+- VDisk -2
+- VDisk -3 (Optional)
+- vNIC
+- Operating System (OS)
+Trước khi tạo vm, chúng ta nên lấy thông tin chi tiết từ KH về hệ điều hành mà họ đang cố gắng cài đặt
+## Thủ tục triển khai
+- Tạo 1 VM theo yêu cầu
+- Cài đặt OS 
+
+## Các bước thực hiện sau
+- Bật nguồn máy ảo
+- Cài đặt VMware tool (thủ công) đối với windows or Open vmware tool for linux
+- Thay đổi tên máy tính như tên hiển thị VM (Ví dụ:đặt cùng tên: VM-app001)
+- Gán địa chỉ IP cho OS khách
+- Thêm hệ thống vào miền nếu là window
+- Kiểm tra và thay đổi múi giờ phù hợp
+- Activate the Guest OS License
+- Disable IE Enhanced Security for windows servers
+- Turn off firewall (Nếu sử dụng tường lửa bên ngoài nào)
+- Enable RDP/SSH (Putty, MobaXterm,...)
+- Test the VM access via RDP/SSH
+- Cài đặt ứng dụng cụ thể theo yêu cầu
+- Bảo mật VM Guest OS bằng chính sách mật khẩu...
+- Provide the VM details to End user/Client/Customer
+	- Cung cấp thông tin chi tiết về VM cho KH để họ có thể xác minh quyền truy cập máy ảo bằng rdp hoặc ssh
+
+# Tài liệu tham khảo
+
+1. https://docs.vmware.com/en/VMware-vSphere/index.html
