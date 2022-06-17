@@ -9,6 +9,7 @@
   - [1.3 Bare-metal architecture](#13-bare-metal-architecture)
 - [2. Virtual Machine Concepts](#2-virtual-machine-concepts)
   - [2.1 Virtual Machine Components - Các thành phần của máy ảo](#21-virtual-machine-components---các-thành-phần-của-máy-ảo)
+  - [<br></br>](#br)
 - [3. About Virtual Machine Files](#3-about-virtual-machine-files)
 - [Physical Resource Sharing - Chia sẻ tài nguyên vật lý](#physical-resource-sharing---chia-sẻ-tài-nguyên-vật-lý)
 - [Benefits of Using Virtual Machine](#benefits-of-using-virtual-machine)
@@ -94,6 +95,7 @@ Các khái niệm về máy ảo:
   - *Disk controllers*
   - *Parallel and serial ports*
 <br></br>
+---
 # 3. About Virtual Machine Files
 - A virtual machine includes a set of related files.
 - Tôi đặt các tệp máy ảo bình thưuofng, bất cứ khi nào chúng tôi tạo máy ảo trong trong máy trạm vmware hoặc máy chủ thành công ở bất kỳ nơi nào bạn tạo máy ảo
