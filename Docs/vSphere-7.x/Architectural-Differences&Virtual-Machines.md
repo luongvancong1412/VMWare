@@ -6,7 +6,7 @@
 - [1. Architectural Differences](#1-architectural-differences)
   - [1.1 Traditional or Physical architecture](#11-traditional-or-physical-architecture)
   - [1.2 Host based architecture](#12-host-based-architecture)
-  - [Kiến trúc kim loại trần](#kiến-trúc-kim-loại-trần)
+  - [Bare-metal architecture](#bare-metal-architecture)
 - [Virtual Machine Concepts - Các khái niệm về máy ảo](#virtual-machine-concepts---các-khái-niệm-về-máy-ảo)
   - [Virtual Machine Components - Các thành phần của máy ảo](#virtual-machine-components---các-thành-phần-của-máy-ảo)
 - [About Virtual Machine Files](#about-virtual-machine-files)
@@ -68,12 +68,14 @@ Có 3 kiến trúc:
 
 ➟**Host based architecture** chỉ đượcc sử dụng cho các mục đích thử nghiệm, nó không phải cho mục đích sản xuất.
 
-## Kiến trúc kim loại trần
-- Sự khác biệt ở đây là ta sẽ không cài hệ điều hành mà sẽ cài phầm mềm ESXi trực tiếp trên phần cứng khôgn có gì khácf ngoài kiến trúc kim loại trần
-- Trong kiến trúc này esxi trực tiếp chạy phần cứng trên máy chủ esxi mà nó cho phép bạn tạo nhiều máy ảo, vì vậy để thử nghiệm tôi tạo sơ đồ này cho thấy 3 vms vm1 vm2 vm3.
-Vì vậy đây là sự khác biệt giữa các kiến trúc trên máy chủ truyền thống và kim loại trần, vì vậy hầu hết môi trường sản xuất chúng tôi khuyên bạn nên sử dụng kim loại trần.
+## Bare-metal architecture
 
+![Imgur](https://i.imgur.com/NOfyIlT.png)
 
+- Sự khác biệt ở đây là sẽ không cài hệ điều hành mà sẽ cài phầm mềm ESXi trực tiếp trên phần cứng
+- Trên máy chủ esxi nó cho phép bạn tạo nhiều máy ảo, trong sơ đồ này cho thấy có 3 vms: vm1 vm2 vm3.
+
+➟ Hầu hết môi trường sản xuất sử dụng Bare-metal architecture.
 
 # Virtual Machine Concepts - Các khái niệm về máy ảo
 
