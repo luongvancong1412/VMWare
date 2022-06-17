@@ -8,7 +8,7 @@
   - [1.2 Host based architecture](#12-host-based-architecture)
   - [1.3 Bare-metal architecture](#13-bare-metal-architecture)
 - [2. Virtual Machine Concepts](#2-virtual-machine-concepts)
-  - [2.1 Virtual Machine Components](#21-virtual-machine-components)
+  - [2.1 Virtual Machine Components - Các thành phần của máy ảo](#21-virtual-machine-components---các-thành-phần-của-máy-ảo)
 - [About Virtual Machine Files](#about-virtual-machine-files)
 - [Physical Resource Sharing - Chia sẻ tài nguyên vật lý](#physical-resource-sharing---chia-sẻ-tài-nguyên-vật-lý)
 - [Benefits of Using Virtual Machine](#benefits-of-using-virtual-machine)
@@ -82,18 +82,17 @@ Các khái niệm về máy ảo:
 - A virtual machine is a software computer that, like a physical computer, rún an operating system and applications.
 - máy ảo là 1 máy tính phần mềm, giống như một máy tính vật lý, chạy hệ điều hành và các ứng dụng.
 
-## 2.1 Virtual Machine Components
-Các thành phần của máy ảo
+## 2.1 Virtual Machine Components - Các thành phần của máy ảo
+
 <a href="https://imgur.com/qUiyJrR"><img src="https://i.imgur.com/qUiyJrR.png" title="source: imgur.com" width=50% align=left /></a>
 
 - **Operating system**
-- **VMware Tools**
-  - *sau khi cài đặt, nó sẽ cung cấp tất cả các trình điều khiển thiết bị máy ảo,bất kể các thành phần sẽ được cung cấp bởi VMware*
-- **Virtual resources** như:
-  - CPU and memory
-  - Network adapters
-  - Disk controllers
-  - Parallel and serial ports
+- **VMware Tools**: *sau khi cài đặt, nó sẽ cung cấp tất cả các trình điều khiển thiết bị máy ảo,bất kể các thành phần sẽ được cung cấp bởi VMware*
+- **Virtual resources** - Các tài nguyên ảo như:
+  - *CPU and memory*
+  - *Network adapters*
+  - *Disk controllers*
+  - *Parallel and serial ports*
 
 # About Virtual Machine Files
 - A virtual machine includes a set of related files.
