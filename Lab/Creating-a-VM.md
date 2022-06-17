@@ -136,28 +136,32 @@ Xác định:
 Xác định:
 |Virtual Machine(VM)|Description|
 |:---:|:---:|
-|VM Name|VM-App001
-|vCPU(s)| 2
-|vMem|2 gb| 
-|vDisk - 1| 40 gb
+|VM Name|VM-ESXi7
+|vCPU(s)|2
+|vMem|4 gb|
+|vDisk - 1|40 gb
 |vDisk - 2(Optional)
-|vNIC| 1 Network Card|
-|Operating System (OS)| Windows Server 2019|
+|vNIC|1 |
+|Operating System (OS)|ESXi 7.0.3 |
 
 ### Step 2: Implementation Procedure
 #### Create a VM as per requirement
-![Imgur](https://i.imgur.com/PhbSFW0.png)
-![Imgur](https://i.imgur.com/Fu1wvwU.png)
-![Imgur](https://i.imgur.com/OP0B984.png)
+
 #### Install the Guest OS
-
-![Imgur](https://i.imgur.com/CxIayQv.png)
-![Imgur](https://i.imgur.com/6ADy86a.png)
-![Imgur](https://i.imgur.com/fKA4HDF.png)
-![Imgur](https://i.imgur.com/Bdn6PnT.png)
-![Imgur](https://i.imgur.com/cppCRUQ.png)
-![Imgur](https://i.imgur.com/NVvANgM.png)
-
+![Imgur](https://i.imgur.com/CjnfyP1.png)
+![Imgur](https://i.imgur.com/tmWUIpm.png)
+![Imgur](https://i.imgur.com/HeJEZxv.png)
+![Imgur](https://i.imgur.com/qzw7AwM.png)
+![Imgur](https://i.imgur.com/s3j3dpF.png)
+![Imgur](https://i.imgur.com/eIqqbnt.png)
+![Imgur](https://i.imgur.com/eVEX3lk.png)
+![Imgur](https://i.imgur.com/T5U8T6T.png)
+![Imgur](https://i.imgur.com/XlNsOLp.png)
+![Imgur](https://i.imgur.com/1Tg6aZN.png)
+![Imgur](https://i.imgur.com/lgj7yN8.png)
+![Imgur](https://i.imgur.com/Sf01bmh.png)
+![Imgur](https://i.imgur.com/xFszzkH.png)
+![Imgur](https://i.imgur.com/lJS8pmQ.png)
 ### Step 3: Post-Implementation
 #### Power on VM
 #### Install Vmware Tools or Open VM Tools for Linux
