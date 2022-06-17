@@ -1,12 +1,12 @@
 <h1> VMware Datacenter Virtualization Basics </h1>
 
-<h2> Mục lục </h2>
+<h2> Summary </h2>
 
 - [Tổng quan](#tổng-quan)
   - [1. Virtual Machines](#1-virtual-machines)
   - [2. Lợi ích của việc sử dụng máy ảo](#2-lợi-ích-của-việc-sử-dụng-máy-ảo)
   - [3. IT problems in scope](#3-it-problems-in-scope)
-  - [3. Các loại ảo hóa](#3-các-loại-ảo-hóa)
+  - [4. Các loại ảo hóa](#4-các-loại-ảo-hóa)
     - [3.1. Desktop](#31-desktop)
     - [3.2. Application](#32-application)
     - [3.3. Server](#33-server)
@@ -69,12 +69,12 @@ https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207
 <h3>➟ Chi phí cơ sở hạ tầng giảm</h3>
 
 ## 3. IT problems in scope 
-Những thách thức lớn mà VMware đã giải quyết:
+Những thách thức lớn:
 <h4>High CAPEX for dedicated infrastructure</h4>
 
 - Chi phí cao cho những thiết bị chuyên dụng
-- Khi mua Laptop sẽ có các mẫu bộ vi xử lý i3 i5 i7, cấu hình nào tốt nhất , thương hiệu nào tốt hơn,...
-- Khi bắt đầu 1 dự án, trong giai đoạn ban đầu họ sẽ xác định cần bao nhiêu máy chủ cho dự án mới này,... Nếu không có ảo hoá, cần đầu tư chi phí cao cho toàn bộ cơ sở hạ tầng vật lý, data center,...
+  - Khi mua Laptop sẽ có các mẫu bộ vi xử lý i3 i5 i7, cấu hình nào tốt nhất , thương hiệu nào tốt hơn,...
+  - Khi bắt đầu 1 dự án, trong giai đoạn ban đầu họ sẽ xác định cần bao nhiêu máy chủ cho dự án mới này,... Nếu không có ảo hoá, cần đầu tư chi phí cao cho toàn bộ cơ sở hạ tầng vật lý, data center,...
 - Nếu sử dụng ảo hoá, không cần đầu tư nhiều dung lượng cao mà có thể sử dụng ít hơn và có thể duy trì data center của mình
 <h4>Single point of failure</h4>
 
@@ -98,7 +98,7 @@ Những thách thức lớn mà VMware đã giải quyết:
 - Không đủ tài nguyên hoặc dung lượng của trung tâm dữ liệu
 
 
-## 3. Các loại ảo hóa
+## 4. Các loại ảo hóa
 
 ### 3.1. Desktop
 Cho phép nhiều máy ảo chạy Desktop cloud trên cùng một máy chủ vật lý hoặc ảo
@@ -156,9 +156,7 @@ Sử dụng các thành phần vật lý và ảo để tạo ra một mạng la
 - Là sự kết hợp giữa mạng vật lý và mạng ảo, sử dụng thành phần của cả 2 để tạo ra một môi trường dễ quản lý hơn nhiều so với một môi trường vật lý nghiêm ngặt
 - Giúp thử nghiệm các ứng dụng mới được phát trển trên mạng ảo trước khi phát hành để phát hiện các sai sót và lỗi tiềm ẩn, tối ưu hoá hiệu suất của ứng dụng dựa trên cách nó hoạt động trên môi trường ảo
 
-
-
 # Tài liệu tham khảo 
 
 1. https://www.globalknowledge.com/us-en/resources/resource-library/articles/virtualization-for-newbies-five-types-of-virtualization/#gref
-2. 
+2. https://www.parallels.com/blogs/ras/virtual-machine/

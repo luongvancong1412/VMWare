@@ -3,9 +3,9 @@
 <h2> Summary</h2>
 
 - [Nội dung chính](#nội-dung-chính)
-- [Architectural Differences](#architectural-differences)
-  - [Kiến trúc vật lý](#kiến-trúc-vật-lý)
-  - [Kiến trúc dựa trên máy chủ](#kiến-trúc-dựa-trên-máy-chủ)
+- [1. Architectural Differences](#1-architectural-differences)
+  - [1.1 Traditional or Physical architecture](#11-traditional-or-physical-architecture)
+  - [1.2 Host based architecture](#12-host-based-architecture)
   - [Kiến trúc kim loại trần](#kiến-trúc-kim-loại-trần)
 - [Virtual Machine Concepts - Các khái niệm về máy ảo](#virtual-machine-concepts---các-khái-niệm-về-máy-ảo)
   - [Virtual Machine Components - Các thành phần của máy ảo](#virtual-machine-components---các-thành-phần-của-máy-ảo)
@@ -25,7 +25,6 @@
 
 ---
 Bài trước: [Basic Server Fundamentals](../2-Basic-Server-Fundamentals.md)
-
 - Tổng quan về ảo hoá, lý do sử dụng ảo hoá máy chủ vmware
 - Nguyên tắc cơ bản về máy chủ
 
@@ -37,34 +36,37 @@ Bài này:
 - Cteating a Virtual Machine(VM)
 - Install a Guest OS in a VM
 - Install VMware Tools on a VM
-
-- Tạo thêm một máy ảo bổ xung, sẽ cài red hat linux và máy chủ esxi
-- Định cấu hình thư mục hoạt động trên máy chủ windows 2022
+- Tạo thêm một máy ảo bổ xung, cài máy chủ esxi
+- Định cấu hình thư mục hoạt động trên máy chủ windows 2019
 - Tạo 1 người dùng và gán quyền quản trị miền
 
+# 1. Architectural Differences
+Có 3 kiến trúc:
+- Kiến trúc vật lý - **Traditional or Physical architecture**
+- Kiến trúc dựa trên máy chủ  - **Host based architecture**
+- Kiến trúc kim loại trần - **Bare-metal architecture**
 
-# Architectural Differences
-- có 3 kiến trúc:
-+ Kiến trúc vật ly - traditional or Physical architecture
-+ Kiến trúc dựa trên máy chủ  - host based architecture
-+ Kiến trúc kim loại trần - bare-metal architecture
+![Imgur](https://i.imgur.com/JBCpWQj.png)
 
+## 1.1 Traditional or Physical architecture
+![Imgur](https://i.imgur.com/ydAXSgb.png)
 
-## Kiến trúc vật lý
-- Vì vậy trong kiến trúc traditional nếu bạn nhìn thấy sơ đồ, mọi kiến trúc phần cứng chúng tôi gọi gọi nó là x64 architecture
-x có nghĩa là nó bất kỳ 64 bất kỳ 
-- 64 architecture và nó bao gồm các thành phần phần cứng chính là bộ nhơ cpu của bộ xử lý và chúng ta có một card mạng NIC, một bộ nhớ lưu trữ(ssd, flash drive),
-- Trên phần cứng x64 Architectural, chúng ta đang cài đặt hệ điều hành, trên hệ điều hành là Application (ms office, adobe,.. và bất kỳ ứng dụng bên thứ 3 nào khác)
+- **64 Architecture**, nó bao gồm các thành phần phần cứng chính là CPU, Memory và card mạng NIC, một bộ nhớ lưu trữ(ssd, flash drive),
+- Trên phần cứng x64 Architectural  đang cài đặt hệ điều hành (**Operating System** - OS), trên hệ điều hành là **Applications** (ms office, adobe,.. và bất kỳ ứng dụng bên thứ 3 nào khác)
 
-## Kiến trúc dựa trên máy chủ
-- Phần cứng là kiến trúc x64 phổ biến
-- Trên phần cứng đang cài hệ điều hành
-- Sau HĐH là một phần của aplication, chúng ta đang cài đặt 1 trong các phần mềm dựa trên máy chủ ảo hoá, tên phần mềm là máy trạm vmware
+## 1.2 Host based architecture
 
-- Máy trạm vmware là một phần mềm ảo hoá cho phép bạn tạo nhiều máy ảo cho mục đích thử nghiệm, trong hình có 3 máy ảo vm1,vm2.vm3
-- Máy ảo trông giống như 1 máy tính vật lý và chúng tôi cho phép cài dặt hệ điều hành kháchvaf ứng dụng giống như một máy chủ vật lý
-- Máy ảo cũng có các thành phần ảo, đây được coi là nhu cầu ảo vcpu , v-memory,vdisk  và tương tự áp dụng cho các máy ảo cũng không chỉ 3 vms, dựa trên tài nguyên phần cứng, ta có thể tạo ra nhiều máy ảo trên 1 máy trạm vmware
-- Kiến trúc dựa trên máy chủ chỉ đouwjc sử dụng cho các mục đích thử ghiệm, nó không phải cho mục đích sản xuất cua bạn.
+![Imgur](https://i.imgur.com/gZKc7dp.png)
+
+- Phần cứng là **x64 Architecture**
+- Trên phần cứng đang cài **Operating System**
+- Sau HĐH là một phần của **aplication**, đang cài đặt 1 trong các phần mềm dựa trên máy chủ ảo hoá, tên phần mềm là **VMWare Workstation**
+
+- VMWare Workstation là một phần mềm ảo hoá cho phép tạo nhiều máy ảo cho mục đích thử nghiệm, trong hình có 3 máy ảo vm1,vm2.vm3
+- Máy ảo cho phép cài dặt hệ điều hành khách và ứng dụng giống như một máy chủ vật lý
+- Máy ảo cũng có các thành phần ảo, đây được coi là nhu cầu ảo **vcpu**, **v-memory**, **vdisk** và tương tự áp dụng cho các máy ảo cũng không chỉ 3 vms, dựa trên tài nguyên phần cứng, ta có thể tạo ra **nhiều máy ảo trên 1 máy trạm vmware**.
+
+➟**Host based architecture** chỉ đượcc sử dụng cho các mục đích thử nghiệm, nó không phải cho mục đích sản xuất.
 
 ## Kiến trúc kim loại trần
 - Sự khác biệt ở đây là ta sẽ không cài hệ điều hành mà sẽ cài phầm mềm ESXi trực tiếp trên phần cứng khôgn có gì khácf ngoài kiến trúc kim loại trần
