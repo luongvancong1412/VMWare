@@ -5,7 +5,7 @@
 - [Tổng quan](#tổng-quan)
   - [1. Virtual Machines](#1-virtual-machines)
   - [2. Lợi ích của việc sử dụng máy ảo](#2-lợi-ích-của-việc-sử-dụng-máy-ảo)
-    - [2.2 IT problems in scope](#22-it-problems-in-scope)
+  - [3. IT problems in scope](#3-it-problems-in-scope)
   - [3. Các loại ảo hóa](#3-các-loại-ảo-hóa)
     - [3.1. Desktop](#31-desktop)
     - [3.2. Application](#32-application)
@@ -66,9 +66,9 @@ https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207
 
 - Cũng tương tự như trên
 
-<h3>👉 Chi phí cơ sở hạ tầng giảm</h3>
+<h3>➟ Chi phí cơ sở hạ tầng giảm</h3>
 
-### 2.2 IT problems in scope 
+## 3. IT problems in scope 
 Những thách thức lớn mà VMware đã giải quyết:
 <h4>High CAPEX for dedicated infrastructure</h4>
 
