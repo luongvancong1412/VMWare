@@ -9,19 +9,18 @@
   - [1.3 Bare-metal architecture](#13-bare-metal-architecture)
 - [2. Virtual Machine Concepts](#2-virtual-machine-concepts)
   - [2.1 Virtual Machine Components - Các thành phần của máy ảo](#21-virtual-machine-components---các-thành-phần-của-máy-ảo)
-  - [<br></br>](#br)
 - [3. About Virtual Machine Files](#3-about-virtual-machine-files)
-- [Physical Resource Sharing - Chia sẻ tài nguyên vật lý](#physical-resource-sharing---chia-sẻ-tài-nguyên-vật-lý)
-- [Benefits of Using Virtual Machine](#benefits-of-using-virtual-machine)
+- [4. Physical Resource Sharing - Chia sẻ tài nguyên vật lý](#4-physical-resource-sharing---chia-sẻ-tài-nguyên-vật-lý)
+- [5. Benefits of Using Virtual Machine](#5-benefits-of-using-virtual-machine)
   - [Physical Machine](#physical-machine)
   - [Virtual Machine](#virtual-machine)
-- [Lợi ích của việc sử dụng Máy ảo](#lợi-ích-của-việc-sử-dụng-máy-ảo)
+- [6. Lợi ích của việc sử dụng Máy ảo](#6-lợi-ích-của-việc-sử-dụng-máy-ảo)
   - [Máy vật lý](#máy-vật-lý)
   - [Máy ảo](#máy-ảo)
-- [VM Creation - Real time Scenario](#vm-creation---real-time-scenario)
-  - [Thực hiện trước](#thực-hiện-trước)
-  - [Thủ tục triển khai](#thủ-tục-triển-khai)
-  - [Các bước thực hiện sau](#các-bước-thực-hiện-sau)
+- [7. VM Creation - Real time Scenario](#7-vm-creation---real-time-scenario)
+  - [Pre-Implementation Steps](#pre-implementation-steps)
+  - [Implementation Procedure](#implementation-procedure)
+  - [Post-Implementation Steps](#post-implementation-steps)
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 ---
@@ -95,9 +94,11 @@ Các khái niệm về máy ảo:
   - *Disk controllers*
   - *Parallel and serial ports*
 <br></br>
----
+
 # 3. About Virtual Machine Files
-- A virtual machine includes a set of related files.
+A virtual machine includes a set of related files.
+![Imgur](https://i.imgur.com/VoJMDVU.png)
+
 - Tôi đặt các tệp máy ảo bình thưuofng, bất cứ khi nào chúng tôi tạo máy ảo trong trong máy trạm vmware hoặc máy chủ thành công ở bất kỳ nơi nào bạn tạo máy ảo
 , mặc định máy ảo được tạo trong một thư mục của máy ảo sau khi tạo máy ảo,
 nó bao gồm chứa tất cả các tập hợp tệp này
@@ -117,7 +118,9 @@ nếu tạo một ảnh chụp nhanh thứ 2 nó sẽ tạo tên vm_002.vmdk
 +Snapshot data file là VM_name.vmsd nghĩa là chúng ta có bao nhiêu ảnh chụp nhanh mà thông tin đó được duy trì bởi tệp vmst và tệp trạng thái ảnh chụp nhanh mà phần
 ...
 
-# Physical Resource Sharing - Chia sẻ tài nguyên vật lý
+# 4. Physical Resource Sharing - Chia sẻ tài nguyên vật lý
+
+![Imgur](https://i.imgur.com/NQnRyer.png)
 - Ở bất cứ nơi nào bạn tạo VM hoặc bạn có thể tạo trên máy trạm vmware hoặc
 bạn có thể tạo trên máy chủ ESXi
 - Ở bất cứ đâu bạn luôn tạo ra cách đĩa bộ nhớ CPU máy nảo ns sắp tới là tất cả điều này hoàn toàn được chia sẻ từ vật lý Hệ thống call
@@ -129,7 +132,7 @@ Cũng như vậy, chúng tôi có thể phân phối cho máy ao nếu bạn kh�
 cpu có nghĩa là chúng tôi phải sủ dụng một hộp vật lý khác để tạo 1 vms bổ sung, như vậy chúng tôi có thể tăng các hộp esxi.
 Hãy nhớ rằng bất kể tài nguyên có sẵn trong máy tính vật lý, tất cả các tài nguyên này sẽ được chia sẽ cho các...
 
-# Benefits of Using Virtual Machine
+# 5. Benefits of Using Virtual Machine
 
 ## Physical Machine
 - Difficult to relocate:
@@ -152,7 +155,7 @@ Hãy nhớ rằng bất kể tài nguyên có sẵn trong máy tính vật lý, 
 Provide the ability to support logacy applications.
 Enable servers to be consolidated
 
-# Lợi ích của việc sử dụng Máy ảo
+# 6. Lợi ích của việc sử dụng Máy ảo
 
 ## Máy vật lý
 - Khó di dời:
@@ -187,13 +190,13 @@ mà chúng tôi chỉ trong khi vm đang lên và chạy, bạn có thể chỉ 
 
 Nhược điểm: Hạn chế về khả năng tương thích ví dụ phần cứng của model như thế hệ thứ 9 hỗ trợ lên đến esxi 6.5 OS chỉ khi bản muốn sử dung esx 6.7 hoặc esxi 7.0
 
-# VM Creation - Real time Scenario
+# 7. VM Creation - Real time Scenario
 3 Bước:
-- Thực hiện trước
-- Thủ tục triển khai
-- THực hiện sau
+- Pre-Implementation Steps
+- Implementation Procedure
+- Post-Implementation Steps
 
-## Thực hiện trước
+## Pre-Implementation Steps
 - Giả sử tại văn phòng công ty, khách hàng yêu cầu tạo một máy ảo mới
 - Trước khi tạo vm cho lab hoặc client,.. chúng ta đưa ra quy ước đặt tên cụ thể theo tiêu chuẩn cty
 Ví dụ: VM-app001, nên tuân thủ quy ước khi đặt tên
@@ -205,11 +208,11 @@ Ví dụ: VM-app001, nên tuân thủ quy ước khi đặt tên
 - vNIC
 - Operating System (OS)
 Trước khi tạo vm, chúng ta nên lấy thông tin chi tiết từ KH về hệ điều hành mà họ đang cố gắng cài đặt
-## Thủ tục triển khai
+## Implementation Procedure
 - Tạo 1 VM theo yêu cầu
 - Cài đặt OS 
 
-## Các bước thực hiện sau
+## Post-Implementation Steps
 - Bật nguồn máy ảo
 - Cài đặt VMware tool (thủ công) đối với windows or Open vmware tool for linux
 - Thay đổi tên máy tính như tên hiển thị VM (Ví dụ:đặt cùng tên: VM-app001)
@@ -225,6 +228,8 @@ Trước khi tạo vm, chúng ta nên lấy thông tin chi tiết từ KH về h
 - Bảo mật VM Guest OS bằng chính sách mật khẩu...
 - Provide the VM details to End user/Client/Customer
 	- Cung cấp thông tin chi tiết về VM cho KH để họ có thể xác minh quyền truy cập máy ảo bằng rdp hoặc ssh
+
+>Thực hành các bước tạo máy ảo: [xem tại đây](../../Lab/Creating-a-VM.md)
 
 # Tài liệu tham khảo
 
