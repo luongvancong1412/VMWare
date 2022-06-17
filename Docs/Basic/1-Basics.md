@@ -5,7 +5,6 @@
 - [Tổng quan](#tổng-quan)
   - [1. Virtual Machines](#1-virtual-machines)
   - [2. Lợi ích của việc sử dụng máy ảo](#2-lợi-ích-của-việc-sử-dụng-máy-ảo)
-    - [2.1 Lý do sử dụng Virtual machine: Vmware](#21-lý-do-sử-dụng-virtual-machine-vmware)
     - [2.2 IT problems in scope](#22-it-problems-in-scope)
   - [3. Các loại ảo hóa](#3-các-loại-ảo-hóa)
     - [3.1. Desktop](#31-desktop)
@@ -17,8 +16,9 @@
 
 # Tổng quan
 ## 1. Virtual Machines
-Máy ảo (VM) là một phần mềm đại diện của một máy tính vật lý và các thành phần của nó.
-Phần mềm ảo hóa ( virtualization software) chuyển đổi máy vật lý và các thành phần của nó thành các tệp.
+- Máy ảo (VM) là một phần mềm đại diện của một máy tính vật lý và các thành phần của nó
+- Là một môi trường ảo mô phỏng 1 máy vật lý
+- Phần mềm ảo hóa ( virtualization software) chuyển đổi máy vật lý và các thành phần của nó thành các tệp.
 
 <h3>Các thành phần Virtual Machine</h3>
 
@@ -28,14 +28,12 @@ Phần mềm ảo hóa ( virtualization software) chuyển đổi máy vật lý
     - CPU và memory
     - Network adapters
     - Disks và controllers
-    - Parallel và serial ports
 
 ## 2. Lợi ích của việc sử dụng máy ảo
-### 2.1 Lý do sử dụng Virtual machine: Vmware
 <h4>For Better Hardware utilization</h4>
 
-- Sử dụng phần cứng tốt hơn
-- Giả sử tạo 500 máy ảo, ví dụ cấu hình 10 vms trên 1 máy chủ thì ta cần 50 box thay vì 500 máy chủ vật lý
+- Sử dụng phần cứng tốt hơn, giảm chi phí phần cứng
+  - Giả sử cần tạo 500 máy ảo, cấu hình 10 vms trên 1 máy chủ thì ta cần 50 máy chủ thay vì 500 máy chủ vật lý
 - Có giới hạn về dung lượng bộ nhớ cho mỗi máy chủ lưu trữ
 https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207.0&categories=1-0,2-0
 <h4>Financial Benefit</h4>
@@ -45,24 +43,30 @@ https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207
 <h4>Datacentre space</h4>
 
 - Không gian trung tâm dữ liệu
-- Ví dụ họ mua đất để duy trì nhiều server 
-- Khi số lượng máy chủ của bạn giảm từ 500 xuống 50, điều đó có nghĩa là bạn giảm 450 máy chủ, không gian trung tâm dữ liệu cũng giảm
+![Imgur](https://i.imgur.com/VdMMSrf.png)
+
+- Ex: Vấn đề mua đất để duy trì nhiều server 
+  - Với việc sử dụng máy ảo, khi số lượng máy chủ giảm từ 500 xuống 50, điều đó có nghĩa là giảm 450 máy chủ, không gian trung tâm dữ liệu cũng giảm. 
 
 <h4>AMC- Anual Maintenance Cost</h4>
 
-- Về tiền điện, giả sử hoá đơn tiền điện trước đó cho 500 máy chủ, nếu máy chủ của bạn giảm xuống 50 thì hoá đơn tiền điện được tiết kiệm, này gọi chung là chi phí bảo trì hằng năm
-- Giảm chi phí bảo hành hàng năm Chi phí bảo trì hàng năm, điện cung cấp không gián đoạn, khi giảm kích thước thiết bị thì điện cũng giảm
+- Chi phí bảo trì định kỳ
+  - Giả sử hoá đơn tiền điện trước đó cho 500 máy chủ, nếu máy chủ giảm xuống 50 thì hoá đơn tiền điện được tiết kiệm, này gọi chung là chi phí bảo trì hằng năm
+- Giảm chi phí bảo hành hàng năm, điện cung cấp không gián đoạn, khi giảm kích thước thiết bị thì điện cũng giảm
 <h4>UPS - Uninterruptible Power Supply</h4>
 
-- Có một nguồn điện riêng biệt
+- Cung cấp điện liên tục
+  - Có một nguồn điện riêng biệt
+
 <h4>Network equipment</h4>
 
-- Khi số lượng máy chủ giảm từ 500 xuống 50 thì số lượng thiết bị mạng cũng sẽ giảm xuống.
+- Thiết bị mạng
+  - Khi số lượng máy chủ giảm từ 500 xuống 50 thì số lượng thiết bị mạng cũng sẽ giảm xuống.
 <h4>Storage</h4>
 
 - Cũng tương tự như trên
 
-**=>Chi phí cơ sở hạ tầng giảm**
+**👉Chi phí cơ sở hạ tầng giảm**
 
 ### 2.2 IT problems in scope 
 Những thách thức lớn mà VMware đã giải quyết:
