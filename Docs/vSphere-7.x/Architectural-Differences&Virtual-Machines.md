@@ -97,41 +97,33 @@ Các khái niệm về máy ảo:
 
 # 3. About Virtual Machine Files
 A virtual machine includes a set of related files.
+- Các tệp sau khi nào máy ảo:
 ![Imgur](https://i.imgur.com/VoJMDVU.png)
 
-- Tôi đặt các tệp máy ảo bình thưuofng, bất cứ khi nào chúng tôi tạo máy ảo trong trong máy trạm vmware hoặc máy chủ thành công ở bất kỳ nơi nào bạn tạo máy ảo
-, mặc định máy ảo được tạo trong một thư mục của máy ảo sau khi tạo máy ảo,
-nó bao gồm chứa tất cả các tập hợp tệp này
-
-- Tầm quan trọng của các tệp này: Giả sử nếu tên tệp thông tin của bạn là VM_name.vmax thì không có gì khác ngoài tệp cấu hình.
-Tệp cấu hình bao gồm tất cả các chi tiết cấu hình máy ảo, có nghĩa là nếu máy ảo mà chúng tôi đã tạo với 2 cpu 4gb RAM và 40GB đĩa cứng thì tât cả đĩa thông tin cpu này
-được lưu trữ trong tệp vmx và khi nó nói đến tệp hoán đỏi vswp là phím tắt cho tệp hoán đổi và tệp wav này cũng nó sẽ tạo khi chúng ta tạo máy ảo ổn và tệp thiên vị chúng ta cũng vậy, nó thường là một hệ thống đầu ra đầu vào cư bản bình thouowfng chúng ta có thể thấy bios trong máy tính xách tay của mình và máy chủ theo cách tưogn tụ như vậy ảo bios cũng có sẵn trong máy ảo, phần mở rộng tệp bios là nvram
-ram không bay hơi và tệp nhật ký máy ảo nso sẽ tôi tạo nó trong tệp vmware.log, nó bao gồm bất kỳ thay đổi noà bạn đã thực hiện trên máy ảo,tất cả các thay đổi được lưu trữ trong tệp vmware.log và chúng tôi cũng có tệp cấu hình mẫu VM_ là chung cho mọi vm,
+- Tệp cấu hình VM_name.vmx
+  - Tệp cấu hình bao gồm tất cả các chi tiết cấu hình máy ảo, có nghĩa là nếu máy ảo đã tạo với 2 cpu 4gb RAM và 40GB đĩa cứng thì tât cả đĩa thông tin cpu này được lưu trữ trong tệp vmx
+- Bình thouowfng có thể thấy bios trong máy tính xách tay của mình và máy chủ theo cách tương tự như vậy ảo bios cũng có sẵn trong máy ảo, phần mở rộng tệp bios là nvram
+- tệp nhật ký máy ảo nso sẽ tôi tạo nó trong tệp vmware.log, nó bao gồm bất kỳ thay đổi noà bạn đã thực hiện trên máy ảo,tất cả các thay đổi được lưu trữ trong tệp vmware.log và chúng tôi cũng có tệp cấu hình mẫu VM_ là chung cho mọi vm,
 giả sử tên vm của chúng ta là vm1.
 + VM_vm1.vmtx là tệp cấu hình mẫu, mẫu là một trong những khái niệm quan trọng trong vmware vsphere, tôi sẽ giải thích trong các lớp sau nhé và
 +tệp mỗ tả đĩa VM_name.vmdk có nghĩa là tệp đĩa đĩa máy ảo thông thường đây là tệp bộ mô tả
 + Dữ liệu thực tế đc luu trữ trên VM_name-flat.vmdk bao gồm thông tin dữ liệu thực tế
 + Raw device map file - chúng ta có thể sử dụng khi chúng ta muốn thêm bất kỳ kích thước lớn nào của tệp đĩa chia sẻ vào máy ảo, kịch bản đó sẽ tạo ra một chấm rdm rdm vmdk có nghĩa là ánh xạ thiét bị thô và các
-đĩa snapshot chúng ta cũn có trong snapshot máy ảo, có nghĩa là trạng thái  pre-reservo của vm nếu bạn tạo bất kỳ snapshot máy ảo sẽ tạo mặc định bây giờ tất cả các tệp liên quan đến snapshot tệp đĩa snapdragonthoe mặc định tên vm_delta có ngãi là giá gị tậm thời 001 dot vmdk
++ đĩa snapshot chúng ta cũn có trong snapshot máy ảo, có nghĩa là trạng thái  pre-reservo của vm nếu bạn tạo bất kỳ snapshot máy ảo sẽ tạo mặc định bây giờ tất cả các tệp liên quan đến snapshot tệp đĩa snapdragonthoe mặc định tên vm_delta có ngãi là giá gị tậm thời 001 dot vmdk
 nếu tạo một ảnh chụp nhanh thứ 2 nó sẽ tạo tên vm_002.vmdk
 + 001 002 được gọi là giá trị delta
-+Snapshot data file là VM_name.vmsd nghĩa là chúng ta có bao nhiêu ảnh chụp nhanh mà thông tin đó được duy trì bởi tệp vmst và tệp trạng thái ảnh chụp nhanh mà phần
++ Snapshot data file là VM_name.vmsd nghĩa là chúng ta có bao nhiêu ảnh chụp nhanh mà thông tin đó được duy trì bởi tệp vmst và tệp trạng thái ảnh chụp nhanh mà phần
 ...
 
 # 4. Physical Resource Sharing - Chia sẻ tài nguyên vật lý
 
 ![Imgur](https://i.imgur.com/NQnRyer.png)
-- Ở bất cứ nơi nào bạn tạo VM hoặc bạn có thể tạo trên máy trạm vmware hoặc
-bạn có thể tạo trên máy chủ ESXi
-- Ở bất cứ đâu bạn luôn tạo ra cách đĩa bộ nhớ CPU máy nảo ns sắp tới là tất cả điều này hoàn toàn được chia sẻ từ vật lý Hệ thống call
-- Giả sử ở đây như bạn thấy trong sơ đồ này tàn nguyên vật lý là  cpu Memory, network card, storage... Tất cả các tài nguyên vật lý này bất kể kích thước bạn có, kích thước khả dụng chỉ chúng tôi có thể hiển thị là chia sẻ nó
-với các máy ảo, giả sử hệ thống vật lý của tôi có 20 cups và bộ nhớ cũng 20gb và chúng tôi có nhu cầu vật lý và chúng tôi có kích thước đĩa là 100gb, đây là tài nguyên 
-có sẵn nếu bạn muốn tạo máy ảo của mình dựa trên tài nguyên vật lý của bạn 
-tôi chỉ có 20cm nghĩa là mỗi máy ảo của tôi tôi định cung cấp 2 cpu có nghĩa là tối đa chúng tôi có thể tạo tối đa 10 vms và bộ nhớ cũng như nhau, chúgn tôi có thể phân phối cho tất cẩ vms và tương tự với đĩa.
-Cũng như vậy, chúng tôi có thể phân phối cho máy ao nếu bạn không có đủ bộ nhớ
-cpu có nghĩa là chúng tôi phải sủ dụng một hộp vật lý khác để tạo 1 vms bổ sung, như vậy chúng tôi có thể tăng các hộp esxi.
-Hãy nhớ rằng bất kể tài nguyên có sẵn trong máy tính vật lý, tất cả các tài nguyên này sẽ được chia sẽ cho các...
-
+- Ở bất cứ nơi nào bạn tạo VM hoặc bạn có thể tạo trên máy trạm vmware hoặc bạn có thể tạo trên máy chủ ESXi
+- Ở bất cứ đâu có thể tạo ra các đĩa, memory, CPU
+- Giả sử ở đây như bạn thấy trong sơ đồ này tài nguyên vật lý là  cpu Memory, network card, storage... Tất cả các tài nguyên vật lý này bất kể kích thước bạn có, kích thước khả dụng chỉ chúng tôi có thể hiển thị là chia sẻ nó với các máy ảo, giả sử hệ thống vật lý của tôi có 20 cpus và bộ nhớ cũng 20gb và kích thước đĩa là 100gb, đây là tài nguyên có sẵn nếu muốn tạo máy ảo của mình dựa trên tài nguyên vật lý. 
+- Chỉ có 20cpu nghĩa là mỗi máy ảo cung cấp 2 cpu có nghĩa là tối đa chúng tôi có thể tạo tối đa 10 vms và bộ nhớ cũng như nhau, có thể phân phối cho tất cẩ vms và tương tự với đĩa.
+- Cũng như vậy, có thể phân phối cho máy ảo nếu không có đủ bộ nhớ, cpu bằng cách sủ dụng một hộp vật lý khác để tạo 1 vms bổ sung, như vậy có thể tăng các hộp esxi.
+- Hãy nhớ rằng bất kể tài nguyên có sẵn trong máy tính vật lý, tất cả các tài nguyên này sẽ được chia sẽ cho các máy ảo
 # 5. Benefits of Using Virtual Machine
 
 ## Physical Machine
