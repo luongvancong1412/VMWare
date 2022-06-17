@@ -66,7 +66,7 @@ https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207
 
 - Cũng tương tự như trên
 
-**👉Chi phí cơ sở hạ tầng giảm**
+<h3>👉 Chi phí cơ sở hạ tầng giảm</h3>
 
 ### 2.2 IT problems in scope 
 Những thách thức lớn mà VMware đã giải quyết:
