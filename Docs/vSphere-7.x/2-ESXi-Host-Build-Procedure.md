@@ -34,23 +34,23 @@
 - Hệ điều hành hoặc phần mềm chuyên dụng để chạy máy ảo (VMs)
 - Ví dụ: ESXi, VMW Workstation, Fusion, MS Hyper-V & Oracle Virtual Box
 
-Virtual Machine:
+**Virtual Machine:**
 - Nó là một máy được tạo phầm mềm và trông giống như một máy chủ vật lý.
 - Ứng dụng chuyên dụng trừu tượng hoá tài nguyên phần cứng thành phần mềm.
 - Ví dụ: ESXi - VMs, MS Hyper-V - VMs, Oracle Virtual Box VMs
 
-Guest OS:
+**Guest OS:**
 
 <a href="https://imgur.com/KYu8Cdz"><img src="https://i.imgur.com/KYu8Cdz.png" title="source: imgur.com" width=35% align=right /></a>
 
 - Hệ điều hành chạy trong Virtual Machine
 - Eg: MS Windows, Linux, Solaris.
 
-Application:
+**Application:**
 - Phần mềm chạy trên hệ điều hành, sử dụng tài nguyên vật lý hoặc ảo.
 - Eg: MS Office, Chrome, SAP, MS SQL, Oracle,...
 
-vSphere:
+**vSphere:**
 - Sản phẩm ảo hoá server của VMware kết hợp ESXi Hypervisor và vCenter Server Management Platform.
 
 # 2. Tổng quan về ESXi
