@@ -98,64 +98,65 @@ A virtual machine includes a set of related files.
 ![Imgur](https://i.imgur.com/VoJMDVU.png)
 
 - Tệp cấu hình VM_name.vmx
-  - Tệp cấu hình bao gồm tất cả các chi tiết cấu hình máy ảo, có nghĩa là nếu máy ảo đã tạo với 2 cpu 4gb RAM và 40GB đĩa cứng thì tât cả đĩa thông tin cpu này được lưu trữ trong tệp vmx
-- Bình thouowfng có thể thấy bios trong máy tính xách tay của mình và máy chủ theo cách tương tự như vậy ảo bios cũng có sẵn trong máy ảo, phần mở rộng tệp bios là nvram
-- tệp nhật ký máy ảo nso sẽ tôi tạo nó trong tệp vmware.log, nó bao gồm bất kỳ thay đổi noà bạn đã thực hiện trên máy ảo,tất cả các thay đổi được lưu trữ trong tệp vmware.log và chúng tôi cũng có tệp cấu hình mẫu VM_ là chung cho mọi vm,
-giả sử tên vm của chúng ta là vm1.
-+ VM_vm1.vmtx là tệp cấu hình mẫu, mẫu là một trong những khái niệm quan trọng trong vmware vsphere, tôi sẽ giải thích trong các lớp sau nhé và
-+tệp mỗ tả đĩa VM_name.vmdk có nghĩa là tệp đĩa đĩa máy ảo thông thường đây là tệp bộ mô tả
-+ Dữ liệu thực tế đc luu trữ trên VM_name-flat.vmdk bao gồm thông tin dữ liệu thực tế
-+ Raw device map file - chúng ta có thể sử dụng khi chúng ta muốn thêm bất kỳ kích thước lớn nào của tệp đĩa chia sẻ vào máy ảo, kịch bản đó sẽ tạo ra một chấm rdm rdm vmdk có nghĩa là ánh xạ thiét bị thô và các
-+ đĩa snapshot chúng ta cũn có trong snapshot máy ảo, có nghĩa là trạng thái  pre-reservo của vm nếu bạn tạo bất kỳ snapshot máy ảo sẽ tạo mặc định bây giờ tất cả các tệp liên quan đến snapshot tệp đĩa snapdragonthoe mặc định tên vm_delta có ngãi là giá gị tậm thời 001 dot vmdk
-nếu tạo một ảnh chụp nhanh thứ 2 nó sẽ tạo tên vm_002.vmdk
-+ 001 002 được gọi là giá trị delta
-+ Snapshot data file là VM_name.vmsd nghĩa là chúng ta có bao nhiêu ảnh chụp nhanh mà thông tin đó được duy trì bởi tệp vmst và tệp trạng thái ảnh chụp nhanh mà phần
-...
+  - Tệp cấu hình bao gồm tất cả các chi tiết cấu hình máy ảo
+  - Ví dụ nếu máy ảo đã tạo với 2 cpu 4gb RAM và 40GB đĩa cứng thì tât cả đĩa thông tin cpu này được lưu trữ trong tệp vmx
+- Swap files: VM_naem-*.vswp
+- BIOS file: VM_name.nvram
+  - Bình thườngng có thể thấy bios trong máy tính xách tay của mình và máy chủ theo cách tương tự như vậy ảo bios cũng có sẵn trong máy ảo
+  - phần mở rộng tệp bios là nvram
+- Log files: vmware.log
+  - tệp nhật ký máy ảo
+  - nó bao gồm bất kỳ thay đổi noà bạn đã thực hiện trên máy ảo,tất cả các thay đổi được lưu trữ trong tệp vmware.log
+- Template configuration file: VM_name.vmtx
+  - tệp cấu hình mẫu
+  - mẫu là một trong những khái niệm quan trọng trong vmware vsphere, sẽ nói trong những phần sau
+- tệp mỗ tả đĩa VM_name.vmdk 
+- Dữ liệu thực tế đc luu trữ trên: VM_name-flat.vmdk bao gồm thông tin dữ liệu thực tế
+- Raw device map file - chúng ta có thể sử dụng khi chúng ta muốn thêm bất kỳ kích thước lớn nào của tệp đĩa chia sẻ vào máy ảo, kịch bản đó sẽ tạo ra một chấm rdm (Cần tìm hiểu thêm)
+- snapshot disk file: snapshot máy ảo
+  - có nghĩa là trạng thái  pre-reservo của vm
+  - nếu tạo một ảnh chụp nhanh thứ 2 nó sẽ tạo tên vm_002.vmdk
+  - 001 002 được gọi là giá trị delta
+- Snapshot data file là VM_name.vmsd
+
 
 # 4. Chia sẻ tài nguyên vật lý
 
 ![Imgur](https://i.imgur.com/NQnRyer.png)
-- Ở bất cứ nơi nào bạn tạo VM hoặc bạn có thể tạo trên máy trạm vmware hoặc bạn có thể tạo trên máy chủ ESXi
-- Ở bất cứ đâu có thể tạo ra các đĩa, memory, CPU
-- Giả sử ở đây như bạn thấy trong sơ đồ này tài nguyên vật lý là  cpu Memory, network card, storage... Tất cả các tài nguyên vật lý này bất kể kích thước bạn có, kích thước khả dụng chỉ chúng tôi có thể hiển thị là chia sẻ nó với các máy ảo, giả sử hệ thống vật lý của tôi có 20 cpus và bộ nhớ cũng 20gb và kích thước đĩa là 100gb, đây là tài nguyên có sẵn nếu muốn tạo máy ảo của mình dựa trên tài nguyên vật lý. 
-- Chỉ có 20cpu nghĩa là mỗi máy ảo cung cấp 2 cpu có nghĩa là tối đa chúng tôi có thể tạo tối đa 10 vms và bộ nhớ cũng như nhau, có thể phân phối cho tất cẩ vms và tương tự với đĩa.
+- Có thể tạo VM trên:
+  -  máy trạm vmware
+  -  Hoặc máy chủ ESXi
+- Tương tự có thể tạo ra các đĩa, memory, CPU
+- Giả sử ở đây như bạn thấy trong sơ đồ này tài nguyên vật lý là  cpu Memory, network card, storage... Tất cả các tài nguyên vật lý cung cấp kích thước khả dụng có thể chia sẻ nó với các máy ảo
+  - Giả sử hệ thống vật lý có 20 cpus và bộ nhớ cũng 20gb và kích thước đĩa là 100gb, đây là tài nguyên có sẵn nếu muốn tạo máy ảo của mình dựa trên tài nguyên vật lý. 
+  - Chỉ có 20cpu nghĩa là mỗi máy ảo cung cấp 2 cpu có nghĩa là tối đa chúng tôi có thể tạo tối đa 10 vms và bộ nhớ cũng như nhau, có thể phân phối cho tất cẩ vms và tương tự với đĩa.
 - Cũng như vậy, có thể phân phối cho máy ảo nếu không có đủ bộ nhớ, cpu bằng cách sủ dụng một hộp vật lý khác để tạo 1 vms bổ sung, như vậy có thể tăng các hộp esxi.
-- Hãy nhớ rằng bất kể tài nguyên có sẵn trong máy tính vật lý, tất cả các tài nguyên này sẽ được chia sẽ cho các máy ảo
-
+- Bất kể tài nguyên có sẵn trong máy tính vật lý có thể chia sẽ cho các máy ảo
 # 5. Lợi ích của việc sử dụng Máy ảo
 
 ## Máy vật lý
 - Khó di dời:
-+ Các chuyển động yêu cầu thời gian chết. (Khi muốn di chuyển trung tâm dữ liệu từ nơi này sang nơi khác nếu là máy chủ vật lý phải thựcc hineej ngừng hoạt động cho máy chủ đó và có kế hoạch di chuyển máy chủ từ vị trí trì hoãn sang vị trí hoạt động, điều đó có nghĩa là rất khó để di đời  )
-+ Đặc trưng cho phần cứng vật lý. 
+  - Các chuyển động yêu cầu thời gian chết. (Khi muốn di chuyển trung tâm dữ liệu từ nơi này sang nơi khác nếu là máy chủ vật lý phải thực hiện ngừng hoạt động cho máy chủ đó và có kế hoạch di chuyển máy chủ từ vị trí trì hoãn sang vị trí hoạt động, điều đó có nghĩa là rất khó để di đời  ) 
 - Khó quản lý:
-+ Yêu cầu bảo dưỡng vật lý.
-+ Lỗi phần cứng gây ra thời gian chết máy.
+  - Yêu cầu bảo dưỡng vật lý.
+  - Lỗi phần cứng gây ra thời gian chết máy.
 - Phần cứng có những hạn chế:
-+ Thay đổi phần cứng hạn chế hỗ trợ ứng dụng.
-+ Mối quan hệ một-một giữa ứng dụng và máy chủ.
+  - (Tìm hiểu thêm)
 ## Máy ảo
 - Dễ dàng di chuyển:
-+ Đóng gói thành tệp (máy ảo có nghĩa nó trông giống như một phần mềm, nó trông giống như một máy chủ vật lý nhưng nó là một phần mềm được tạo ra bởi một lưới, nó bao gồm danh sách các tệp bạn chỉ cần sao chép tất cả vi tập tin bị lật và bạn có thể di chuyển tới bất cứ nơi nào bạn muốn, bạn có thể dễ dang di chuyển)
-+ Độc lập với phần cứng vật lý
+  + Đóng gói thành tệp (máy ảo có nghĩa nó trông giống như một phần mềm, nó trông giống như một máy chủ vật lý nhưng nó là một phần mềm được tạo ra bởi một lưới, nó bao gồm danh sách các tệp bạn chỉ cần sao chép tất cả vi tập tin bị lật và bạn có thể di chuyển tới bất cứ nơi nào bạn muốn, bạn có thể dễ dang di chuyển)
+  + Độc lập với phần cứng vật lý
 - Dễ dàng quản lý:
-+ Cách ly với các máy ảo khác
-+ Cách ly với những thay đổi phần cứng.
-Cung cấp khả năng hỗ trợ các ứng dụng logacy.
-Cho phép các máy chủ được hợp nhất
+  + Cách ly với các máy ảo khác
+  + Cách ly với những thay đổi phần cứng.
 
-----------------
-Và cũng như việc chỉnh sửa dành riêng cho phần cứng vật lý bị rằng buộc với bất kỳ tích hợp nào với các máy chủ khác hoặc các thiết bị tích hợp khác nên điều đó cũng khó để di dời nhưng trong kịch bản máy ảo
-nó khá đơn giản, bạn chỉ có thể di chuyển máy ảo từ vị trí này sang vị trí khác.
 
-- Khó quản lý: Nếu bạn muốn duy trì vị trí của máy chủ vật lý nếu bạn muốn thực hiện bất kỳ sửa đổi nào trên đĩa nhớ cpu máy chủ vật lý hoặc NIC
-chúng tôi yêu cầu thời gian chết, chúng tôi phải tắt máy chủ vật lý và tăng bộ nhớ và tăng đĩa và tăng bất kỳ thiết bị ngoại vi phần cứng nào bạn 
-muốn thay đổi nhưng khi nói đến kịch bản máy ảo, chúng tôi không cần dành thời gian cho máy ảo thay đổi phần cứng ở đây thay đổi phần cứng có nghĩa là là phần cứng ảo thay đổi, khi vm bật nguồn, chúng tôi có một tính năng từ vmware, tính năng được gọi là Hot add feature
- 
-Host add có nghĩa là nó cho phép bạn thêm đĩa nhớ, cpu và nsa trong khi máy ảo bật nguồn, chúng tôi không cần tắt nguồn vm
-mà chúng tôi chỉ trong khi vm đang lên và chạy, bạn có thể chỉ cần nhấp chuột phải vào cài đặt chỉnh sửa vm và bạn có thể tăng đĩa nhớ cpu bất kỳ thành phần phần cứng nào bạn muốn thêm vào đều được
+Phần cứng vật lý bị rằng buộc với bất kỳ tích hợp nào với các máy chủ khác hoặc các thiết bị tích hợp khác nên điều đó cũng khó để di dời nhưng trong kịch bản máy ảo nó khá đơn giản, có thể di chuyển máy ảo từ vị trí này sang vị trí khác.
 
-Nhược điểm: Hạn chế về khả năng tương thích ví dụ phần cứng của model như thế hệ thứ 9 hỗ trợ lên đến esxi 6.5 OS chỉ khi bản muốn sử dung esx 6.7 hoặc esxi 7.0
+Khó quản lý: Nếu bạn muốn duy trì vị trí của máy chủ vật lý nếu bạn muốn thực hiện bất kỳ sửa đổi nào trên đĩa nhớ cpu máy chủ vật lý hoặc NIC sẽ có thời gian chết, ta phải tắt máy chủ vật lý và tăng bộ nhớ và tăng đĩa và tăng bất kỳ thiết bị ngoại vi phần cứng nào muốn thay đổi 
+  - Nhưng khi nói đến kịch bản máy ảo, không cần dành thời gian cho máy ảo thay đổi phần cứng ở đây thay đổi phần cứng có nghĩa là là phần cứng ảo thay đổi, khi vm bật nguồn, chúng tôi có một tính năng từ vmware, tính năng được gọi là Hot add feature, cho phép bạn thêm đĩa nhớ, cpu và nsa trong khi máy ảo bật nguồn, chúng tôi không cần tắt nguồn vm
+
+Nhược điểm: Hạn chế về khả năng tương thích ví dụ phần cứng của model như thế hệ thứ 9 hỗ trợ lên đến esxi 6.5 OS chỉ khi bản muốn sử dung esx 6.7 hoặc esxi 7.0 thì cần nâng cấp phần cứng.
 
 # 6. VM Creation - Real time Scenario
 3 Bước:
