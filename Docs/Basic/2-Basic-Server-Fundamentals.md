@@ -18,7 +18,7 @@
 Server bao gồm cả yếu tố **physical** và **non-physica**l:
 - **Hardware (HW):** các thành phần vật lý
 - **Software (SW):** Lệnh cho phép người dùng tương tác với phần cứng để thực hiện các tác vụ cụ thể
-- **Firmware** - *Phần mềm cơ sở* **(FW):** Hướng dẫn về cách phần mềm và phần cứng tương tác
+- **Firmware** - *Phần mềm cơ sở* **(FW):** Hướng dẫn về cách phần mềm và phần cứng tương tác (Ví dụ: Firmware trong bo mạch chủ :BIOS hoặc UEFI)
 
 <a href="https://imgur.com/dh9dCtH"><img src="https://i.imgur.com/dh9dCtH.png" title="source: imgur.com" align=center /></a>
 
@@ -45,7 +45,6 @@ Server bao gồm cả yếu tố **physical** và **non-physica**l:
   - AMD
 
 # 3. Memory hoặc RAM
-Bất kỳ thiết bị vật lý nào có khả năng lưu trữ thông tin
 
 <a href="https://imgur.com/HQEUOYl"><img src="https://i.imgur.com/HQEUOYl.png" title="source: imgur.com" /></a>
 
