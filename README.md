@@ -9,10 +9,11 @@
 3. [VMware vSphere 7.x - Sự khác biệt về kiến trúc, Virtual Machines](Docs/vSphere-7.x/1-Architectural-Differences&Virtual-Machines.md)
 4. [VMware vSphere 7.x - Quy trình xây dựng host ESXi](Docs/vSphere-7.x/2-ESXi-Host-Build-Procedure.md)
 5. [VMware vSphere 7.x - Cấu hình và quản lý host ESXi](Docs/vSphere-7.x/3-ESXi-Host-Configuration&Management.md)
+6. [ESXi & Khái niệm cơ bản về mạng](Docs/vSphere-7.x/4-ESXi&Basics-of-Networking.md)
 - Updating ...
 ## Lab
 
 - [Tạo một Virtual Machine](Lab/1-Creating-a-VM.md)
 - [Xây dựng host ESXi](Lab/2-ESXi-Host-Build-Procedure.md)
-
+- [Cấu hình và quản lý host ESXi](Lab/3-Config&Management-host-ESXi.md)
 - Updating ...
