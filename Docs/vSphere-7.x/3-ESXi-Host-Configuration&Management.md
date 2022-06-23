@@ -2,7 +2,7 @@
 
 <h2>Summary</h2>
 
-- [Thành phần ESXI](#thành-phần-esxi)
+- [1. Thành phần ESXI](#1-thành-phần-esxi)
 - [Tệp nhật ký ESXi](#tệp-nhật-ký-esxi)
 - [Lab](#lab)
 
@@ -15,11 +15,11 @@
 - ESXi Host - Lab
 - vSphere Documentation
 
-# Thành phần ESXI
+# 1. Thành phần ESXI
 
-- Kiến trúc ESXi bao gồm hệ điều hành cơ bản, được gọi là VMkernel và các quy trình chạy trên nó
-- VMkernel cung cấp một phương tiện để chạy tất cả các quy trình trên hệ thống, bao gồm các ứng dụng quản lý và tác nhân cũng như các máy ảo
-- Nó có quyền kiểm soát tất cả các thiết bị phần cứng trên máy chủ và quản lý tài nguyên cho các ứng dụng
+- **Kiến trúc ESXi** bao gồm hệ điều hành cơ bản, được gọi là VMkernel và các quy trình chạy trên nó
+- VMkernel ,cũng **giống như hệ điều hành bình thường**, cung cấp một phương tiện để chạy tất cả các quy trình trên hệ thống, bao gồm các ứng dụng quản lý và Agent ESXi cụ thể cũng như các máy ảo
+- Nó có quyền kiểm soát tất cả các thiết bị phần cứng trên server và quản lý tài nguyên cho các ứng dụng
 
 - Các quy trình chính chạy trên VMkernel là
   - Giao diện người dùng bảng điều khiển trực tiếp (Direct Console User Interface - DCUI)
@@ -27,8 +27,77 @@
   - Agents VMware (hostd, vpxa)
   - Hệ thống Mô hình Thông tin Chung (Common Information Model (CIM) System - CIM)
 
-- Giao diện người dùng bảng điều khiển trực tiếp (DCUI)
-  - Giao diện quản lý và cấu hình mức thấp, có thể truy cập thông qua giao diện điều khiển của máy chủ, được sử dụng chủ yếu cho cấu hình cơ bản ban đầu
+<h3>Giao diện người dùng bảng điều khiển trực tiếp (DCUI)</h3>
+
+- Giao diện quản lý và cấu hình mức thấp, có thể truy cập thông qua giao diện điều khiển của máy chủ, được sử dụng chủ yếu cho cấu hình cơ bản ban đầu
+
+!![Imgur](https://i.imgur.com/Tfqj6dS.png)
+
+- DCUI hiển thị những thông tin cơ bản:
+  - Thông tin ESXi 7.0.3, Công ty VMware
+  - Số lượng CPU, Memory gán cho máy chủ này
+
+Để tuỳ chỉnh và xem nhật ký hệ thống nhấn F2:
+- Nhập mật khẩu bảo mật:
+![Imgur](https://i.imgur.com/K4JZpCG.png)
+- Các tính năng chính:
+![Imgur](https://i.imgur.com/7u39A07.png)
+
+<h4> Configure Password</h4>
+
+- Thay đổi mật khẩu bảo user root
+![Imgur](https://i.imgur.com/09H8z7F.png)
+<h4> Configure management Network</h4>
+
+- Cấu hình quản lý mạng:
+![Imgur](https://i.imgur.com/A7BUbnj.png)
+
+- Xem card mạng: Network Adapters
+![Imgur](https://i.imgur.com/ULnJOVs.png)
+
+- VLAN:
+![Imgur](https://i.imgur.com/jC0RBYo.png)
+- IPv4 Configuration: Có 3 tuỳ chọn:
+  - Tắt IPv4
+  - Cấu hình IPv4 động nếu có DHCP server
+  - Cấu hình tĩnh
+  - Trong hình đang sử dụng cấu hình IP tĩnh
+![Imgur](https://i.imgur.com/xgVrDPf.png)
+
+- IPv6 Configuration
+- DNS Configuration
+![Imgur](https://i.imgur.com/B6X9pzc.png)
+- Custom DNS Suffixes
+![Imgur](https://i.imgur.com/98B8Tvz.png)
+<h4> Restart Management Network</h4>
+
+- Khởi động lại Managemet Network, sẽ dẫn đến mất mạng trong thời gian ngắn, ngắt kết nối đến phần mềm quản lý từ xa và việc chạy các máy ảo
+- Nhấn F11 để khởi động lại
+![Imgur](https://i.imgur.com/t1fvSU5.png)
+<h4> Test Management Network</h4>
+
+- Kiểm tra mạng bằng cách thực hiện ping tới các địa chỉ được setting:
+![Imgur](https://i.imgur.com/lodoTnC.png)
+
+<h4> Network Restore Option</h4>
+
+<h4> Configure Keyboard </h4>
+
+<h4> Troubleshooting Options</h4>
+
+<h4> View System Logs</h4>
+
+<h4> View Support Information</h4>
+
+<h4> Reset System Configuration </h4>
+
+<h3>Tắt và khởi động lại nhấn F12</h3>
+
+- Shut down: F2
+- Restart: F11
+![Imgur](https://i.imgur.com/mMuBgLw.png)
+
+
 - Màn hình máy ảo (VMM)
   - Quy trình cung cấp môi trường thực thi cho máy ảo, cũng như quy trình trợ giúp được gọi là VMX. Mỗi máy ảo đang chạy có quy trình VMM và VMX riêng
 - Đại lý VMware (hostd và vpxa)
