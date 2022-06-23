@@ -146,10 +146,6 @@ Tạo một máy chủ ảo thay cho máy chủ vật lý, cho phép quản lý 
 ### 3.4. Storage
 Lưu trữ dữ liệu của doanh nghiệp trong một cloud an toàn, loại bỏ nhu cầu lưu trữ dữ liệu vật lý  và có khả năng giảm chi phí liên quan đến không gian trong trung tâm dữ liệu
 
-- Có 2 loại Storage Virtualization
-  - Internal (nội bộ)
-  - External (bên ngoài)
-
 ### 3.5. Network
 Sử dụng các thành phần vật lý và ảo để tạo ra một mạng lai (hybrid network), cho phép quản trị mạng thông qua các switch phần mềm
 
