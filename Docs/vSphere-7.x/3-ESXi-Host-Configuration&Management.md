@@ -4,7 +4,9 @@
 
 - [1. Thành phần ESXI](#1-thành-phần-esxi)
 - [Tệp nhật ký ESXi](#tệp-nhật-ký-esxi)
+- [Cách quản lý ESXi](#cách-quản-lý-esxi)
 - [Lab](#lab)
+- [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 ---
 <h3> Nội dung chính</h3>
@@ -81,15 +83,41 @@
 
 <h4> Network Restore Option</h4>
 
+- Sử dụng nếu host ESXi bị treo hoặc bi khởi động lại đột ngột hoặc có một cấu hình sai
 <h4> Configure Keyboard </h4>
+
+- Sử dụng để thay đổi ngôn ngữ bàn phím
+
+![Imgur](https://i.imgur.com/DODZHgV.png)
 
 <h4> Troubleshooting Options</h4>
 
+- Option Khắc phục sự cố như:
+  - Enable truy cập shell
+  - Enable SSH
+  - Cấu hình thời gian chờ (Khi không tác động trong 1 khoảng thời gian phiên DCUI sẽ bị khoá)
+  - Khởi động lại Management Agent
+    - Cách khác: có thể sử dụng lệnh khi đã bật shell
+    ```
+    /etc/init.d/hostd restart
+    ```
+![Imgur](https://i.imgur.com/kua0DFw.png)
+
+
 <h4> View System Logs</h4>
+
+- Xem nhật ký hệ thống
+
+![Imgur](https://i.imgur.com/MXX4VZk.png)
 
 <h4> View Support Information</h4>
 
+- Xem thông tin đầy dủ của system (Serial number, License,...)
+![Imgur](https://i.imgur.com/IF2ZmpG.png)
+
 <h4> Reset System Configuration </h4>
+
+- Khôi phục lại cài đặt ban đầu
 
 <h3>Tắt và khởi động lại nhấn F12</h3>
 
@@ -109,33 +137,47 @@
   - Hệ điều hành giống như Giao diện Hệ điều hành Di động ( Portable Operating System Interface - POSIX) được phát triển bởi VMware, cung cấp một số chức năng tương tự như trong các hệ điều hành khác, chẳng hạn như tạo và kiểm soát quy trình, signals, hệ thống tệp và quy trình xử lý.
 
   - Được thiết kế đặc biệt để hỗ trợ chạy nhiều máy ảo và cung cấp chức năng **core** như:
-    - Resource scheduling - Lâp lịch tài nguyên
-    - I/O stacks
-    - Device drivers - Trình điều khiển thiết bị
+    - Resource scheduling - Lâp lịch tài nguyên (CPU, Memory, Disk,...)
+    - I/O stacks - Ngăn xếp đầu ra đầu vào
+    - Device drivers - Trình điều khiển thiết bị (Các công cụ máy ảo)
 
 - **Hệ thống tập tin**
-  - VMkernel sử dụng một hệ thống tệp trong bộ nhớ đơn giản để chứa các tệp cấu hình Máy chủ ESXi, tệp nhật ký và các bản vá theo giai đoạn
+  - VMkernel sử dụng một hệ thống tệp trong bộ nhớ đơn giản để chứa các tệp cấu hình Máy chủ ESXi, tệp nhật ký và các bản vá theo giai đoạn (có nghĩa là các bản vá đã được áp dụng)
   - Hệ thống tệp này độc lập với hệ thống tệp Vmware vSphere VMFS được sử dụng để lưu trữ các máy ảo
-  - ESXi có thể định cấu hình máy chủ nhật ký hệ thống từ xa và máy chủ kết xuất từ ​​xa, cho phép bạn lưu tất cả thông tin nhật ký trên hệ thống bên ngoài
+  - ESXi có thể định cấu hình máy chủ nhật ký hệ thống từ xa và máy chủ kết xuất từ ​​xa, cho phép bạn lưu tất cả thông tin nhật ký trên hệ thống bên ngoài (Ví dụ trên ESXi có thể lưu trữ dữ liệu của 1 tháng sau đó đẩy ra lưu trữ bên ngoài)
 
 # Tệp nhật ký ESXi
 
 |S.No|Tên Log|Mô tả|
 |:---:|---|---|
-1 | /var/log/auth.log | ESXi Shell xác thực thành công và thất bại
-2 | /var/log/esxupdate.log | Bản vá lỗi ESXi và cập nhật nhật ký cài đặt
-3 | /var/log/hostd.log | Nhật ký dịch vụ quản lý máy chủ lưu trữ, bao gồm máy ảo và máy chủ lưu trữ Tác vụ và sự kiện, giao tiếp với tác nhân vpxa vSphere Client và vCenter Server cũng như các kết nối SDK
+1 | /var/log/auth.log | Thông tin ESXi Shell xác thực thành công và thất bại<br>Ví dụ nếu sử dung ID root đăng nhập không thành công nó sẽ lưu trữ trong auth.log
+2 | /var/log/esxupdate.log | Thông tin Bản vá lỗi ESXi và cập nhật nhật ký cài đặt
+3 | /var/log/hostd.log | Nhật ký dịch vụ quản lý máy chủ lưu trữ, bao gồm máy ảo và máy chủ lưu trữ Tác vụ và sự kiện, giao tiếp với tác nhân vpxa vSphere Client và vCenter Server cũng như các kết nối SDK<br>Hầu hết khắc phục sự cố sử dụng file này.
 4 | /var/log/syslog.log | Khởi tạo dịch vụ quản lý, cơ quan giám sát, tác vụ đã lên lịch và sử dụng DCUI
 5 | /var/log/vmkernel.log | Core VMkernel nhật ký, bao gồm các sự kiện trình điều khiển và thiết bị phát hiện, lưu trữ và mạng, cũng như khởi động máy ảo
 6 | /var/log/vmkwarning.log | Bản tóm tắt thông báo Nhật ký Cảnh báo và Cảnh báo được trích từ nhật ký VMkernel
-7 | /var/log/vmksummary.log | Tóm tắt về khởi động và tắt máy chủ ESXi, nhịp tim hàng giờ với thời gian hoạt động, số lượng máy ảo đang chạy và mức tiêu thụ tài nguyên dịch vụ
-8 | /var/log/vpxa.log | vCenter Máy chủ vpxa nhật ký tác nhân, bao gồm giao tiếp với vCenter Server và đại lý hostd quản lý máy chủ
-9 | /var/log/fdm.log | vSphere Lô sẵn sàng cao, được sản xuất bởi dịch vụ FDM
+7 | /var/log/vmksummary.log | Tóm tắt về khởi động và tắt máy chủ ESXi, heartbeat hàng giờ với thời gian hoạt động, số lượng máy ảo đang chạy và mức tiêu thụ tài nguyên dịch vụ
+8 | /var/log/vpxa.log | vCenter Máy chủ vpxa nhật ký Agent, bao gồm giao tiếp với vCenter Server và đại lý hostd quản lý máy chủ
+9 | /var/log/fdm.log | vSphere Log sẵn sàng cao, được sản xuất bởi dịch vụ FDM
+
+# Cách quản lý ESXi
+Có 2 cách:
+- Sử dụng giao diện đồ hoạ:
+  - VMware host Client
+  - vSphere Client (Chưa rõ)
+- Sử dụng dòng lệnh:
+  - ESX Cli thông qua ssh
+  - VMware Power CLi (Là một công cụ co ssawn từ trang web vmware)
+
+![Imgur](https://i.imgur.com/suCXC7d.png)
 
 # Lab
 - ESXi host Management Interfaces
 - ESXi Host Post-Implementation Steps
 - ESXi host Navigation
+> Lab: [Cầu hình và quản trị host ESXi](../../Lab/3-Config&Management-host-ESXi.md)
 
+
+# Tài liệu tham khảo
 VMware vSphere Documentation
 https://docs.vmware.com/en/VMware-vSphere/index.htm
