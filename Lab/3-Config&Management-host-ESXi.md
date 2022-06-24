@@ -2,6 +2,11 @@
 
 <h2>Summary</h2>
 
+- [Create VM trên ESXi](#create-vm-trên-esxi)
+- [Manage Permissions](#manage-permissions)
+  - [Thêm user](#thêm-user)
+
+
 # Create VM trên ESXi
 
 
@@ -57,3 +62,7 @@
 ![Imgur](https://i.imgur.com/hstwwWs.png)
 
 ![Imgur](https://i.imgur.com/5NECY8V.png)
+
+## Thêm user
+
+!
