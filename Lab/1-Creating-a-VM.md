@@ -1,13 +1,9 @@
-<h1>Creating a Virtual Machine (VM)<h1>
+<h1>Tạo máy ảo (Virtual Machine - VM) thời gian thực <h1>
 
 <h2>Summary</h2>
 
-- [Install a Guest OS in a VM](#install-a-guest-os-in-a-vm)
+- [Cài đặt một Guest OS trên VM](#cài-đặt-một-guest-os-trên-vm)
   - [1. Window Server 2019, 2022](#1-window-server-2019-2022)
-    - [Step 1: Pre-Implementation](#step-1-pre-implementation)
-    - [Step 2: Implementation Procedure](#step-2-implementation-procedure)
-      - [Create a VM as per requirement](#create-a-vm-as-per-requirement)
-      - [Install the Guest OS](#install-the-guest-os)
     - [Step 3: Post-Implementation](#step-3-post-implementation)
       - [Power on VM](#power-on-vm)
       - [Install Vmware Tools or Open VM Tools for Linux](#install-vmware-tools-or-open-vm-tools-for-linux)
@@ -24,10 +20,10 @@
       - [VM Guest OS hardening](#vm-guest-os-hardening)
       - [Provide the VM details to End user/Customer/Client/Tenant](#provide-the-vm-details-to-end-usercustomerclienttenant)
   - [2. ESXi 7.x](#2-esxi-7x)
-    - [Step 1: Pre-Implementation](#step-1-pre-implementation-1)
-    - [Step 2: Implementation Procedure](#step-2-implementation-procedure-1)
-      - [Create a VM as per requirement](#create-a-vm-as-per-requirement-1)
-      - [Install the Guest OS](#install-the-guest-os-1)
+    - [Step 1: Pre-Implementation](#step-1-pre-implementation)
+    - [Step 2: Implementation Procedure](#step-2-implementation-procedure)
+      - [Create a VM as per requirement](#create-a-vm-as-per-requirement)
+      - [Install the Guest OS](#install-the-guest-os)
     - [Step 3: Post-Implementation](#step-3-post-implementation-1)
       - [Power on VM](#power-on-vm-1)
       - [Install Vmware Tools or Open VM Tools for Linux](#install-vmware-tools-or-open-vm-tools-for-linux-1)
@@ -45,10 +41,10 @@
       - [Provide the VM details to End user/Customer/Client/Tenant](#provide-the-vm-details-to-end-usercustomerclienttenant-1)
 - [Install VMware Tools on a VM](#install-vmware-tools-on-a-vm)
 
-# Install a Guest OS in a VM
+# Cài đặt một Guest OS trên VM
 ## 1. Window Server 2019, 2022
-### Step 1: Pre-Implementation
-Xác định:
+<h3> Step 1: Pre-Implementation - Trước triển khai</h3>
+Xác định yêu cầu của khách hàng:
 |Virtual Machine(VM)|Description|
 |:---:|:---:|
 |VM Name|VM-App001
@@ -59,12 +55,22 @@ Xác định:
 |vNIC| 1 Network Card|
 |Operating System (OS)| Windows Server 2019|
 
-### Step 2: Implementation Procedure
-#### Create a VM as per requirement
+<h3> Step 2: Implementation Procedure - Quy trình thực hiện</h3>
+
+<h4>Step 2.1:Tạo một máy ảo (VM) theo yêu cầu</h4>
+
+Thực hiện trong môi trường VMware workstation
+- Tạo máy ảo mới, chọn `Custom > Next` và làm theo hướng dẫn
+
 ![Imgur](https://i.imgur.com/PhbSFW0.png)
+- Đặt kích thước Disk, nên chọn `Store virtual disk as a single file`
+
 ![Imgur](https://i.imgur.com/Fu1wvwU.png)
+- Thêm ISO image windows server 2019:
+
 ![Imgur](https://i.imgur.com/OP0B984.png)
-#### Install the Guest OS
+
+<h4> Cài đặt Guest OS </h4>
 
 ![Imgur](https://i.imgur.com/CxIayQv.png)
 ![Imgur](https://i.imgur.com/6ADy86a.png)
