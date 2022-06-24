@@ -80,7 +80,7 @@
 - Muốn theo dõi server có Common Information Model (CIM), dịch vụ này chạy ở VMkernel Level
   - Đây cũng là Giám sát phần cứng không Agent. Để giám sát host ESXi, ta không cần phải cài đặt bất kỳ Agent nào. Có thể dựa trên địa chỉ IP hoặc giao thức snmp để giám sát ESXi
 
-=> Thành phần core của ESXi là VMkernel, để truy cập vào hạt nhân VM, ta có thể sử dụng trình Shell và nó không cần Agent nào để duy trì host ESXi. Mục đích của ESXi là nó cho phép tạo ra máy ảo và nó cũng yêu cầu storage và network để quản lý host ESXi.
+=> Thành phần core của ESXi là VMkernel, để truy cập vào hạt nhân VM, ta có thể sử dụng trình Shell và nó không cần Agent nào để duy trì host ESXi, ta có thể config và support host ESXi bằng CLI Commands. Mục đích của ESXi là nó cho phép tạo ra máy ảo và nó cũng yêu cầu storage và network để quản lý host ESXi.
 # 4. ESXi Host Build Procedure
 ## 4.1 Các bước trước khi cài đặt ESXi
 - Xác minh danh sách tương thích phần cứng
