@@ -98,22 +98,22 @@
 ![Imgur](https://i.imgur.com/mMuBgLw.png)
 
 
-- Màn hình máy ảo (VMM)
+- Màn hình máy ảo (VMM)- Chưa hiểu
   - Quy trình cung cấp môi trường thực thi cho máy ảo, cũng như quy trình trợ giúp được gọi là VMX. Mỗi máy ảo đang chạy có quy trình VMM và VMX riêng
-- Đại lý VMware (hostd và vpxa)
+- Đại lý VMware (hostd và vpxa) - Chưa hiểu
   - Được sử dụng để cho phép quản lý Cơ sở hạ tầng VMware cấp cao từ các ứng dụng từ xa
 - Hệ thống Mô hình Thông tin Chung (CMM)
   - Giao diện cho phép quản lý cấp phần cứng từ các ứng dụng từ xa thông qua một tập hợp các API tiêu chuẩn
 
-- VMkernel
-  - Hệ điều hành giống như Giao diện Hệ điều hành Di động (POSIX) được phát triển bởi VMware, cung cấp một số chức năng tương tự như trong các hệ điều hành khác, chẳng hạn như tạo và kiểm soát quy trình, tín hiệu, hệ thống tệp và quy trình xử lý.
+- **VMkernel**
+  - Hệ điều hành giống như Giao diện Hệ điều hành Di động ( Portable Operating System Interface - POSIX) được phát triển bởi VMware, cung cấp một số chức năng tương tự như trong các hệ điều hành khác, chẳng hạn như tạo và kiểm soát quy trình, signals, hệ thống tệp và quy trình xử lý.
 
-  - Được thiết kế đặc biệt để hỗ trợ chạy nhiều máy ảo và cung cấp chức năng cốt lõi như
-    - Lập kế hoạch tài nguyên
-    - Ngăn xếp I / O
-    - Trình điều khiển thiết bị
+  - Được thiết kế đặc biệt để hỗ trợ chạy nhiều máy ảo và cung cấp chức năng **core** như:
+    - Resource scheduling - Lâp lịch tài nguyên
+    - I/O stacks
+    - Device drivers - Trình điều khiển thiết bị
 
-- Hệ thống tập tin
+- **Hệ thống tập tin**
   - VMkernel sử dụng một hệ thống tệp trong bộ nhớ đơn giản để chứa các tệp cấu hình Máy chủ ESXi, tệp nhật ký và các bản vá theo giai đoạn
   - Hệ thống tệp này độc lập với hệ thống tệp Vmware vSphere VMFS được sử dụng để lưu trữ các máy ảo
   - ESXi có thể định cấu hình máy chủ nhật ký hệ thống từ xa và máy chủ kết xuất từ ​​xa, cho phép bạn lưu tất cả thông tin nhật ký trên hệ thống bên ngoài
