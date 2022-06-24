@@ -70,6 +70,17 @@
 
 <a href="https://imgur.com/itSnG04"><img src="https://i.imgur.com/itSnG04.png" title="source: imgur.com" /></a>
 
+- Bên dưới là Storage and Network: để cài đặt host ESXi ta cần storage và Network để truy cập host ESXi từ hệ thống khác.
+- Bên trong OS ESXi, lõi chính của hệ điều hành là VMkernel
+  - Để có thể truy cập vào VMkernel này, ta có thể truy cập bằng Local Support Console (được gọi là ESXi Shell - cho phép kết nối với core VMkernel)
+- VMware Management Framework là một hệ thống quản lý Agentless (Sau khi cài đặt ESXi xong chỉ cần mở trình duyệt gõ địa chỉ IP host ESXi nó sẽ chạy trang chủ ESXi, có nghĩa là không có Agent để quản lý host ESXi đó)
+- CLI Commands để cấu hình và hỗ trợ
+  - Giả sử muốn cấu hình bất cứ thứ gì có thể thực hiện từ chế độ đồ hoạ hoặc sử dụng giao diện dòng lệnh CLI
+
+- Muốn theo dõi server có Common Information Model (CIM), dịch vụ này chạy ở VMkernel Level
+  - Đây cũng là Giám sát phần cứng không Agent. Để giám sát host ESXi, ta không cần phải cài đặt bất kỳ Agent nào. Có thể dựa trên địa chỉ IP hoặc giao thức snmp để giám sát ESXi
+
+=> Thành phần core của ESXi là VMkernel, để truy cập vào hạt nhân VM, ta có thể sử dụng trình Shell và nó không cần Agent nào để duy trì host ESXi. Mục đích của ESXi là nó cho phép tạo ra máy ảo và nó cũng yêu cầu storage và network để quản lý host ESXi.
 # 4. ESXi Host Build Procedure
 ## 4.1 Các bước trước khi cài đặt ESXi
 - Xác minh danh sách tương thích phần cứng
