@@ -265,6 +265,5 @@ Xác định các yêu cầu:
 ![Imgur](https://i.imgur.com/lJS8pmQ.png)
 
 ### Step 3: Post-Implementation
-> Thực hiện trong lab sau
 
 # Tài liệu tham khảo
