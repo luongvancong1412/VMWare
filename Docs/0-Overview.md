@@ -24,7 +24,7 @@
 # 1. Cloud computing là gì
 - Cloud computing - *Điện toán đám mây*
 
-<a href="https://imgur.com/ASSTHTk"><img src="https://i.imgur.com/ASSTHTk.png" title="source: imgur.com" align=center width=80% /></a>
+<a href="https://imgur.com/ASSTHTk"><img src="https://i.imgur.com/ASSTHTk.png" title="source: imgur.com" width=90% align=center  /></a>
 
 - Là việc cung cấp computing resource phù hợp, nhanh chóng và thuận lợi với người dùng thông qua internet.
 - *Computing resource: servers, storages, application, service,...*
@@ -35,7 +35,7 @@
   - Cung cấp tài nguyên của họ thông qua Internet
   - Ví dụ SunCloud là một ví dụ về hình thức này.
 
-<a href="https://imgur.com/IUwl8PE"><img src="https://i.imgur.com/IUwl8PE.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/IUwl8PE"><img src="https://i.imgur.com/IUwl8PE.png" title="source: imgur.com" width=90% /></a>
 
 - Tất cả phần cứng, phần mềm và cơ sở hạ tầng hỗ trợ khác đều do nhà cung cấp như SunCloud sở hữu và quản lý.
   - Khách hàng có thể truy cập và quản lý acount của mình thông qua các trình duyệt web.
@@ -45,7 +45,7 @@
 ## Private Cloud
 - Là dạng tài nguyên được sử dụng dành riêng cho một tổ chức hoặc doanh nghiệp nào đó.
 
-<a href="https://imgur.com/SHKVgJ7"><img src="https://i.imgur.com/SHKVgJ7.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/SHKVgJ7"><img src="https://i.imgur.com/SHKVgJ7.png" title="source: imgur.com" width=90% /></a>
 
 - Đối với hình thức này, doanh nghiệp có thể tận dụng các hạ tầng có sẵn của bên thứ 3 như SunCloud để triển khai các dịch vụ của riêng mình.
   - Suncloud sẽ cung cấp không gian hạ tầng chỗ đặt, hệ thống điện, điều hoà,... để triển khai hệ thống CNTT.
@@ -55,6 +55,9 @@
 - Vấn đề: Triển khai công nghệ, chi phí xây dựng, duy trì
 ## Hybrid Cloud
 - Sự kết hợp của Public và Private cloud
+
+<a href="https://imgur.com/Z48sECo"><img src="https://i.imgur.com/Z48sECo.png" title="source: imgur.com" /></a>
+
 - Được rằng buộc bởi công nghệ để đảm bảo sự riêng tư
 - Giúp tối ưu hoá cơ sở hạ tầng
 
@@ -63,6 +66,8 @@
 
 
 # 3. Mô hình
+
+<a href="https://imgur.com/tJBVefn"><img src="https://i.imgur.com/tJBVefn.png" title="source: imgur.com" /></a>
 
 ## Iaas – Infrastructure as a Services
 - Infrastructure as a Services - Dịch vụ cơ sở hạ tầng
