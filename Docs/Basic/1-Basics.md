@@ -3,9 +3,10 @@
 <h2> Summary </h2>
 
 - [Tổng quan](#tổng-quan)
+  - [1.Ảo hoá là gì](#1ảo-hoá-là-gì)
   - [1. Virtual Machines](#1-virtual-machines)
   - [2. Lợi ích của việc sử dụng máy ảo](#2-lợi-ích-của-việc-sử-dụng-máy-ảo)
-  - [3. IT problems in scope](#3-it-problems-in-scope)
+  - [3. Những thách thức](#3-những-thách-thức)
   - [4. Các loại ảo hóa](#4-các-loại-ảo-hóa)
     - [3.1. Desktop](#31-desktop)
     - [3.2. Application](#32-application)
@@ -15,48 +16,45 @@
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 # Tổng quan
-## 1. Virtual Machines
-- Máy ảo (VM) là một phần mềm đại diện của một máy tính vật lý và các thành phần của nó
-- Là một môi trường ảo mô phỏng 1 máy vật lý
-- Phần mềm ảo hóa ( virtualization software) chuyển đổi máy vật lý và các thành phần của nó thành các tệp.
+## 1.Ảo hoá là gì
 
-<h3>Các thành phần Virtual Machine</h3>
+## 1. Virtual Machines
+- Là một môi trường ảo mô phỏng 1 máy vật lý
+- Có các thành phần ảo tương tự như máy tính thật
+  - CPU, Memory, Network Interface và Storage
+- Nhiều máy ảo có thể cùng tồn tại trong một máy vật lý duy nhất.
+<h3>Các thành phần Virtual Machine VMware</h3>
 
 - Guest operating system
+  - Windows, Linux
 - VMware Tools
 - Tài nguyên ảo:
     - CPU và memory
     - Network adapters
     - Disks và controllers
-
+        - Controllers : VMware Workstation
 ## 2. Lợi ích của việc sử dụng máy ảo
-<h4>For Better Hardware utilization</h4>
-
-- Sử dụng phần cứng tốt hơn, giảm chi phí phần cứng
+<h4>For Better Hardware utilization - Sử dụng phần cứng tốt hơn</h4>
+- Giảm chi phí phần cứng
   - Giả sử cần tạo 500 máy ảo, cấu hình 10 vms trên 1 máy chủ thì ta cần 50 máy chủ thay vì 500 máy chủ vật lý
-- Có giới hạn về dung lượng bộ nhớ cho mỗi máy chủ lưu trữ
+>Giới hạn về dung lượng cho mỗi máy chủ lưu trữ
 https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207.0&categories=1-0,2-0
-<h4>Financial Benefit</h4>
+<h4>Financial Benefit - Giảm chi phí</h4>
 
-- Lợi ích tài chính
+<h4>Datacentre space -  Không gian trung tâm dữ liệu</h4>
 
-<h4>Datacentre space</h4>
-
-- Không gian trung tâm dữ liệu
 ![Imgur](https://i.imgur.com/VdMMSrf.png)
 
 - Ex: Vấn đề mua đất để duy trì nhiều server 
   - Với việc sử dụng máy ảo, khi số lượng máy chủ giảm từ 500 xuống 50, điều đó có nghĩa là giảm 450 máy chủ, không gian trung tâm dữ liệu cũng giảm. 
+- Tiết kiệm không gian so server với ảo hoá.
+<h4>AMC- Anual Maintenance Cost -  Chi phí bảo trì định kỳ</h4>
 
-<h4>AMC- Anual Maintenance Cost</h4>
-
-- Chi phí bảo trì định kỳ
-  - Giả sử hoá đơn tiền điện trước đó cho 500 máy chủ, nếu máy chủ giảm xuống 50 thì hoá đơn tiền điện được tiết kiệm, này gọi chung là chi phí bảo trì hằng năm
-- Giảm chi phí bảo hành hàng năm, điện cung cấp không gián đoạn, khi giảm kích thước thiết bị thì điện cũng giảm
-<h4>UPS - Uninterruptible Power Supply</h4>
-
-- Cung cấp điện liên tục
-  - Có một nguồn điện riêng biệt
+- Giả sử hoá đơn tiền điện trước đó cho 500 máy chủ, nếu máy chủ giảm xuống 50 thì hoá đơn tiền điện được tiết kiệm, này gọi chung là chi phí bảo trì hằng năm
+- Chi phí: bảo trì điện + con người + vị trí + hệ thống
+=> Cloud chỉ mất chi phí hàng tháng
+<h4>UPS - Uninterruptible Power Supply - Cung cấp điện liên tục</h4>
+  - Có một nguồn điện riêng biệt, ổn định, có tính dự phòng
 
 <h4>Network equipment</h4>
 
@@ -64,39 +62,28 @@ https://configmax.esp.vmware.com/guest?vmwareproduct=vSphere&release=vSphere%207
   - Khi số lượng máy chủ giảm từ 500 xuống 50 thì số lượng thiết bị mạng cũng sẽ giảm xuống.
 <h4>Storage</h4>
 
-- Cũng tương tự như trên
+- Truyền thống: không sử dụng hết không gian
+- Máy ảo: sử dụng tốt hơn
 
-<h3>➟ Chi phí cơ sở hạ tầng giảm</h3>
+<h3>➟ Chỉ cần nắm công nghệ, chi phí cơ sở hạ tầng giảm</h3>
 
-## 3. IT problems in scope 
-Những thách thức lớn:
-<h4>High CAPEX for dedicated infrastructure</h4>
+## 3. Những thách thức
 
-- Chi phí cao cho những thiết bị chuyên dụng
-  - Khi mua Laptop sẽ có các mẫu bộ vi xử lý i3 i5 i7, cấu hình nào tốt nhất , thương hiệu nào tốt hơn,...
-  - Khi bắt đầu 1 dự án, trong giai đoạn ban đầu họ sẽ xác định cần bao nhiêu máy chủ cho dự án mới này,... Nếu không có ảo hoá, cần đầu tư chi phí cao cho toàn bộ cơ sở hạ tầng vật lý, data center,...
-- Nếu sử dụng ảo hoá, không cần đầu tư nhiều dung lượng cao mà có thể sử dụng ít hơn và có thể duy trì data center của mình
-<h4>Single point of failure</h4>
+<h4>Chi phí cao cho những thiết bị chuyên dụng</h4>
+- Khi mua Laptop sẽ có các mẫu bộ vi xử lý i3 i5 i7, cấu hình nào tốt nhất , thương hiệu nào tốt hơn,...
+- Khi bắt đầu 1 dự án, trong giai đoạn ban đầu họ sẽ xác định cần bao nhiêu máy chủ cho dự án mới này,... Nếu không có ảo hoá, cần đầu tư chi phí cao cho toàn bộ cơ sở hạ tầng vật lý, data center,...
+- Nếu sử dụng ảo hoá, không cần đầu tư nhiều dung lượng cao, sau này có thể nâng cấp thêm
+<h4>Single point of failure - Một điểm lỗi duy nhất</h4>
 
-- Một điểm lỗi duy nhất.
-- Ví dụ: Giả sử có 200 máy chủ trong tổ chức, nếu 1 máy chủ gặp sự cố chắc chắn sẽ ảnh hưởng đến hoạt động sản xuất. Nếu bạn có 1 data center hoàn chỉnh thì đó cũng được coi là **Single point of failure**.
+- Ví dụ: Giả sử có 200 máy chủ trong tổ chức, nếu 1 máy chủ gặp sự cố chắc chắn sẽ ảnh hưởng đến hoạt động tổ chức. Datacenter cũng được coi là **Single point of failure**.
 - VMware cung cấp toàn bộ đều là máy ảo, máy sẽ hoạt động liên tục. Về kỹ thuật được gọi là tính khả dụng, tính sẵn sàng cao
-<h4>Long wait time for hardware purchases</h4>
+<h4>Long wait time for hardware purchases - Thời gian chờ đợi dài để mua phần cứng</h4>
 
-- Thời gian chờ đợi dài để mua phần cứng
-  - Khi mua Laptop ta có thể đến cửa hàng mua, nhưng khi nói đến máy chủ, nếu muốn mua 100 máy chủ phải đặt hàng trước, mất một thời gian để cung cấp 100 máy chủ
-  - Giả sử nếu có 1 hộp Exsa cấu hình cao, ta có thể tạo nhiều máy ảo trên đó và có thể tạo máy ảo một cách nhanh chóng, cài hệ điều hành tương tự như máy thật, không phải chờ đợi lâu cho **Long wait time for hardware purchases** 
-<h4>Unexpected infrastructure outages</h4>
-
-- Cơ sở hạ tầng ngừng hoạt động không mong muốn
+- Khi mua Laptop ta có thể đến cửa hàng mua, nhưng khi nói đến máy chủ, nếu muốn mua 100 máy chủ phải đặt hàng trước, mất một thời gian để cung cấp 100 máy chủ
+- Giả sử nếu có 1 hộp Exsa cấu hình cao, ta có thể tạo nhiều máy ảo trên đó và có thể tạo máy ảo một cách nhanh chóng, cài hệ điều hành tương tự như máy thật, không phải chờ đợi lâu cho **Long wait time for hardware purchases** 
 <h4>Performance bottlenecks</h4>
 
-- Tắc nghẽn hiệu suất
-- Tất cả hiệu suất đều có giới hạn
-<h4>Not enough data center resources or space</h4>
-
-- Không đủ tài nguyên hoặc dung lượng của trung tâm dữ liệu
-
+- Tất cả không gian trên máy ảo đều có giới hạn
 
 ## 4. Các loại ảo hóa
 
