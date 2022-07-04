@@ -16,14 +16,15 @@
   - [Tiết kiệm chi phí](#tiết-kiệm-chi-phí)
   - [Tiện lợi](#tiện-lợi)
   - [An toàn và liên tục](#an-toàn-và-liên-tục)
-  - [Triển khai nhanh chóng ở bất kỳ đâu](#triển-khai-nhanh-chóng-ở-bất-kỳ-đâu)
+  - [Quy mô linh hoạt](#quy-mô-linh-hoạt)
+  - [Triển khai nhanh chóng](#triển-khai-nhanh-chóng)
 - [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 
 # 1. Cloud computing là gì
 - Cloud computing - *Điện toán đám mây*
 
-<a href="https://imgur.com/ASSTHTk"><img src="https://i.imgur.com/ASSTHTk.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/ASSTHTk"><img src="https://i.imgur.com/ASSTHTk.png" title="source: imgur.com" align=center width=80% /></a>
 
 - Là việc cung cấp computing resource phù hợp, nhanh chóng và thuận lợi với người dùng thông qua internet.
 - *Computing resource: servers, storages, application, service,...*
@@ -64,20 +65,46 @@
 # 3. Mô hình
 
 ## Iaas – Infrastructure as a Services
+- Infrastructure as a Services - Dịch vụ cơ sở hạ tầng
+- Là mô hình dịch vụ pay-per-use (trả tiền cho những gì sử dụng)
+- Chi phí sử dụng dịch vụ được tính dựa trên chức năng và lượng tài nguyên mà khách hàng dùng.
+- Nhà cung cấp dịch vụ bán cho khách hàng các server, thiết bị mạng, Memory, CPU, storage, máy tính (thật hoặc ảo) và một số tính năng bảo vệ an ninh
+- Không được tạo ra để phục vụ người dùng cuối mà để phục vụ cho các công ty, đơn vị phát hành web sử dụng với mục đích triển khai phần mềm
 
 ## PaaS – Platform as a Services
-
+- Platform as a Services - Dịch vụ nền tảng
+- Cho phép triển khai các ứng dụng, website trên đám mây
+- Gần giống với Iaas nhưng cấp độ cao hơn.
+    - Được trang bị thêm các công cụ khác
+    - Sẽ có một nền tảng được cài đặt sẵn để phù hợp cho việc phát triển ứng dụng
+- Không cần quản lý cơ sở hạ tầng của tổ chức (phần cứng, hệ điều hành)
 ## SaaS – Software as a Services
-
+- Software as a Services - Dịch vụ phần mềm
+- Mô hình dịch vụ cao nhất hiện nay
+- Cho phép người dùng sử dụng được các ứng dụng dễ dàng trên Cloud thông qua internet.
+  - Đây là các sản phẩm hoàn chỉnh, người dùng có thể sử dụng ngay mà không cần thiết phải thiết lập server để quản lý.
+- Ví dụ:
+  - Microsoft Office 365
+  - OneDrive
+  - Dropbox
+  - ...
+ 
 # 4. Lợi ích
 
 ## Tiết kiệm chi phí
-
+- Tiết kiệm chi phí đầu tư cơ sở hạ tầng ban đầu: *mua phần cứng, phần mềm, triển khai hệ thống,...*
 ## Tiện lợi
-
+- Truy cập nhanh chóng thông qua internet mà không cần cài đặt phức tạp.
 ## An toàn và liên tục
+- Dữ liệu được lưu trữ trên đám mây, tránh được nhiều trường hợp mất dữ liệu: hư hỏng ổ cứng,...
+- Nhà cung cấp dịch vụ cung cấp dịch vụ Backup định kỳ và các phương thức bảo mật
 
-## Triển khai nhanh chóng ở bất kỳ đâu
+## Quy mô linh hoạt
+- Cung cấp lượng tài nguyên mà KH thực sự cần
+- Các tài nguyên này có thể tăng hoặc giảm quy mô ngay lập tức khi nhu cầu thay đổi
+
+## Triển khai nhanh chóng
+- Triển khai ứng dụng nhanh chóng chỉ với vài cú nhấp chuột
 
 # Tài liệu tham khảo
 
