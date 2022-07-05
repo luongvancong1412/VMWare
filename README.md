@@ -24,4 +24,5 @@
 1. [Tạo một Virtual Machine](Lab/1-Creating-a-VM.md)
 2. [Xây dựng host ESXi](Lab/2-ESXi-Host-Build-Procedure.md)
 3. [Cấu hình và quản lý host ESXi](Lab/3-Config&Management-host-ESXi.md)
+4. [Tạo Virtual Switch](Docs/vSphere-7.x/4-ESXi-Networking.md)
 - Updating ...
