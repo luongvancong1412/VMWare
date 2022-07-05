@@ -12,8 +12,9 @@
   - [2.Địa chỉ Internet Protocol (IP)](#2địa-chỉ-internet-protocol-ip)
   - [3.Loại địa chỉ IP](#3loại-địa-chỉ-ip)
 - [III. Phân loại địa chỉ IP & Resered IPs](#iii-phân-loại-địa-chỉ-ip--resered-ips)
-  - [1. Phân loại địa chỉ IP - Tổng quan](#1-phân-loại-địa-chỉ-ip---tổng-quan)
-  - [2. Phân loại địa chỉ IP -Khái niệm Bit ưu tiên](#2-phân-loại-địa-chỉ-ip--khái-niệm-bit-ưu-tiên)
+  - [1. Phân loại địa chỉ IP](#1-phân-loại-địa-chỉ-ip)
+    - [1.1 Tổng quan](#11-tổng-quan)
+    - [1.2 Khái niệm Bit ưu tiên](#12-khái-niệm-bit-ưu-tiên)
   - [3. Địa chỉ IP Network, Valid & Broadcast](#3-địa-chỉ-ip-network-valid--broadcast)
   - [4. Địa chỉ IP Private](#4-địa-chỉ-ip-private)
   - [5. Địa chỉ IP Public](#5-địa-chỉ-ip-public)
@@ -186,7 +187,9 @@ Tương tự Https, SFTP, SSH, SMS, SMTP, v.v.,
 - Các kịch bản thời gian thực kết nối mạng
 - Các lệnh mạng cơ bản
 - Câu đố - Chỉ để kiểm tra kiến ​​thức của chúng tôi
-## 1. Phân loại địa chỉ IP - Tổng quan
+## 1. Phân loại địa chỉ IP
+
+### 1.1 Tổng quan
 
 - Địa chỉ IP mạng - Network IP Addresses
 - Địa chỉ IP hợp lệ -  Valid IP Address
@@ -194,24 +197,32 @@ Tương tự Https, SFTP, SSH, SMS, SMTP, v.v.,
 - Địa chỉ IP riêng -  Private IP Addresses
 - Địa chỉ IP công cộng -  Public IP Addresses
 - Địa chỉ IP lặp lại -  Loopback IP Address
--  Địa chỉ IP tĩnh -  Static IP Address
+- Địa chỉ IP tĩnh -  Static IP Address
 - Địa chỉ IP động -  Dynamic IP Address
 - Địa chỉ IP APIPA -  APIPA IP Address
 - Địa chỉ IP miễn phí Free IP Address
 
-## 2. Phân loại địa chỉ IP -Khái niệm Bit ưu tiên
+### 1.2 Khái niệm Bit ưu tiên
 
 Bit ưu tiên - Priority Bit:
 - Bit ưu tiên được sử dụng để phân loại địa chỉ IP.
 - Hầu hết (các) bit Quan trọng hoặc bit Thứ tự cao từ octet đầu tiên được chọn cho (các) Bit Ưu tiên
 
-Phạm vi Class A-Octet đầu tiên
+Class A Range - First Octet
 
-Phạm vi Class B-Octet đầu tiên
+<a href="https://imgur.com/WhLafJL"><img src="https://i.imgur.com/WhLafJL.png" title="source: imgur.com" /></a>
 
-Dải Class C-Octet đầu tiên
+Class B Range - First Octet
+
+<a href="https://imgur.com/uO14ZFG"><img src="https://i.imgur.com/uO14ZFG.png" title="source: imgur.com" /></a>
+
+Class C Range - First Octet
+
+<a href="https://imgur.com/r48a9E6"><img src="https://i.imgur.com/r48a9E6.png" title="source: imgur.com" /></a>
 
 ## 3. Địa chỉ IP Network, Valid & Broadcast
+
+<a href="https://imgur.com/O5WMx8K"><img src="https://i.imgur.com/O5WMx8K.png" title="source: imgur.com" width=45% align=right /></a>
 
 Địa chỉ IP mạng - Network IP Address:
 - Địa chỉ IP với tất cả các bit là ZERO trong phần host.
@@ -220,7 +231,14 @@ Dải Class C-Octet đầu tiên
 - Địa chỉ IP với tất cả các bit là ONES trong phần host.
 Địa chỉ IP hợp lệ - Valid IP Addresses:
 - Giữa địa chỉ mạng và địa chỉ truyền rộng.
+
 - Chỉ Địa chỉ IP hợp lệ mới được chỉ định cho máy chủ và máy khách.
+
+|||
+|---|---|
+|<a href="https://imgur.com/9VdtSMs"><img src="https://i.imgur.com/9VdtSMs.png" title="source: imgur.com" /></a>|<a href="https://imgur.com/f0odzaC"><img src="https://i.imgur.com/f0odzaC.png" title="source: imgur.com" /></a>
+|||
+
 
 ## 4. Địa chỉ IP Private
 - Có một số dải địa chỉ IP nhất định trong mỗi lớp địa chỉ IP được dành riêng cho private network.
