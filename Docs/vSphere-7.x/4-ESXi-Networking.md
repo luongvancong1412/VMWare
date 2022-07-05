@@ -183,10 +183,8 @@ Tương tự Https, SFTP, SSH, SMS, SMTP, v.v.,
 - Phân loại địa chỉ IP - Tổng quan
 - Khái niệm Bit ưu tiên & Định dạng Octet
 - Dải địa chỉ IP đặc biệt
-- Mặt nạ mạng con, Cổng mặc định
-- Các kịch bản thời gian thực kết nối mạng
+- Subnet mask, Default gateway
 - Các lệnh mạng cơ bản
-- Câu đố - Chỉ để kiểm tra kiến ​​thức của chúng tôi
 ## 1. Phân loại địa chỉ IP
 
 ### 1.1 Tổng quan
@@ -208,28 +206,21 @@ Bit ưu tiên - Priority Bit:
 - Bit ưu tiên được sử dụng để phân loại địa chỉ IP.
 - Hầu hết (các) bit Quan trọng hoặc bit Thứ tự cao từ octet đầu tiên được chọn cho (các) Bit Ưu tiên
 
-Class A Range - First Octet
-
-<a href="https://imgur.com/WhLafJL"><img src="https://i.imgur.com/WhLafJL.png" title="source: imgur.com" /></a>
-
-Class B Range - First Octet
-
-<a href="https://imgur.com/uO14ZFG"><img src="https://i.imgur.com/uO14ZFG.png" title="source: imgur.com" /></a>
-
-Class C Range - First Octet
-
-<a href="https://imgur.com/r48a9E6"><img src="https://i.imgur.com/r48a9E6.png" title="source: imgur.com" /></a>
+Class A Range - First Octet|Class B Range - First Octet|Class C Range - First Octet
+|---|---|---|
+<a href="https://imgur.com/WhLafJL"><img src="https://i.imgur.com/WhLafJL.png" title="source: imgur.com" /></a>|<a href="https://imgur.com/uO14ZFG"><img src="https://i.imgur.com/uO14ZFG.png" title="source: imgur.com" /></a>|<a href="https://imgur.com/r48a9E6"><img src="https://i.imgur.com/r48a9E6.png" title="source: imgur.com" /></a>
 
 ## 3. Địa chỉ IP Network, Valid & Broadcast
 
 <a href="https://imgur.com/O5WMx8K"><img src="https://i.imgur.com/O5WMx8K.png" title="source: imgur.com" width=45% align=right /></a>
 
-Địa chỉ IP mạng - Network IP Address:
+**Địa chỉ IP mạng - Network IP Address:**
 - Địa chỉ IP với tất cả các bit là ZERO trong phần host.
 
-Địa chỉ IP Truyền rộng - Broad Cast IP Address:
+**Broad Cast IP Address:**
 - Địa chỉ IP với tất cả các bit là ONES trong phần host.
-Địa chỉ IP hợp lệ - Valid IP Addresses:
+
+**Valid IP Addresses** - Địa chỉ IP hợp lệ
 - Giữa địa chỉ mạng và địa chỉ truyền rộng.
 
 - Chỉ Địa chỉ IP hợp lệ mới được chỉ định cho máy chủ và máy khách.
@@ -246,6 +237,7 @@ Class C Range - First Octet
 - Khi một mạng sử dụng địa chỉ private kết nối internet, cần phải dịch địa chỉ IP Riêng thành Địa chỉ IP Public. Quá trình dịch này được gọi là Network Address Translation (NAT).
 - Một router thường là thiết bị mạng thực hiện NAT.
 
+<a href="https://imgur.com/UvEZHi2"><img src="https://i.imgur.com/UvEZHi2.png" title="source: imgur.com" /></a>
 ## 5. Địa chỉ IP Public
 
 - Địa chỉ IP Public là Địa chỉ IP có thể được truy cập trực tiếp qua internet và được Nhà cung cấp dịch vụ Internet (Internet Service Provider - ISP) hoặc Cơ quan cấp số được chỉ định Internet (Internet Assigned Numbers Authority - IANA) chỉ định cho bộ định tuyến mạng.
@@ -267,48 +259,66 @@ STT | IP Private| IP Public
 ## 7. Địa chỉ IP Loopback
 
 - Địa chỉ loopback là một địa chỉ IP dành riêng có thể được sử dụng để kiểm tra, chẩn đoán thiết bị.
+
 - Dải IP Loopback bắt đầu từ 127.0.0.0 kết thúc tại 127.255.255.255
 - Địa chỉ loopback 127.0.0.1 thường được gọi là `localhost` và nó được `sử dụng để kiểm tra thẻ NIC` để xác minh rằng `nó đang gửi và nhận tín hiệu`.
+<a href="https://imgur.com/M3PtwEV"><img src="https://i.imgur.com/M3PtwEV.png" title="source: imgur.com"  width=55% align=right /></a>
 - Để `kiểm tra một card mạng` bằng địa chỉ loopback, chúng ta có thể sử dụng tiện ích `TCP/IP Ping`.
 - `ping 127.0.0.1`> Nếu lệnh thành công, Nhận Reply từ 127.0.0.1
   - Điều này cho thấy rằng card mạng và drivers đang hoạt động bình thường.
 - Nếu tiện ích Ping không thể return card mạng, điều này có thể cho thấy sự cố driver hoặc sự cố vật lý với card.
 
+
+
 ## 8. IP static so với IP dynamic
 
-IP static:
+
+**IP static:**
+<a href="https://imgur.com/R8EtT4F"><img src="https://i.imgur.com/R8EtT4F.png" title="source: imgur.com" width=45% align=right /></a>
 - Là IP được gán theo cách thủ công.
 - Servers và các thiết bị mạng khác được cấu hình bằng IP tĩnh
 - Nó luôn là Địa chỉ IP cố định và cần được sửa đổi Khi có bất kỳ thay đổi nào về mạng.
 
-IP dynamic:
+**IP dynamic:**
 - Nó có nghĩa là IP được gán tự động.
 - IP động là giải pháp tốt nhất khi chúng ta có nhiều máy Client.
 - DHCP Server sẽ tự động gia hạn Địa chỉ IP theo lease period (Thời gian thuê). Ví dụ: 8 ngày, 10 ngày.
 
 ## 9. Automatic Private IP Addressing - IP (APIPA):
 
+<a href="https://imgur.com/G7adzUy"><img src="https://i.imgur.com/G7adzUy.png" title="source: imgur.com" width=65% align=right /></a>
+
 - Khi client hoặc máy trạm (workstations) không thể truy cập Máy chủ DHCP và nó sẽ nhận được một Địa chỉ IP tạm thời thay thế được gọi là IP APIPA.
 - Hệ thống tự chọn địa chỉ IP trong dải từ 169.254.1.0 đến 169.254.254.255.
 - Theo mặc định, giao thức APIPA được bật.
 - Cách tìm Trạng thái IP APIPA
-  - Start > Run > ncpa.cpl
+  - `Start > Run > ncpa.cpl`
   - Chọn Specific Network Properties
-  - Chọn TCP/IPv4 > Nhấp vào Properties
-  - Đi tới Tab > Alternate Configuration > APIPA
+  - Chọn `TCP/IPv4` > Nhấp vào `Properties`
+  - Đi tới Tab > `Alternate Configuration` > APIPA
 
 - Commands: ipconfig/release, ipconfig/renew
+<a href="https://imgur.com/N723uNU"><img src="https://i.imgur.com/N723uNU.png" title="source: imgur.com" /></a>
 
 ## 10. Subnet Mask
 
 - Subnet Mask tách biệt phần Network (N) và Host (H) của Địa chỉ IP.
 - Được đại diện với tất cả các số 1 trong phần Network và với tất cả các chữ O trong phần Host.
 
+|Class| Priority Bits|Network and Host ID| Default Subnet Mask|
+|:---:|:---:|:---:|:---:|
+|A|0|N.H.H.H|255.0.0.0|
+|B|10|N.N.H.H|255.255.0.0|
+|C|110|N.N.N.H|255.255.255.0|
+
 ## 11. Default Gateway
 
 - Default Gateway là thiết bị chuyển tiếp dữ liệu từ mạng này sang mạng khác.
 - Hầu hết thường là một router.
 - Các cổng mạng mặc định cũng có thể được cấu hình bằng máy tính thay vì router.
+
+<a href="https://imgur.com/DDSy5hj"><img src="https://i.imgur.com/DDSy5hj.png" title="source: imgur.com" /></a>
+
 
 ## 12. Các tình huống thực tế của mạng:
 
@@ -355,9 +365,13 @@ Kịch bản -2
 - Một trong những công dụng chính của lệnh telnet là kiểm tra xem một cổng cụ thể có đang lắng nghe trên máy chủ hay không.
 - Lệnh: `telnet [hostname / ipaddress] [port number]`
 
+>cmd: appwiz.cpl> Turn Windows features on or off để bật tắt Telnet
+
 ## 14. IPv6
 - IPv6 là địa chỉ 128 bit và nó được chia thành các ranh giới 16 bit, và mỗi khối 16 bit được chuyển đổi thành số thập lục phân 4 chữ số và được phân tách bằng dấu hai chấm.
 - Đó là ký hiệu Colon-Hex.
+
+<a href="https://imgur.com/I4E8zhq"><img src="https://i.imgur.com/I4E8zhq.png" title="source: imgur.com" /></a>
 
 ##  15. Khái niệm vSphere Network
 
