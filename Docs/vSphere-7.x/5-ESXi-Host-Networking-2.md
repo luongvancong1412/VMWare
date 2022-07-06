@@ -2,25 +2,16 @@
 
 <h2>Summary</h2>
 
-
-
-# Tóm tắt
-
-- Khái niệm mạng ESXi
-
-- Chuyển mạch tiêu chuẩn vSphere (VSS) hoặc vSwitch
-
-- Nhóm cổng vSwitch
-
-- Tối đa hóa mạng ESXi
-
-- Các trường hợp sử dụng vSwitch
-
-- Kiến trúc mạng ESXi
-
-- Các loại công tắc ảo
-
-- Mạng ESXi - Phòng thí nghiệm
+- [Khái niệm mạng ESXi](#khái-niệm-mạng-esxi)
+  - [Physical Switch](#physical-switch)
+  - [Physical Network](#physical-network)
+  - [Virtual Network](#virtual-network)
+- [vSphere Standard Switch (vSS) hoặc vSwitch](#vsphere-standard-switch-vss-hoặc-vswitch)
+- [Các Group Port vSwitch](#các-group-port-vswitch)
+- [Tối đa hóa mạng máy chủ ESXi](#tối-đa-hóa-mạng-máy-chủ-esxi)
+- [Kiến trúc mạng ESXi](#kiến-trúc-mạng-esxi)
+- [Các loại công tắc ảo](#các-loại-công-tắc-ảo)
+- [Mạng ESXi - lab](#mạng-esxi---lab)
 
 # Khái niệm mạng ESXi
 
@@ -72,7 +63,7 @@
 Ví dụ
 - Một vSwitch không thể kết nối trực tiếp với một vSwitch khác trong hộp ESXi mà nó sẽ kết nối từ vswitch kết nối đến physical adapter rồi nó mới kết nối đến vswitch khác.
 
-# nhóm Cổng vSwitch
+# Các Group Port vSwitch
 <a href="https://imgur.com/3Pq1ClZ"><img src="https://i.imgur.com/3Pq1ClZ.png" title="source: imgur.com" width=45% align=right /></a>
 
 - 2 nhóm cổng này được tạo tự động khi cài đặt ESXi, một nhóm dành riêng cho mạng máy ảo, một nhóm cổng khác dành riêng cho mạng quản lý 
@@ -80,9 +71,10 @@ Ví dụ
 - Quản lý mạng máy ảo.
 
 2. VM Kernel Port Group:
-- Điều này chủ yếu dành cho lưu trữ IP, vSphere vMotion, Fault Tolerance (FT), VSAN, Cấp phép, v.v.
+- Điều này chủ yếu dành cho lưu trữ IP, vSphere vMotion, Fault Tolerance (FT), VSAN, Cấp phép, v.v. (Đề cập ở phần vCenter)
 - Đối với mạng quản lý ESXi
 
+Đoạn 22:50
 <a href="https://imgur.com/3iQgOpX"><img src="https://i.imgur.com/3iQgOpX.png" title="source: imgur.com" /></a>
 
 # Tối đa hóa mạng máy chủ ESXi
@@ -115,7 +107,7 @@ Mạng ảo hỗ trợ các loại thiết bị chuyển mạch ảo sau:
 
 Cả hai loại công tắc đều có tính đàn hồi (Linh hoạt): các cổng được tạo và loại bỏ tự động.
 
-# Mạng ESXi - Phòng thí nghiệm:
+# Mạng ESXi - lab
 
 1. Tạo vSwitch
 
