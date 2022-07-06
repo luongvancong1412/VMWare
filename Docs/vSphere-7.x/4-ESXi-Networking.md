@@ -24,11 +24,8 @@
   - [9. Automatic Private IP Addressing - IP (APIPA):](#9-automatic-private-ip-addressing---ip-apipa)
   - [10. Subnet Mask](#10-subnet-mask)
   - [11. Default Gateway](#11-default-gateway)
-  - [12. Các tình huống thực tế của mạng:](#12-các-tình-huống-thực-tế-của-mạng)
-  - [13. Các lệnh Networking Cơ bản:](#13-các-lệnh-networking-cơ-bản)
-  - [14. IPv6](#14-ipv6)
-  - [15. Khái niệm vSphere Network](#15-khái-niệm-vsphere-network)
-  - [16. Switch tiêu chuẩn vSphere - vSphere Standard Switch](#16-switch-tiêu-chuẩn-vsphere---vsphere-standard-switch)
+  - [12. Các lệnh Networking Cơ bản:](#12-các-lệnh-networking-cơ-bản)
+  - [13. IPv6](#13-ipv6)
 
 ---
 - Các khái niệm cơ bản về mạng
@@ -224,7 +221,7 @@ Class A Range - First Octet|Class B Range - First Octet|Class C Range - First Oc
 - Địa chỉ IP với tất cả các bit là ONES trong phần host.
 
 **Valid IP Addresses** - Địa chỉ IP hợp lệ
-- Giữa địa chỉ mạng và địa chỉ truyền rộng.
+- Giữa địa chỉ mạng và địa chỉ Broad Cast.
 
 - Chỉ Địa chỉ IP hợp lệ mới được chỉ định cho máy chủ và máy khách.
 
@@ -322,20 +319,7 @@ STT | IP Private| IP Public
 
 <a href="https://imgur.com/DDSy5hj"><img src="https://i.imgur.com/DDSy5hj.png" title="source: imgur.com" /></a>
 
-
-## 12. Các tình huống thực tế của mạng:
-
-Kịch bản 1:
-- Một trong các Tổ chức có 75 Máy trạm và 5 Máy chủ.
-- Loại Địa chỉ IP nào được ưu tiên cho Mạng?
-- Nó có 5 phòng ban (Ví dụ: Nhân sự, Bán hàng, Sản xuất, QA & Dev, hỗ trợ CNTT và các bộ phận khác)
-
-Kịch bản -2
-- Một trong các Tổ chức có 120 Máy trạm và 10 Máy chủ.
-- Loại Địa chỉ IP nào được ưu tiên cho Mạng?
-- Nó có 6 đội. Nhưng giao tiếp giữa các đội nên không thể thực hiện được?
-
-## 13. Các lệnh Networking Cơ bản:
+## 12. Các lệnh Networking Cơ bản:
 
 **Ipconfig / Ifconfig:**
 
@@ -370,29 +354,8 @@ Kịch bản -2
 
 >cmd: appwiz.cpl> Turn Windows features on or off để bật tắt Telnet
 
-## 14. IPv6
+## 13. IPv6
 - IPv6 là địa chỉ 128 bit và nó được chia thành các ranh giới 16 bit, và mỗi khối 16 bit được chuyển đổi thành số thập lục phân 4 chữ số và được phân tách bằng dấu hai chấm.
 - Đó là ký hiệu Colon-Hex.
 
 <a href="https://imgur.com/I4E8zhq"><img src="https://i.imgur.com/I4E8zhq.png" title="source: imgur.com" /></a>
-
-##  15. Khái niệm vSphere Network
-
-**Physical Network:**
-- Một mạng các máy vật lý được kết nối để chúng có thể gửi dữ liệu đến và nhận dữ liệu từ nhau. VMware ESXi chạy trên một máy vật lý.
-
-**Virtual Network:**
-- Một mạng các máy ảo chạy trên một máy vật lý được kết nối logic với nhau để chúng có thể gửi dữ liệu đến và nhận dữ liệu từ nhau. Máy ảo có thể được kết nối với mạng ảo mà bạn tạo khi thêm một mạng
-
-Physical Switch:
-- Một bộ chuyển mạch ethernet vật lý quản lý lưu lượng mạng giữa các máy trong mạng vật lý.
-- Một switch có nhiều cổng, mỗi cổng có thể được kết nối với một máy duy nhất hoặc một switch khác trong mạng.
-- Mỗi cổng có thể được cấu hình để hoạt động theo những cách nhất định tùy thuộc vào nhu cầu của máy kết nối với nó.
-- Switch là cốt lõi của một mạng vật lý. Nhiều thiết bị switch có thể được kết nối với nhau để tạo thành mạng lớn hơn.
-
-## 16. Switch tiêu chuẩn vSphere - vSphere Standard Switch
-- Nó hoạt động giống như một switch Ethernet vật lý.
-- Nó phát hiện máy ảo nào được kết nối hợp lý với mỗi cổng ảo của nó và sử dụng thông tin đó để chuyển tiếp lưu lượng đến đúng máy ảo.
-- Một switch tiêu chuẩn vSphere có thể được kết nối với switch vật lý bằng cách sử dụng Adapter Ethernet vật lý, còn được gọi là **uplink**
-- Kiểu kết nối này tương tự như kết nối các switch vật lý với nhau để tạo ra một mạng lớn hơn.
-- Mặc dù một vSphere Standard Switch hoạt động giống như một switch vật lý,nhưng nó không có một số chức năng nâng cao của một switch vật lý.
