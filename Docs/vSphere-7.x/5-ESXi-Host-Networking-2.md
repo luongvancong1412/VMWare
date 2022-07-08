@@ -80,12 +80,11 @@ Ví dụ
 # Tối đa hóa mạng máy chủ ESXi
 
 Mạng ESXi
-Tối đa cấu hình
 
-Các cổng tạo chuyển mạch Mạng ảo trên mỗi Switch tiêu chuẩn: 4088
-Tổng số cổng Switch Mạng ảo trên mỗi máy chủ / máy chủ ESXi: 4096
-Nhóm cổng trên mỗi công tắc tiêu chuẩn vSphere (VSS): 512
-NICS vật lý 10 Gbps / 20 Gbps / 25 Gbps trên mỗi máy chủ: 16
+- Các cổng tạo chuyển mạch Mạng ảo trên mỗi Switch tiêu chuẩn: 4088
+- Tổng số cổng Switch Mạng ảo trên mỗi máy chủ / máy chủ ESXi: 4096
+- Nhóm cổng trên mỗi công tắc tiêu chuẩn vSphere (VSS): 512
+- NICS vật lý 10 Gbps / 20 Gbps / 25 Gbps trên mỗi máy chủ: 16
 
 # Kiến trúc mạng ESXi
 
