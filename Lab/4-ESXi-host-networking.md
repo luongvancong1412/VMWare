@@ -1,4 +1,17 @@
-<h1>Tạo Virtual switch </h1>
+<h1>Virtual switch </h1>
+
+
+<h2>Summary</h2>
+
+- [Tạo Vswitch](#tạo-vswitch)
+- [Tạo nhóm Cổng VM](#tạo-nhóm-cổng-vm)
+- [Tạo nhóm Cổng VMkernel](#tạo-nhóm-cổng-vmkernel)
+- [Thêm NIC hoặc Liên kết lên để chuyển đổi dự phòng](#thêm-nic-hoặc-liên-kết-lên-để-chuyển-đổi-dự-phòng)
+- [Tuân thủ Chính sách kết nối vSwitch](#tuân-thủ-chính-sách-kết-nối-vswitch)
+- [Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.](#gán-các-nhóm-cổng-cụ-thể-cho-vm-sản-xuất--thử-nghiệm)
+- [Loại bỏ vSwitch, nhóm cổng, liên kết lên](#loại-bỏ-vswitch-nhóm-cổng-liên-kết-lên)
+
+# Tạo Vswitch
 
 Mặc định khi cài đặt ESXi, nó tự tạo ra switch đầu tiên là vSwitch0
 
@@ -20,3 +33,10 @@ Một số giới hạn:
 
 Số vSwitch tối đa
 <a href="https://imgur.com/vf7knuJ"><img src="https://i.imgur.com/vf7knuJ.png" title="source: imgur.com" /></a>
+
+# Tạo nhóm Cổng VM
+# Tạo nhóm Cổng VMkernel
+# Thêm NIC hoặc Liên kết lên để chuyển đổi dự phòng
+# Tuân thủ Chính sách kết nối vSwitch
+# Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
+# Loại bỏ vSwitch, nhóm cổng, liên kết lên
