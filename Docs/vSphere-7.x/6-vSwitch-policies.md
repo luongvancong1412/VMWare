@@ -9,7 +9,7 @@
 - [5. NIC Teaming và Cân bằng tải - NIC Teaming and Load Balancing](#5-nic-teaming-và-cân-bằng-tải---nic-teaming-and-load-balancing)
 - [6. Phát hiện chuyển đổi mạng dự phòng -Network Failover detection](#6-phát-hiện-chuyển-đổi-mạng-dự-phòng--network-failover-detection)
 - [7. Chính sách Định hình Lưu lượng - Traffic-Shaping Policy](#7-chính-sách-định-hình-lưu-lượng---traffic-shaping-policy)
-- [Lệnh](#lệnh)
+- [8. Lệnh](#8-lệnh)
 - [ESXi Networking - lab:](#esxi-networking---lab)
 
 Sesion 5: vSwitch policies
@@ -110,7 +110,7 @@ Chúng ta có thể định cấu hình **các thuật toán cân bằng tải**
 
 <a href="https://imgur.com/Fi2AdYs"><img src="https://i.imgur.com/Fi2AdYs.png" title="source: imgur.com" /></a>
 
-# Lệnh
+# 8. Lệnh
 
 ESXI Networking Command - Chức năng|Command|
 |---|---|
