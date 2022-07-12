@@ -16,58 +16,88 @@ Sesion 5: vSwitch policies
 - Các trường hợp sử dụng vSwitch
 - Mạng ESXi - Chính sách vSwitch
 - Mạng ESXi - Lệnh
+  - Các lệnh này sẽ hữu ích khi **gặp bất kỳ sự cố** nào trên interface đồ hoạ người dùng, khi không thể truy cập máy chủ ESX thông qua giao diện đồ hoạ người dùng
 - Mạng ESXi - Lab
 
 # 1. Các trường hợp sử dụng vSwitch
-Trường hợp sử dụng-1
+> Nói qua về các trường hợp sử dụng vswitch của bài trước
+Trường hợp sử dụng-1:
+- Chỉ một vswitch
+  - Theo cấu hình vmware vsphere, mỗi vswitch hỗ trợ tối đa 4088 port
 
 <a href="https://imgur.com/sKG49Ny"><img src="https://i.imgur.com/sKG49Ny.png" title="source: imgur.com" /></a>
 
 Nhóm cổng **vSwitch**
-1. Nhóm cổng **VM**: Dành cho Mạng máy ảo.
-2. Nhóm cổng **VMkernel**: Dành cho ESXi Mgmt. & Services
+1. Nhóm cổng **VM**: Chỉ dành cho Mạng máy ảo. Yêu cầu tối thiểu để truy cập máy ảo từ bên trong máy chủ của bạn cần một nhóm cổng VM
+2. Nhóm cổng **VMkernel**: Dành cho ESXi Mgmt. & Services (dùng để quản lý ESXi và các dịch vụ của nó:vmontion)
+
 
 <a href="https://imgur.com/DqgEji5"><img src="https://i.imgur.com/DqgEji5.png" title="source: imgur.com" /></a>
 
+- Mỗi switch ảo nên có tối thiểu 2 NIC với mục đích dự phòng và tối đa chúng ta có thể thêm 16 NIC
+- 2 Nhóm cổng này sẽ được tạo mặc định
+- Cần nhớ 1 điều: đối với mạng máy ảo chúng ta không cần cung cấp địa chỉ ip nào ở **cấp độ nhóm cổng** mà chúng ta chỉ có thể cung cấp địa chỉ ip trên máy ảo mà khách đang vận hành cấp hệ thống. Chỉ khi nói đến mạng quản lý, chúng ta cần cung cấp địa chỉ ip cho cấp nhóm cổg VMkernel
 Trường hợp sử dụng-2
-
+- Nhiều vswitch
+  - Trong hình dưới có 5 vswitch nhưng các cổng hoạt động được hỗ trợ tối đa cũng chỉ là 4096. Nó sẽ không hỗ trợ nhiều hơn
+  - Trong trường hợp 2 sử dụng từng nhóm cổng thay vì cấu hình tất cả các nhóm cổng trên cùng một vswitch
+  - Khi truy cập voà máy chủ ESXi > Network > Port groups, ta có thể tìm thấy tất cả các nhóm cổng
+  - VLAN ID là tuỳ chọn, nếu mạng vật lý có số VLAN, chúng ta cần nhập các số VAN đó vào đây, ngược lại có thể để trống giá trị mặc định là 0
+  - Và đây được coi là nhóm cổng vswith tiêu chuẩn
 <a href="https://imgur.com/HtLQiKn"><img src="https://i.imgur.com/HtLQiKn.png" title="source: imgur.com" /></a>
 
 <a href="https://imgur.com/fF38FfN"><img src="https://i.imgur.com/fF38FfN.png" title="source: imgur.com" /></a>
 
 # 2. Chính sách vSwitch
-
+- Khi click vào option edit vswitch, chúng ta thấy rằng có 3 loại chính sách:
 <a href="https://imgur.com/XkAP8TH"><img src="https://i.imgur.com/XkAP8TH.png" title="source: imgur.com" /></a>
 
 - Các chính sách được đặt ở cấp độ chuyển mạch tiêu chuẩn (standard switch level), áp dụng cho tất cả các nhóm cổng trên **vSwitch theo mặc định**.
 - **Các chính sách mạng** có sẵn:
 1. Security (Bảo mật)
-2. Traffic shaping (Định hình giao thông)
+2. Traffic shaping (Định hình lưu lượng)
 3. NIC teaming and failover (NIC hợp tác và chuyển đổi dự phòng)
-- Các chính sách được xác định ở các cấp độ tiếp theo:
-  - Mức **vSwitch**:
+- Các chính sách được xác định ở các cấp độ tiếp theo (subsequent levels):
+  - Cấp **vSwitch**:
     - Các chính sách mặc định cho tất cả các cổng trên switch tiêu chuẩn (standard switch).
   - Cấp **nhóm cổng**:
-    - Các chính sách hiệu quả: Các chính sách được xác định ở cấp độ này sẽ ghi đè các chính sách mặc định được đặt ở cấp độ chuyển đổi tiêu chuẩn.
+    - Các chính sách hiệu quả: Các chính sách được xác định ở cấp độ này sẽ ghi đè các chính sách mặc định được đặt ở cấp độ vswitch standard.
+    - Nên đôi khi ở cấp độ nhóm cổng, chúng ta không cần đặt bất kỳ chính sách nào khi bạn áp dụng chính sách trên vswitch, nó sẽ tự động ghi đè chính sách này sang cấp nhóm.
 
 <a href="https://imgur.com/XkAP8TH"><img src="https://i.imgur.com/XkAP8TH.png" title="source: imgur.com" /></a>
+
+- Trong thực tế, chúng ta không cần sửa đổi bất kỳ điều gì (để mặc định)
+- Trong một số tình huống (trong mục đích kiểm toán hoặc muốn phân tích lưu lượng truy cập mạng ESX hoặc muốn xem thông tin điều khiển đầu vào và đầu ra của mạng, kiểm soát đầu vào và đầu ra) ta nên sửa đổi thông tin chính sách vswitch 
+
+Tầm quan trong của các chính sách:
+- Trong security, có 3 loại chính sách, một trong 3 loại đó là chế độ Promiscuous, nó hoạt động giống như một bộ phân tích gói có khi là khi gửi bất kỳ thông tin nào từ hệ thống này sang hệ thống khác, tất cả các gói này sẽ được phân tích, nó sẽ tạo một số thông tin nhật ký trên cấp độ kernel esxi host VM
+  - Nó sẽ lưu trong nhật ký VMkernel và đôi khi sẽ lưu trong nhật ký hostd 
+  - Nó hoạt động giống như một trình phân tích, bất cứ khi nào ta muốn phân tích bất kỳ gói nào giữa nguồn và đích, chúng ta nên bật chính sách bảo mật này đến khi không có yêu cầu nào
+- Về chính sách MAC address changes: có nghĩa là nếu muốn giám sát bất kỳ người dùng nào đang cố thay đổi địa chỉ MAC ở cấp độ VM hoặc cấp hệ điều hành Guest, khi đó sẽ có thông báo về điều này
+- NIC teaming là các chính sách về NIC, nếu 2 NIC trở nên ta có thể thực hiện cân bằng tải, chuyển đổi dự phòng nếu một NIC bị hỏng
+- Về Traffic shaping nói về việc set một số băng thông cho máy chủ, mặc định ở trạng thái Disabled
 
 # 3. Security Policies - Chính sách Bảo mật
 
 **vSphere Admin** có thể xác định các chính sách bảo mật ở cả standard switch level và port group level:
 - **Chế độ Promiscuous**:
-  - Cho phép một công tắc ảo (virtual switch) hoặc nhóm cổng chuyển tiếp **tất cả lưu lượng** truy cập bất kể điểm đến.
+  - Cho phép một switch ảo (virtual switch) hoặc nhóm cổng chuyển tiếp **tất cả lưu lượng** truy cập bất kể điểm đến.
 - **MAC address changes** - Thay đổi địa chỉ MAC:
   - Chấp nhận hoặc từ chối **lưu lượng đến** khi khách thay đổi địa chỉ MAC.
+  - Khi địa chỉ MAC bị thay đổi ta sẽ ngay lập tức nhận được cảnh báo
 - Forged transmits:
   - Chấp nhận hoặc từ chối **lưu lượng gửi đi** khi khách thay đổi địa chỉ MAC.
+    - Này cũng tương tự **MAC address changes**, nhưng thay vì lưu lượng vào thì đó là lưu lượng ra ngoài
 
 <a href="https://imgur.com/XYiPje0"><img src="https://i.imgur.com/XYiPje0.png" title="source: imgur.com" /></a>
 
 # 4. Chính sách hợp tác NIC - NIC teaming Policies
-- **NIC Teaming** cho phép nhiều NICS được kết nối với một công tắc ảo duy nhất để tiếp tục truy cập vào mạng.
-- Trong một số trường hợp, nó cũng có thể kích hoạt cân bằng tải nếu phần cứng bị lỗi.
-- **Chính sách cân bằng tải**
+- **NIC Teaming** cho phép nhiều NICS được kết nối với một switch ảo duy nhất để tiếp tục truy cập vào mạng.
+  - ví dụ:
+    - 1 NIC: tốc độ mạng là 80
+    - 2 NIC: tốc độ mạng được chia ra 40 40
+- Trong một số trường hợp, nó cũng có thể kích hoạt cân bằng tải nếu phần cứng bị lỗi (quy trình tự động)
+- Các tuỳ chọn **Chính sách cân bằng tải**
   - Định tuyến dựa trên **Cổng ảo** gốc
   - Định tuyến dựa trên **Nguồn MAC Hash**
   - Định tuyến dựa trên **IP Hash**
@@ -81,38 +111,46 @@ Trường hợp sử dụng-2
 
 Chúng ta có thể định cấu hình **các thuật toán cân bằng tải** khác nhau trên vSwitch để xác định cách phân phối lưu lượng mạng giữa các NIC vật lý trong một nhóm NIC.
 1. Định tuyến dựa trên **cổng ảo** có nguồn gốc
-- Công tắc ảo chọn các liên kết dựa trên ID cổng máy ảo trên Công tắc tiêu chuẩn vSphere
+- Switch ảo chọn các đường uplink dựa trên ID cổng máy ảo trên Switch tiêu chuẩn vSphere
+- Ta có 4088 cổng trong đó 1 cổng dành riêng cho 1 nhiệm vụ ảo, mỗi nhiệm vụ dành riêng cho 1 cổng
 2. Định tuyến dựa trên **mã nguồn MAC Hash**
-- Công tắc ảo chọn một đường lên cho một máy ảo dựa trên địa chỉ MAC của máy ảo. Để tính toán đường lên cho một máy ảo, công tắc ảo sử dụng địa chỉ MAC của máy ảo và số lượng liên kết lên trong nhóm NIC.
+- Switch ảo chọn một đường uplink cho một máy ảo dựa trên địa chỉ MAC của máy ảo. Để tính toán đường uplink cho một máy ảo, switch ảo sử dụng địa chỉ MAC của máy ảo và số lượng đường uplink trong nhóm NIC.
 
 3. Định tuyến dựa trên **IP Hash**
-- Switch ảo chọn các đường lên cho các máy ảo dựa trên địa chỉ IP nguồn và đích của mỗi gói tin.
+- Switch ảo chọn các đường uplink cho các máy ảo dựa trên địa chỉ IP nguồn và đích của mỗi gói tin.
 
-4. Sử dụng **Lệnh chuyển đổi dự phòng** rõ ràng
-- Không có cân bằng tải thực tế nào khả dụng với chính sách này. Công tắc ảo luôn sử dụng liên kết lên đứng đầu tiên trong danh sách Bộ điều hợp hoạt động từ thứ tự chuyển đổi dự phòng và vượt qua các tiêu chí phát hiện chuyển đổi dự phòng. Nếu không có liên kết lên trong danh sách Hoạt động, công tắc ảo sẽ sử dụng liên kết lên từ danh sách Dự phòng.
+4. Sử dụng **Failover Order** Explicit
+- Không có cân bằng tải thực tế nào khả dụng với chính sách này. Switch ảo luôn sử dụng đường uplink lên đứng đầu tiên trong danh sách Adapters hoạt động từ failover order và vượt qua các tiêu chí phát hiện chuyển đổi dự phòng. Nếu không có đường uplink trong danh sách Hoạt động, switch ảo sẽ sử dụng đường uplink lên từ danh sách Dự phòng.
 
 # 6. Phát hiện chuyển đổi mạng dự phòng -Network Failover detection
 
 - **VMkernel** có thể sử dụng **trạng thái liên kết (link status)** hoặc **đèn hiệu (beaconing)** hoặc cả hai để phát hiện lỗi mạng.
-- **Beacon Probing** là một trong hai cơ chế phát hiện lỗi NIC có sẵn
-- VMkernel thông báo cho các bộ chuyển mạch vật lý về những thay đổi trong vị trí thực của địa chỉ MAC.
+- **Beacon Probing** là một trong hai cơ chế phát hiện lỗi NIC có sẵn. Vì vậy nếu có 2 Card trong đó một card bị lỗi, nó sẽ thông báo rằng một trong các NIC lỗi
+  - Chúng ta cũng có thể sử dụng công cụ giám sát bên thứ 3 để thay thế
+- VMkernel thông báo cho các bộ switch vật lý về những thay đổi trong vị trí thực của địa chỉ MAC.
 - **Chuyển đổi dự phòng (Failover)** được **VMkernel** thực hiện dựa trên các tham số có thể định cấu hình:
-  - **Failback**: Cách bộ điều hợp vật lý trở lại hoạt động sau khi khôi phục từ lỗi.
+  - **Failback**: Cách adapter vật lý trở lại hoạt động sau khi khôi phục từ lỗi.
   - **Tùy chọn cân bằng tải (Load-balancing option)**: Sử dụng **thứ tự chuyển đổi dự phòng rõ ràng (explicit failover order)**.
-  - Luôn sử dụng liên kết lên vmnic ở đầu danh sách bộ điều hợp hoạt động.
+  - Luôn sử dụng đường uplink vmnic ở đầu danh sách bộ điều hợp hoạt động.
 
 <a href="https://imgur.com/DGORDvI"><img src="https://i.imgur.com/DGORDvI.png" title="source: imgur.com" /></a>
 
 # 7. Chính sách Định hình Lưu lượng - Traffic-Shaping Policy
 - Định hình lưu lượng mạng (Network traffic shaping) là một cơ chế để hạn chế việc tiêu thụ băng thông mạng có sẵn của một máy ảo.
-- Tốc độ trung bình, tốc độ đỉnh và kích thước cụm có thể định cấu hình.
-- Định hình lưu lượng chỉ kiểm soát lưu lượng đi, tức là lưu lượng đi từ máy ảo đến công tắc ảo và ra vào mạng vật lý.
+- Có thể định cấu hình: Tốc độ trung bình, tốc độ đỉnh và kích thước cụm .
+  - Băng thông đỉnh nên duy trì 80% (20% làm bộ đệm)
+  - Băng thông trung bình là 50%
+  - Kích thước cụm là thời gian chúng ta cần gửi lưu lượng truy cập
+  - Chính sách này có thể áp dụng cho từng VM levels, nó không áp dụng cho tất cả các vm
+- Traffic shaping controls chỉ kiểm soát lưu lượng đi, tức là lưu lượng đi từ máy ảo đến switch ảo và ra vào mạng vật lý.
 
-<a href="https://imgur.com/Fi2AdYs"><img src="https://i.imgur.com/Fi2AdYs.png" title="source: imgur.com" /></a>
+<a href="https://imgur.com/Z6tMf4b"><img src="https://i.imgur.com/Z6tMf4b.png" title="source: imgur.com" /></a>
+
+<a href="https://imgur.com/yuQ9lhX"><img src="https://i.imgur.com/yuQ9lhX.png" title="source: imgur.com" /></a>
 
 # 8. Lệnh
-
-ESXI Networking Command - Chức năng|Command|
+Một số lệnh quan trọng
+Chức năng|Command|
 |---|---|
 Để lấy các thẻ Mạng có sẵn trên máy chủ ESXi | `esxcfg-nics-l`
 Để chỉ hiển thị cổng mặc định | `esxcfg-route`
@@ -134,6 +172,7 @@ Tắt mạng vmnic | `esxcli network nic down-n=vmnic_name`
 Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích ping và vmkping | `vmkping <IP>`
 
 # ESXi Networking - lab:
+> Thực hiện lab trên 2 ESXi cho 2 [trường hợp sử dụng vswitch](#1-các-trường-hợp-sử-dụng-vswitch)
 
 1. Tạo vSwitch
 2. Tạo nhóm Cổng VM
@@ -142,3 +181,5 @@ Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích pin
 5. Tuân thủ Chính sách kết nối vSwitch
 6. Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
 7. Loại bỏ vSwitch, nhóm cổng, liên kết lên
+
+> Xem lab: [ESXi Networking](../../Lab/4-ESXi-host-networking.md)
