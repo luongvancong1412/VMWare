@@ -114,23 +114,23 @@ Chúng ta có thể định cấu hình **các thuật toán cân bằng tải**
 
 ESXI Networking Command - Chức năng|Command|
 |---|---|
-Để lấy các thẻ Mạng có sẵn trên máy chủ ESXi | esxcfg-nics-l
-Để chỉ hiển thị cổng mặc định | esxcfg-route
-Để tải các nhóm cổng vmkernel có sẵn trên máy chủ ESXi | esxcfg-vmknic-l
-Để nhận thông tin về công tắc ảo có sẵn trên máy chủ ESXi | esxcfg-vswitch-1
-Số tùy chọn có sẵn cho cài đặt mạng esxcli | mạng esxcli
-Để liệt kê các kết nối đã thiết lập trên máy chủ của chúng tôi (Netstat) | danh sách kết nối ip mạng esxcli
-Để liệt kê cấu hình địa chỉ IP cho các cổng VMkernel | giao diện ip mạng esxcli ipv4 get
-Để liệt kê các giao diện vmkernel và cấu hình của chúng | danh sách giao diện ip mạng esxcli
-Để liệt kê thông tin máy chủ hàng xóm hoặc bảng ARP trên máy chủ ESXi | esxcli mạng ip danh sách hàng xóm
-Để liệt kê bảng định tuyến của máy chủ lưu trữ | esxcli network ip route ipv4 list
-Để xem Cấu hình NIC Vật lý | mạng esxcli nic
-Tắt mạng vmnic | esxcli nic down-n = vmnic_name
-Để liệt kê tất cả NICS có trong danh sách nic mạng Esxi host | esxcli
-Để kiểm tra các thuộc tính của một số liệu thống kê mạng vmknic | esxcli duy nhất get-n vmnico
-Để kết nối lại mạng vmnic | esxcli, nic up-navmnic_name
-Để liệt kê cấu hình vswitch hiện tại | danh sách tiêu chuẩn vSwitch mạng esxcli
-Để kiểm tra kết nối trên cổng | nc-z dest-ip dest-port
+Để lấy các thẻ Mạng có sẵn trên máy chủ ESXi | `esxcfg-nics-l`
+Để chỉ hiển thị cổng mặc định | `esxcfg-route`
+Để tải các nhóm cổng vmkernel có sẵn trên máy chủ ESXi | `esxcfg-vmknic-l`
+Để nhận thông tin về công tắc ảo có sẵn trên máy chủ ESXi | `esxcfg-vswitch-1`
+Số tùy chọn có sẵn cho cài đặt mạng esxcli | `esxcli network`
+Để liệt kê các kết nối đã thiết lập trên máy chủ của chúng tôi (Netstat) | `esxcli network ip connection list`
+Để liệt kê cấu hình địa chỉ IP cho các cổng VMkernel | `esxcli network ip interface ipv4 get`
+Để liệt kê các giao diện vmkernel và cấu hình của chúng | `esxcli network ip interface list`
+Để liệt kê thông tin máy chủ hàng xóm hoặc bảng ARP trên máy chủ ESXi | `esxcli network ip neighbor list`
+Để liệt kê bảng định tuyến của máy chủ lưu trữ | `esxcli network ip route ipv4 list`
+Để xem Cấu hình NIC Vật lý | `esxcli network nic`
+Tắt mạng vmnic | `esxcli network nic down-n=vmnic_name`
+Để liệt kê tất cả NICS có trong danh sách nic mạng Esxi host | `esxcli network nic list`
+Để kiểm tra các thuộc tính của một số liệu thống kê mạng vmknic | `esxcli network nic stats get-n vmnico`
+Để kết nối lại mạng vmnic | `esxcli network nic up-navmnic_name`
+Để liệt kê cấu hình vswitch hiện tại | `esxcli network vSwitch standard list`
+Để kiểm tra kết nối trên cổng | `nc-z dest-ip dest-port`
 Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích ping và vmkping | `vmkping <IP>`
 
 # ESXi Networking - lab:
