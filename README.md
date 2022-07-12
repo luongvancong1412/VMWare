@@ -18,6 +18,8 @@
    - [Các khái niệm cơ bản](Docs/vSphere-7.x/4-ESXi-Networking.md#i-khái-niệm-cơ-bản-về-mạng)
    - [Địa chỉ IP](Docs/vSphere-7.x/4-ESXi-Networking.md#ii-ip-addressing)
    - [Phân loại địa chỉ IP và Resered IPs](Docs/vSphere-7.x/4-ESXi-Networking.md#iii-phân-loại-địa-chỉ-ip--resered-ips)
+   - [Standard vSwitch](Docs/vSphere-7.x/5-ESXi-Host-Networking-2.md)
+   - [vSwitch policies](Docs/vSphere-7.x/6-vSwitch-policies.md)
 - Updating ...
 ## Lab
 
