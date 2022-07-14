@@ -7,7 +7,7 @@
   - [1.2 Physical Network](#12-physical-network)
   - [1.3 Virtual Network](#13-virtual-network)
 - [2. vSphere Standard Switch (vSS) hoặc vSwitch](#2-vsphere-standard-switch-vss-hoặc-vswitch)
-- [3. Các Group Port](#3-các-group-port)
+- [3. Group Port](#3-group-port)
 - [4. Host ESXi - Tối đa hóa mạng](#4-host-esxi---tối-đa-hóa-mạng)
 - [Kiến trúc mạng ESXi](#kiến-trúc-mạng-esxi)
 - [Các loại vSwitch](#các-loại-vswitch)
@@ -62,9 +62,16 @@ Một physical network switch là một **thiết bị phần cứng** được 
 Ví dụ
 - Một vSwitch không thể kết nối trực tiếp với một vSwitch khác trong hộp ESXi mà nó sẽ kết nối từ vswitch kết nối đến physical adapter rồi nó mới kết nối đến vswitch khác.
 
-# 3. Các Group Port
+**Uplink Port**
+- Chính là card mạng vật lý trên mỗi host ESXi
+- Để các máy ảo ở các host ESXi liên lạc với nhau và liên lạc với bên ngoài
+
+<a href="https://imgur.com/KmfesN5"><img src="https://i.imgur.com/KmfesN5.png" title="source: imgur.com" /></a>
+
+# 3. Group Port
 <a href="https://imgur.com/3Pq1ClZ"><img src="https://i.imgur.com/3Pq1ClZ.png" title="source: imgur.com" width=45% align=right /></a>
 
+- Dùng để nhóm các port trong vswitch
 - 2 nhóm cổng được tạo tự động khi cài đặt ESXi
   - một nhóm dành riêng cho mạng máy ảo
   - một nhóm cổng khác dành riêng cho mạng quản lý 
@@ -73,8 +80,7 @@ Ví dụ
 - Quản lý mạng máy ảo.
 
 2. **VM Kernel Port Group**:
-- Điều này chủ yếu dành cho lưu trữ IP, vSphere vMotion, Fault Tolerance (FT), VSAN, Cấp phép, v.v. (Đề cập ở phần vCenter)
-- Đối với mạng quản lý ESXi
+- Cung cấp các kết nối IP storage, vSphere vMotion, Fault Tolerance (FT), VSAN, Cấp phép, v.v. (Đề cập ở phần vCenter)
 
 Đoạn 22:50
 <a href="https://imgur.com/3iQgOpX"><img src="https://i.imgur.com/3iQgOpX.png" title="source: imgur.com" /></a>
@@ -97,10 +103,11 @@ Mạng ESXi
 
 Mạng ảo hỗ trợ các loại thiết bị vSwitch sau:
 
-- **Standard switches (VSS)**:
-  - Cấu hình switch ảo cho một host duy nhất.
+- **Standard switches (VSS)**: Quản lý network các máy ảo ở mức độ host.
+  - Có sẵn trên ESXi, vSphere
+    - Cấu hình switch ảo cho một host duy nhất.
 
-- **Distributed switches(DVS)**:
+- **Distributed switches(DVS)**: Quản lý network các VM ở mức độ Datacenter, dùng để quản lý tập trung, không có sẵn trong vSphere.
   - Switch ảo được cấu hình cho toàn bộ data Center.
   - Có thể gắn tới 2.000 host trên cùng một Distributed switch.
   - Cấu hình nhất quán trên tất cả các host được đính kèm.
