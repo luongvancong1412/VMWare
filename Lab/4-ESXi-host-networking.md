@@ -10,6 +10,7 @@
 - [Tuân thủ Chính sách kết nối vSwitch](#tuân-thủ-chính-sách-kết-nối-vswitch)
 - [Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.](#gán-các-nhóm-cổng-cụ-thể-cho-vm-sản-xuất--thử-nghiệm)
 - [Loại bỏ vSwitch, nhóm cổng, liên kết lên](#loại-bỏ-vswitch-nhóm-cổng-liên-kết-lên)
+- [Thực hành các lệnh](#thực-hành-các-lệnh)
 
 # Tạo Vswitch
 
@@ -40,3 +41,43 @@ Số vSwitch tối đa
 # Tuân thủ Chính sách kết nối vSwitch
 # Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
 # Loại bỏ vSwitch, nhóm cổng, liên kết lên
+
+# Thực hành các lệnh
+
+<h3>Để lấy các card Mạng có sẵn trên máy chủ ESXi </h3>
+
+```
+esxcfg-nics -l
+``` 
+
+<h3>Để chỉ hiển thị default gateway</h3>
+```
+esxcfg-route
+```
+
+<h3>Để tải các nhóm cổng vmkernel có sẵn trên máy chủ ESXi</h3>
+```
+esxcfg-vmknic -l
+```
+<h3>Để nhận thông tin về công tắc ảo có sẵn trên máy chủ ESXi </h3>
+```
+esxcfg-vswitch -l
+```
+
+<h3>Số tùy chọn có sẵn cho cài đặt mạng esxcli</h3>
+```
+esxcli network
+```
+Để liệt kê các kết nối đã thiết lập trên máy chủ của chúng tôi (Netstat) | `esxcli network ip connection list`
+Để liệt kê cấu hình địa chỉ IP cho các cổng VMkernel | `esxcli network ip interface ipv4 get`
+Để liệt kê các giao diện vmkernel và cấu hình của chúng | `esxcli network ip interface list`
+Để liệt kê thông tin máy chủ hàng xóm hoặc bảng ARP trên máy chủ ESXi | `esxcli network ip neighbor list`
+Để liệt kê bảng định tuyến của máy chủ lưu trữ | `esxcli network ip route ipv4 list`
+Để xem Cấu hình NIC Vật lý | `esxcli network nic`
+Tắt mạng vmnic | `esxcli network nic down-n=vmnic_name`
+Để liệt kê tất cả NICS có trong danh sách nic mạng Esxi host | `esxcli network nic list`
+Để kiểm tra các thuộc tính của một số liệu thống kê mạng vmknic | `esxcli network nic stats get-n vmnico`
+Để kết nối lại mạng vmnic | `esxcli network nic up-navmnic_name`
+Để liệt kê cấu hình vswitch hiện tại | `esxcli network vSwitch standard list`
+Để kiểm tra kết nối trên cổng | `nc-z dest-ip dest-port`
+Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích ping và vmkping | `vmkping <IP>`
