@@ -180,6 +180,8 @@ Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích pin
 4. Thêm NIC hoặc Liên kết lên để chuyển đổi dự phòng
 5. Tuân thủ Chính sách kết nối vSwitch
 6. Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
-7. Loại bỏ vSwitch, nhóm cổng, liên kết lên
+7. Loại bỏ vSwitch, nhóm cổng, uplink
 
-> Xem lab: [ESXi Networking](../../Lab/4-ESXi-host-networking.md)
+> Xem lab: [ESXi Networking](../../Lab/4-ESXi-host-networking.md) 
+
+[Imgur](https://i.imgur.com/Z6tMf4b.png)
