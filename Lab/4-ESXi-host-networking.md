@@ -10,6 +10,7 @@
 - [Tuân thủ Chính sách kết nối vSwitch](#tuân-thủ-chính-sách-kết-nối-vswitch)
 - [Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.](#gán-các-nhóm-cổng-cụ-thể-cho-vm-sản-xuất--thử-nghiệm)
 - [Loại bỏ vSwitch, nhóm cổng, liên kết lên](#loại-bỏ-vswitch-nhóm-cổng-liên-kết-lên)
+- [Thực hành các lệnh](#thực-hành-các-lệnh)
 
 # Tạo Vswitch
 
@@ -40,3 +41,106 @@ Số vSwitch tối đa
 # Tuân thủ Chính sách kết nối vSwitch
 # Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
 # Loại bỏ vSwitch, nhóm cổng, liên kết lên
+
+# Thực hành các lệnh
+
+<h3>Lấy các card Mạng có sẵn trên máy chủ ESXi </h3>
+
+```
+esxcfg-nics -l
+``` 
+
+<h3>Hiển thị default gateway</h3>
+
+```
+esxcfg-route
+```
+
+<h3>Hiển thị các nhóm cổng vmkernel có sẵn trên máy chủ ESXi</h3>
+
+```
+esxcfg-vmknic -l
+```
+<h3>Nhận thông tin về switch ảo có sẵn trên máy chủ ESXi </h3>
+
+```
+esxcfg-vswitch -l
+```
+
+<h3>Liệt kê các kết nối đã thiết lập trên máy chủ(Netstat)</h3>
+
+```
+esxcli network ip connection list
+```
+
+<h3>Liệt kê cấu hình địa chỉ IP cho các cổng VMkernel</h3>
+
+```
+esxcli network ip interface ipv4 get
+```
+
+<h3>Liệt kê các giao diện vmkernel và cấu hình của chúng</h3>
+
+```
+esxcli network ip interface list`
+```
+
+<h3>Liệt kê thông tin máy chủ hàng xóm hoặc bảng ARP trên máy chủ ESXi</h3>
+
+```
+esxcli network ip neighbor list
+```
+
+<h3>Liệt kê bảng định tuyến của máy chủ lưu trữ</h3>
+
+```
+esxcli network ip route ipv4 list
+```
+
+<h3>Xem Cấu hình NIC Vật lý </h3>
+
+```
+esxcli network nic
+```
+
+<h3>Tắt mạng vmnic</h3>
+
+```
+esxcli network nic down-n=vmnic_name
+```
+
+<h3>Liệt kê tất cả NICS có trong danh sách nic mạng Esxi host</h3>
+
+```
+esxcli network nic list
+```
+
+<h3>Kiểm tra các thuộc tính của một số liệu thống kê mạng vmknic</h3>
+
+```
+esxcli network nic stats get-n vmnico
+```
+
+<h3>Kết nối lại mạng vmnic</h3>
+
+```
+esxcli network nic up-navmnic_name
+```
+
+<h3>Liệt kê cấu hình vswitch hiện tại</h3>
+
+```
+esxcli network vSwitch standard list
+```
+
+<h3>Kiểm tra kết nối trên cổng</h3>
+
+```
+nc-z dest-ip dest-port
+```
+
+<h3>Kiểm tra kết nối với máy chủ ESXi từ xa bằng các tiện ích ping và vmkping</h3>
+
+```
+vmkping <IP>
+```
