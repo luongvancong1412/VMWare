@@ -13,6 +13,9 @@
 # 1. vCenter 7.0 Kiến trúc
 
 - vCenter Server được hỗ trợ bởi vSphere Client, cơ sở dữ liệu vCenter Server và các máy chủ được quản lý.
+
+<a href="https://imgur.com/vWil5qB"><img src="https://i.imgur.com/vWil5qB.png" title="source: imgur.com" /></a>
+
 - vSphere Client:
   - Giao diện người dùng dựa trên HTML 5 cho phép kết nối với các phiên bản vCenter Server bằng cách sử dụng trình duyệt Web.
 
