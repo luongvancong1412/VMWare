@@ -3,7 +3,7 @@
 <h2>Summary</h2>
 
 - [1. vCenter 7.0 Kiến trúc](#1-vcenter-70-kiến-trúc)
-- [2. Quy trình xây dựng vCenter- Thời gian thực tế](#2-quy-trình-xây-dựng-vcenter--thời-gian-thực-tế)
+- [2. Quy trình xây dựng vCenter- Kịch bản thời gian thực tế](#2-quy-trình-xây-dựng-vcenter--kịch-bản-thời-gian-thực-tế)
   - [2.1 Các bước trước khi cài đặt vCenter](#21-các-bước-trước-khi-cài-đặt-vcenter)
   - [2.2 Quy trình Cài đặt vCenter](#22-quy-trình-cài-đặt-vcenter)
 - [3. Các Bước Cài đặt sau vCenter](#3-các-bước-cài-đặt-sau-vcenter)
@@ -12,14 +12,23 @@
 
 # 1. vCenter 7.0 Kiến trúc
 
-- vCenter Server được hỗ trợ bởi vSphere Client, cơ sở dữ liệu vCenter Server và các máy chủ được quản lý.
+- vCenter Server được hỗ trợ bởi vSphere Client, cơ sở dữ liệu vCenter Server và máy chủ được quản lý bằng host.
+
 
 <a href="https://imgur.com/vWil5qB"><img src="https://i.imgur.com/vWil5qB.png" title="source: imgur.com" /></a>
 
+- Sau khi cài đặt vCenter, nó sẽ đi kèm với một số Mo-dun bổ sung, chúng ta không cần cài đặt mo-dum mà nó mặc định đi kèm với server vCenter
+  - Một trong những mô-đun bổ sung là tệp html5 Client vSphere
+- Chúng ta có thể truy cập máy chủ vCenter và máy chủ trung tâm gắn với 1 database mặc định có tên là postgresql
+- Có thành phần bổ sung là Platform Services Controller (PSC) để kiểm soát dịch vụ nền tảng đi kèm với một đăng nhập duy nhất (Single Sign-On) của máy chủ vCenter
+  - máy chủ vCenter theo mặc định có 2 tài khoản quản trị viên
+    - 1 là tài khoản người máy root giống như máy chủ ESX
+    - 1 tài khoản quản trị viên khác là quản trị viên theo tỷ lệ vsphere dot cục bộ
+  - Chúng ta có thể sử dụng Directory Domain hoạt động inte gration, vì vậy khi cài đặt 1 máy chủ vCenter, chúng ta phải tạo 1 bản ghi DNS và join vào miền...
 - vSphere Client:
   - Giao diện người dùng dựa trên HTML 5 cho phép kết nối với các phiên bản vCenter Server bằng cách sử dụng trình duyệt Web.
 
-# 2. Quy trình xây dựng vCenter- Thời gian thực tế
+# 2. Quy trình xây dựng vCenter- Kịch bản thời gian thực tế
 
 ## 2.1 Các bước trước khi cài đặt vCenter
 
