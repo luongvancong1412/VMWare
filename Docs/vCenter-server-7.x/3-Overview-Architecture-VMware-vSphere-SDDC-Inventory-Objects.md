@@ -45,7 +45,7 @@ Bắt đầu tìm hiểu từ dưới lên:
   - Trong cụm bao gồm: máy chủ, Memory, CPU, Nic,.. sẽ biến nó thành một nhóm tài nguyên
   - Ở trên cùng của cụm có thể cung cấp nhiều máy ảo, trong máy ảo cài đặt Guest OS, trên Guest OS chúng ta có thể cài các ứng dụng cần sử dụng. (Ví dụ Office trên Guest OS là window,...)
 
-<h3> Tầng Application Services<h3>
+<h3> Tầng Application Services</h3>
 
 - Tất cả các máy ảo đều có thể quản lý từ Bảng điều khiển máy chủ vCenter, khi đăng nhập vào vCenter và thêm host, chúng ta sẽ nhận được tất cả các tính năng sẵn cõ và các tính năng mở rộng (trong hình chỉ nói một số tính năng chính)
 - Availability:
