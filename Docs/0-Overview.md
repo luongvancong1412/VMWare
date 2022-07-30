@@ -3,12 +3,12 @@
 <h2>Summary</h2>
 
 - [1. Cloud computing là gì](#1-cloud-computing-là-gì)
-- [2. Các dạng Cloud computing](#2-các-dạng-cloud-computing)
+- [2. Mô hình triển khai](#2-mô-hình-triển-khai)
   - [Public Cloud](#public-cloud)
   - [Private Cloud](#private-cloud)
   - [Hybrid Cloud](#hybrid-cloud)
   - [Community Cloud](#community-cloud)
-- [3. Mô hình](#3-mô-hình)
+- [3. Mô hình dịch vụ](#3-mô-hình-dịch-vụ)
   - [Iaas – Infrastructure as a Services](#iaas--infrastructure-as-a-services)
   - [PaaS – Platform as a Services](#paas--platform-as-a-services)
   - [SaaS – Software as a Services](#saas--software-as-a-services)
@@ -29,7 +29,7 @@
 - Là việc cung cấp computing resource phù hợp, nhanh chóng và thuận lợi với người dùng thông qua internet.
 - *Computing resource: servers, storages, application, service,...*
 
-# 2. Các dạng Cloud computing
+# 2. Mô hình triển khai
 ## Public Cloud
 - Thuộc sở hữu và vận hành bởi nhà cung cấp dịch vụ trung gian
   - Cung cấp tài nguyên của họ thông qua Internet
@@ -65,7 +65,7 @@
 - Xây dựng nhằm mục đích chia sẻ cơ sở hạ tầng, dữ liệu cho nhiều tổ chức, người dùng khác nhau có liên quan.
 
 
-# 3. Mô hình
+# 3. Mô hình dịch vụ
 
 <a href="https://imgur.com/tJBVefn"><img src="https://i.imgur.com/tJBVefn.png" title="source: imgur.com" /></a>
 

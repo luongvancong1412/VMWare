@@ -11,7 +11,7 @@
   - [1. Địa chỉ IP cơ bản](#1-địa-chỉ-ip-cơ-bản)
   - [2.Địa chỉ Internet Protocol (IP)](#2địa-chỉ-internet-protocol-ip)
   - [3.Loại địa chỉ IP](#3loại-địa-chỉ-ip)
-- [III. Phân loại địa chỉ IP & Resered IPs](#iii-phân-loại-địa-chỉ-ip--resered-ips)
+- [III. Phân loại địa chỉ IP](#iii-phân-loại-địa-chỉ-ip)
   - [1. Phân loại địa chỉ IP](#1-phân-loại-địa-chỉ-ip)
     - [1.1 Tổng quan](#11-tổng-quan)
     - [1.2 Khái niệm Bit ưu tiên](#12-khái-niệm-bit-ưu-tiên)
@@ -178,7 +178,7 @@ Tương tự Https, SFTP, SSH, SMS, SMTP, v.v.,
 - Khi hết địa chỉ IPv4, địa chỉ IPv6 sẽ thay thế IPv4. IPv6 cung cấp 128 bit địa chỉ.
 
 
-# III. Phân loại địa chỉ IP & Resered IPs
+# III. Phân loại địa chỉ IP
 
 - Phân loại địa chỉ IP - Tổng quan
 - Khái niệm Bit ưu tiên & Định dạng Octet

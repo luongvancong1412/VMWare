@@ -12,6 +12,7 @@
 - [8. Lệnh](#8-lệnh)
 - [ESXi Networking - lab:](#esxi-networking---lab)
 
+---
 Sesion 5: vSwitch policies
 - Các trường hợp sử dụng vSwitch
 - Mạng ESXi - Chính sách vSwitch
@@ -20,8 +21,7 @@ Sesion 5: vSwitch policies
 - Mạng ESXi - Lab
 
 # 1. Các trường hợp sử dụng vSwitch
-> Nói qua về các trường hợp sử dụng vswitch của bài trước
-Trường hợp sử dụng-1:
+**Trường hợp 1:**
 - Chỉ một vswitch
   - Theo cấu hình vmware vsphere, mỗi vswitch hỗ trợ tối đa 4088 port
 
@@ -37,7 +37,8 @@ Nhóm cổng **vSwitch**
 - Mỗi switch ảo nên có tối thiểu 2 NIC với mục đích dự phòng và tối đa chúng ta có thể thêm 16 NIC
 - 2 Nhóm cổng này sẽ được tạo mặc định
 - Cần nhớ 1 điều: đối với mạng máy ảo chúng ta không cần cung cấp địa chỉ ip nào ở **cấp độ nhóm cổng** mà chúng ta chỉ có thể cung cấp địa chỉ ip trên máy ảo mà khách đang vận hành cấp hệ thống. Chỉ khi nói đến mạng quản lý, chúng ta cần cung cấp địa chỉ ip cho cấp nhóm cổg VMkernel
-Trường hợp sử dụng-2
+
+**Trường hợp 2**
 - Nhiều vswitch
   - Trong hình dưới có 5 vswitch nhưng các cổng hoạt động được hỗ trợ tối đa cũng chỉ là 4096. Nó sẽ không hỗ trợ nhiều hơn
   - Trong trường hợp 2 sử dụng từng nhóm cổng thay vì cấu hình tất cả các nhóm cổng trên cùng một vswitch
@@ -180,6 +181,8 @@ Một số lệnh quan trọng
 4. Thêm NIC hoặc Liên kết lên để chuyển đổi dự phòng
 5. Tuân thủ Chính sách kết nối vSwitch
 6. Gán các nhóm Cổng cụ thể cho VM Sản xuất & Thử nghiệm.
-7. Loại bỏ vSwitch, nhóm cổng, liên kết lên
+7. Loại bỏ vSwitch, nhóm cổng, uplink
 
-> Xem lab: [ESXi Networking](../../Lab/4-ESXi-host-networking.md)
+> Xem lab: [ESXi Networking](../../Lab/4-ESXi-host-networking.md) 
+
+[Imgur](https://i.imgur.com/Z6tMf4b.png)
