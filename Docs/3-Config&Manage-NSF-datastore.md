@@ -4,68 +4,87 @@
 
 - [Kiến trúc vật lý vs Virtual Architecture](#kiến-trúc-vật-lý-vs-virtual-architecture)
 - [vSphere Storage - Datastores](#vsphere-storage---datastores)
-- [vSphere Storage - Overview](#vsphere-storage---overview)
+- [vSphere Storage - Tổng quan](#vsphere-storage---tổng-quan)
 - [vSphere Storage Technologies](#vsphere-storage-technologies)
-- [vSphere Storage with Conceptual Diagram](#vsphere-storage-with-conceptual-diagram)
-- [Comparing Types of Storage](#comparing-types-of-storage)
-- [vSphere Features supported by Storage](#vsphere-features-supported-by-storage)
-- [vSphere on NFS/NAS Storage Architecture](#vsphere-on-nfsnas-storage-architecture)
-- [NFS Storage Architecture & Components](#nfs-storage-architecture--components)
-- [NFS Storage Architecture - Addressing and Access Control with NFS](#nfs-storage-architecture---addressing-and-access-control-with-nfs)
-- [NFS Datastore - Configuration](#nfs-datastore---configuration)
+- [vSphere Storage - Sơ đồ khái niệm](#vsphere-storage---sơ-đồ-khái-niệm)
+- [So sánh các loại lưu trữ](#so-sánh-các-loại-lưu-trữ)
+- [vSphere Storage - Các tính năng hỗ trợ](#vsphere-storage---các-tính-năng-hỗ-trợ)
+- [vSphere trên Kiến trúc NFS/NAS Storage](#vsphere-trên-kiến-trúc-nfsnas-storage)
+- [NFS Storage - Cấu trúc và Thành phần](#nfs-storage---cấu-trúc-và-thành-phần)
+- [NFS Storage Architecture - Định địa chỉ và Kiểm soát truy cập (Access Control) với NFS](#nfs-storage-architecture---định-địa-chỉ-và-kiểm-soát-truy-cập-access-control-với-nfs)
+- [NFS Datastore - Cấu hình](#nfs-datastore---cấu-hình)
 - [NFS Datastore Configuration & Management - Home lab](#nfs-datastore-configuration--management---home-lab)
 
 # Kiến trúc vật lý vs Virtual Architecture
 - Các tùy chọn lưu trữ giúp chúng ta linh hoạt trong việc thiết lập bộ nhớ dựa trên các yêu cầu về chi phí, hiệu suất và khả năng quản lý.
 - vSphere VMFS cung cấp một kiến ​​trúc lưu trữ phân tán (distributed storage architecture), nơi nhiều máy chủ ESXi có thể read/write đồng thời vào bộ nhớ dùng chung.
 - Bộ nhớ dùng chung (**Shared storage**) hữu ích cho Phục hồi sau thảm họa (**Disaster Recovery - DR**), Tính khả dụng cao (**High Availability - HA**) và di chuyển các máy ảo giữa các máy chủ (**VMotion**).
+
+<a href="https://imgur.com/rC9qbXQ"><img src="https://i.imgur.com/rC9qbXQ.png" title="source: imgur.com" /></a>
+
 # vSphere Storage - Datastores
-- A datastore is a logical storage unit that can use disk space on one physical device or span several physical devices.
-- Datastores are used to hold virtual machine(VM) files, Templates, and ISO images.
-- A VM is stored as a set of files in its own directory or as a group of objects in a datastore.
-- vSphere supports the following types of datastores:
+- Datastore là một đơn vị lưu trữ logic có thể sử dụng không gian đĩa trên một thiết bị vật lý hoặc trên một số thiết bị vật lý.
+- Datastore được sử dụng để chứa các tệp máy ảo (VM), Mẫu (Templates) và ISO images.
+- Một máy ảo được lưu trữ dưới dạng một tập hợp các tệp trong thư mục riêng của nó hoặc như một nhóm các đối tượng trong một datastore.
+
+- vSphere hỗ trợ các loại Datastore sau:
 
 1. VM File System (VMFS)
 2. Network File System (NFS)
-3. Virtual SAN (VSAN)
+3. Virtual SAN (vSAN)
 4. Virtual Volumes (vVols)
 
-# vSphere Storage - Overview
-- ESXi hosts should be configured with shared access to datastores
+<a href="https://imgur.com/h5LPJHJ"><img src="https://i.imgur.com/h5LPJHJ.png" title="source: imgur.com" /></a>
+
+# vSphere Storage - Tổng quan
+
+<a href="https://imgur.com/2fztNFq"><img src="https://i.imgur.com/2fztNFq.png" title="source: imgur.com" /></a>
+
+- ESXi hosts nên được cấu hình shared access tới datastores
 # vSphere Storage Technologies
-- In the vSphere environment, ESXi hosts, vCenter support several storage technologies.
+
+- Trong môi trường vSphere, các máy chủ ESXi, vCenter hỗ trợ một số công nghệ lưu trữ sau:
+
 - **Direct Attached Storage (DAS):**
-  - Internal or external storage disks or arrays (Just a Bunch of Disks -JBOD) attached to host through a direct connection instead of a network connection.
+  - Các đĩa hoặc mảng lưu trữ bên trong hoặc bên ngoài (Just a Bunch of Disks -JBOD) được gắn vào máy chủ lưu trữ thông qua kết nối trực tiếp thay vì kết nối mạng.
 - **Fibre Channel (FC):**
-  - A high-speed transport protocol used for SANS. Fibre Channel encapsulates SCSI commands, which are transmitted between Fibre Channel nodes.
-  - In General, a Fibre Channel node is a Server, a storage system, or a tape drive.
-  - A FC Switch interconnects multiple nodes, forming the fabric in a Fibre Channel network.
+  - Một giao thức truyền tải tốc độ cao được sử dụng cho SANS. Fibre Channel đóng gói các lệnh SCSI, được truyền giữa các nút Fibre Channel.
+  - nút (node) Fibre Channel là một **Máy chủ**, một hệ thống lưu trữ (**storage system**) hoặc một ổ đĩa băng (tape drive).
+  - Một FC Switch kết nối nhiều nút với nhau, tạo thành kết cấu trong mạng Fibre Channel.
 - **FCOE:**
-  - The Fibre Channel traffic is encapsulated into Fibre Channel over Ethernet (FCoE) frames.
-  - These FCOE frames are converged with other types of traffic on the Ethernet network.
+  - Lưu lượng **Fibre Channel** được đóng gói thành các frame **Fibre Channel over Ethernet** (FCoE).
+  - Các frame FCOE này được hội tụ với các loại traffic khác trên mạng Ethernet.
 - **iSCSI:**
-  - A SCSI transport protocol, providing access to storage devices and cabling over standard TCP/IP networks.
-  - iSCSI maps SCSI block-oriented storage over TCP/IP, Initiators, such as an iSCSI host bus adapter (HBA) in an ESXi host, send SCSI commands to targets, located in iSCSI storage systems.
-- **Network Attached Storage (NAS):**
-  - Storage shared over Standard TCP/IP networks at the file system level.
-  - NAS storage is used to hold NFS datastores.
-  - The NFS protocol does not support SCSI commands.
-- FCOE, ISCSI and NAS can run high-speed networks providing increased storage performance levels and ensuring sufficient bandwidth.
-- With sufficient bandwidth, multiple types of high-bandwidth protocol traffic can coexist on the same network.
-# vSphere Storage with Conceptual Diagram
-- VMs are accessing different types of storage
-# Comparing Types of Storage
-- Each different protocol has its own set of supported features
-Technology Protocols Interface
+  - Một giao thức truyền tải SCSI, cung cấp quyền truy cập vào các thiết bị lưu trữ và đi cáp qua mạng TCP/IP tiêu chuẩn.
+  - iSCSI ánh xạ lưu trữ theo hướng block SCSI qua TCP/IP, Trình khởi tạo (Initiators), ví dụ như **iSCSI host bus adapter** (HBA) trong máy chủ ESXi, gửi lệnh SCSI đến các mục tiêu, nằm trong hệ thống lưu trữ iSCSI.
 
-Fibre Channel (FC)  FC/SCSI Block access of data/LUN FC HBA
-Fibre Channel over Ethernet (FCOE) FCOE/SCSI Block access of data/LUN Converged Network Adapter (hardware FCOE)
-iSCSI IP/SCSI Block access of data/LUN iSCSI HBA or iSCSI-enabled NIC (hardware iSCSI) Network adapter (software iSCSI)
-NAS IP/NFS File (no direct LUN access) Network adapter
-Virtual SAN VSAN Block access of data Network adapter
-Wolsv  FC, iSCSI VMFS & NFS NIC & HBA
+- **Network Attached Storage (NAS)**
+  - Storage được chia sẻ qua mạng Standard TCP/IP ở cấp hệ thống tệp.
+  - Storage NAS được sử dụng để chứa các NFS datastore.
+  - Giao thức NFS **không hỗ trợ** các lệnh SCSI.
+- FCOE, ISCSI và NAS có thể chạy các mạng tốc độ cao (**high-speed network**), tăng mức hiệu suất lưu trữ và đảm bảo đủ băng thông.
 
-# vSphere Features supported by Storage
+- Với đủ băng thông, nhiều loại lưu lượng giao thức băng thông cao có thể cùng tồn tại trên cùng một mạng.
+
+# vSphere Storage - Sơ đồ khái niệm
+- Các VM đang truy cập các loai storage khác nhau.
+
+<a href="https://imgur.com/ksLDsWi"><img src="https://i.imgur.com/ksLDsWi.png" title="source: imgur.com" /></a>
+
+# So sánh các loại lưu trữ
+
+- Mỗi giao thức khác nhau có tập hợp các tính năng được hỗ trợ riêng
+
+Technology|Protocols|Transfers| Interface
+|---|---|---|---|
+Fibre Channel (FC)|FC/SCSI|Block access of data/LUN|FC HBA
+Fibre Channel over Ethernet (FCOE)|FCOE/SCSI|Block access of data/LUN|Converged Network Adapter (hardware FCOE)
+iSCSI| IP/SCSI| Block access of data/LUN |iSCSI HBA or iSCSI-enabled NIC (hardware iSCSI)<br>Network adapter (software iSCSI)
+NAS| IP/NFS| File (no direct LUN access)| Network adapter
+Virtual SAN| VSAN| Block access of data| Network adapter
+vVols|FC, iSCSI|VMFS & NFS|NIC & HBA
+
+# vSphere Storage - Các tính năng hỗ trợ
 
 Storage Type|Boot VM|ESXI Boot from SAN|Datastore|RDM|VM Cluster|vMotion| VMware HA | VMware DRS| Storage APIs-Data Protection|
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -73,71 +92,84 @@ Local Storage|yes| No|VMFS 6|No|Yes*|Yes*|No|No|Yes|
 Fibre Channel|Yes|Yes|VMFS 6|Yes|Yes|Yes|Yes|Yes|Yes|
 iSCSI|Yes|Yes|VMFS 6|Yes|Yes|Yes|Yes|Yes|Yes|
 NAS over NFS|Yes|No|NFS3 & NFS 4.1|No|No
-- Local storage supports a cluster of virtual machines on a single host (also known as a cluster in a box).
-- A shared virtual disk is required.
-- DAS supports vSphere vMotion when combined with vSphere Storage vMotion.
+vSphere Virtual Volumes (vVols)|Yes|No|VMFS và NFS|No|Yes|Yes|Yes|Yes|Yes|
 
-# vSphere on NFS/NAS Storage Architecture
-- NFS is a file-sharing protocol that ESXi hosts use to communicate with a network attached storage (NAS) device.
-- NFS supports NFS version 3 and 4.1 over TCP/IP.
-- To clarity, both NFS and NAS refer to the same type of storage protocol and the terms will be used interchangeably.
-# NFS Storage Architecture & Components
-- An NFS file system is located on a NAS device that is called the NFS server.
-- The NFS server contains one or more directories that are shared with the ESXI host over a TCP/IP network.
-- An ESXi host accesses the NFS server through a VMkernel port that is defined on a virtual switch.
-+ NAS device or a Server with storage
-+ Directory to share with the ESXi host over the network
-+ ESXi host with NIC mapped to virtual switch
-+ VMkernel port defined on virtual switch
+- Local storage hỗ trợ một cluster máy ảo trên một host duy nhất (còn được gọi là **a cluster in a box**).
+- Cần một shared virtual disk.
+- **DAS** hỗ trợ **vSphere vMotion** khi kết hợp với **vSphere Storage vMotion**.
 
-# NFS Storage Architecture - Addressing and Access Control with NFS
-- The ESXi host accesses the NFS server through the NFS server's IP address or host name.
-- The VMkernel port is configured with an IP address, and it is connected to a network that has access to the NFS server.
-- NFS version 4.1 and NFS version 3 are available with vSphere 7.x
-- Directory to share with the ESXi host over the network
-- Different features are supported with different versions of the protocol
-  - NFS 4.1 supports multipathing unlike NFS 3
-  - NFS 3 supports all vSphere features.
-  - NFS 4.1 does not support Storage DRS, VMware vSphere Storage I/O Control, VMware vCenter Site Recovery Manager, and Virtual Volumes
+# vSphere trên Kiến trúc NFS/NAS Storage
 
-# NFS Datastore - Configuration
+- NFS là một giao thức chia sẻ tệp (**file-sharing protocol**) mà các host ESXi sử dụng để giao tiếp với thiết bị lưu trữ gắn liền với mạng (network attached storage - NAS).
+- NFS hỗ trợ NFS version 3 and 4.1 qua TCP/IP.
+- Cả NFS and NAS đều đề cập đến cùng một type of storage protocol và các thuật ngữ (terms) sẽ được sử dụng thay thế cho nhau (interchangeably).
 
-Create a VMkernel port:
-- For better performance and security, separate our NFS network from the iSCSI network.
-Provide the following information:
+<a href="https://imgur.com/398IxHf"><img src="https://i.imgur.com/398IxHf.png" title="source: imgur.com" /></a>
+
+# NFS Storage - Cấu trúc và Thành phần
+
+- Hệ thống tệp **NFS** nằm trên thiết bị **NAS** được gọi là **NFS Server**.
+- **Máy chủ NFS** chứa một hoặc nhiều thư mục được chia sẻ với máy chủ ESXI qua mạng TCP/IP.
+- Máy chủ ESXi truy cập máy chủ NFS thông qua **cổng VMkernel** được xác định trên một **vSwitch**.
+
+<a href="https://imgur.com/cZVGR0D"><img src="https://i.imgur.com/cZVGR0D.png" title="source: imgur.com" /></a>
+
+# NFS Storage Architecture - Định địa chỉ và Kiểm soát truy cập (Access Control) với NFS
+
+- Máy chủ ESXi truy cập máy chủ NFS thông qua địa chỉ IP hoặc host name của máy chủ NFS.
+- Cổng VMkernel được cấu hình bằng địa chỉ IP và nó được kết nối với mạng có quyền truy cập vào máy chủ NFS.
+- Phiên bản NFS 4.1 và NFS phiên bản 3 có sẵn với vSphere 7.x
+- Thư mục được chia sẻ với máy chủ ESXi qua mạng.
+- Các tính năng khác nhau được hỗ trợ với các phiên bản khác nhau của giao thức
+  - NFS 4.1 hỗ trợ đa phân vùng (multipathing) không giống như NFS 3
+  - NFS 3 hỗ trợ tất cả các tính năng vSphere.
+  - NFS 4.1 không hỗ trợ Storage DRS, VMware vSphere Storage I/O Control, VMware vCenter Site Recovery Manager và Virtual Volumes
+
+<a href="https://imgur.com/vxGuFV7"><img src="https://i.imgur.com/vxGuFV7.png" title="source: imgur.com" /></a>
+
+# NFS Datastore - Cấu hình
+
+**Tạo một VMkernel port:**
+- Để hiệu suất và bảo mật tốt hơn, hãy tách mạng NFS khỏi mạng iSCSI.
+
+Cung cấp các thông tin sau:
+
 - NFS version: v3 or v4.1
-- Datastore name
-- NFS server names or IP addresses
-- Folder on the NFS server.
-  - for example: /templates and /nfs_share
-- Select hosts that will mount the datastore
-- Whether to mount the NFS file system read-only/RW
-- Authentication parameters
+- Tên Datastore
+- Tên máy chủ NFS hoặc địa chỉ IP
+- Thư mục trên NFS server.
+  - ví dụ: /templates and /nfs_share
+- Chọn hosts sẽ mount tới datastore
+- Có mount hệ thống tệp NFS read-only/RW hay không
+- Các thông số xác thực
+
+<a href="https://imgur.com/ZIevI44"><img src="https://i.imgur.com/ZIevI44.png" title="source: imgur.com" /></a>
+
 # NFS Datastore Configuration & Management - Home lab
 
-NAS Server Build Procedure and Create a NFS Datastore
-|NFS Pre-Configuration Steps|
+Quy trình xây dựng máy chủ NAS và tạo 1 NFS Datastore
+|Bước NFS Pre-Configuration|
 |---|
-|Setup NFS Storage Environment|
-|If we plan to use Kerberos authentication with the NFS 4.1 datastore, make sure to configure the ESXi hosts for Kerberos authentication (Optional)|
-Create a VMkernel Port group|
-|Get the NFS Server IP Address, Share Folder Name|
-|Choose the NFS Version 3 or 4.1|
-|NFS Server Login Credentials|
+|Thiết lập môi trường NFS Storage|
+|Nếu sử dụng xác thực Kerberos với datastore NFS 4.1, đảm bảo cấu hình các máy chủ ESXi để xác thực Kerberos (Optional)|
+Tạo một **VMkernel Port group**|
+|Lấy địa chỉ IP máy chủ NFS, tên Share Folder|
+|Chọn NFS Version 3 hoặc 4.1|
+|Thông tin đăng nhập máy chủ NFS|
 
 NFS Configuration Procedure|
 |---|
-Add NFS Server role on Windows Server 2022|
-Create a folder and provide NFS Share permission, Allow root access|
-In the vSphere Client object navigator, browse to a host, a cluster, or a data center|
-From the right-click menu, select Storage > New Datastore|
-Select NFS as the datastore type and specify an NFS version 3 or 4.1|
-If multiple hosts access the same datastore, we must use the same protocol on all hosts. (Optional)|
-Enter Datastore Name, Share folder name & NFS Server name or IP Address|
-If we are creating a datastore at the data center or cluster level, select hosts that mount the datastore.|
-Review the configuration options and click Finish.|
+Thêm vai trò máy chủ NFS (**NFS Server role**) trên Windows Server 2022 |
+Tạo thư mục và cung cấp quyền Chia sẻ NFS, Cho phép truy cập root |
+Trong vSphere Client object navigator, duyệt đến host, cluster hoặc data center |
+Chuột phải vào **menu**, chọn **Storage> New Datastore** |
+Chọn NFS làm loại datastore và chỉ định phiên bản NFS 3 hoặc 4.1 |
+Nếu nhiều máy chủ truy cập vào cùng một kho dữ liệu (datastore), cần phải sử dụng cùng một giao thức trên tất cả các máy chủ. (Optional) |
+Nhập **Datastore Name, Share folder name** & Tên máy chủ NFS hoặc **Địa chỉ IP** |
+Nếu đang tạo một kho dữ liệu ở cấp độ data center hoặc cluster, hãy chọn các host cần mount với kho dữ liệu. |
+Review các cấu hình đã chọn và click vào **Finish**. |
 
-NFS Post-Installation Steps|
+Bước NFS Post-Installation|
 |---|
-Validate the new NFS Datastore|
-Create a VM and verify the VM files on NFS Datastore|
+Xác thực NFS Datastore mới|
+Tạo một VM và xác minh các file VM trên NFS Datastore|
