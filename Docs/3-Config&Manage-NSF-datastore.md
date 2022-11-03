@@ -14,6 +14,7 @@
 - [NFS Storage Architecture - Định địa chỉ và Kiểm soát truy cập (Access Control) với NFS](#nfs-storage-architecture---định-địa-chỉ-và-kiểm-soát-truy-cập-access-control-với-nfs)
 - [NFS Datastore - Cấu hình](#nfs-datastore---cấu-hình)
 - [NFS Datastore Configuration & Management - Home lab](#nfs-datastore-configuration--management---home-lab)
+- [Tài liệu tham khảo](#tài-liệu-tham-khảo)
 
 # Kiến trúc vật lý vs Virtual Architecture
 - Các tùy chọn lưu trữ giúp chúng ta linh hoạt trong việc thiết lập bộ nhớ dựa trên các yêu cầu về chi phí, hiệu suất và khả năng quản lý.
@@ -87,11 +88,12 @@ vVols|FC, iSCSI|VMFS & NFS|NIC & HBA
 # vSphere Storage - Các tính năng hỗ trợ
 
 Storage Type|Boot VM|ESXI Boot from SAN|Datastore|RDM|VM Cluster|vMotion| VMware HA | VMware DRS| Storage APIs-Data Protection|
-|---|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|---|
 Local Storage|yes| No|VMFS 6|No|Yes*|Yes*|No|No|Yes|
 Fibre Channel|Yes|Yes|VMFS 6|Yes|Yes|Yes|Yes|Yes|Yes|
 iSCSI|Yes|Yes|VMFS 6|Yes|Yes|Yes|Yes|Yes|Yes|
-NAS over NFS|Yes|No|NFS3 & NFS 4.1|No|No
+NAS over NFS|Yes|No|NFS3 & NFS 4.1|No|No|Yes|Yes|Yes|Yes|
+vSAN Storage|Yes|No|vSAN|No|Yes|Yes|Yes|Yes|Yes|
 vSphere Virtual Volumes (vVols)|Yes|No|VMFS và NFS|No|Yes|Yes|Yes|Yes|Yes|
 
 - Local storage hỗ trợ một cluster máy ảo trên một host duy nhất (còn được gọi là **a cluster in a box**).
@@ -173,3 +175,8 @@ Bước NFS Post-Installation|
 |---|
 Xác thực NFS Datastore mới|
 Tạo một VM và xác minh các file VM trên NFS Datastore|
+
+
+
+# Tài liệu tham khảo
+1. https://www.youtube.com/watch?v=sErpXMXCyfY&list=PLjsBan7CwUQAFA9m2dYEL2FmeRdRiyWBD&index=16
