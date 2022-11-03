@@ -5,7 +5,7 @@
 - [Kiến trúc vật lý vs Virtual Architecture](#kiến-trúc-vật-lý-vs-virtual-architecture)
 - [vSphere Storage - Datastores](#vsphere-storage---datastores)
 - [vSphere Storage - Tổng quan](#vsphere-storage---tổng-quan)
-- [vSphere Storage Technologies](#vsphere-storage-technologies)
+- [vSphere Storage - Các công nghệ:](#vsphere-storage---các-công-nghệ)
 - [vSphere Storage - Sơ đồ khái niệm](#vsphere-storage---sơ-đồ-khái-niệm)
 - [So sánh các loại lưu trữ](#so-sánh-các-loại-lưu-trữ)
 - [vSphere Storage - Các tính năng hỗ trợ](#vsphere-storage---các-tính-năng-hỗ-trợ)
@@ -24,10 +24,10 @@
 <a href="https://imgur.com/rC9qbXQ"><img src="https://i.imgur.com/rC9qbXQ.png" title="source: imgur.com" /></a>
 
 # vSphere Storage - Datastores
-- Datastore là một đơn vị lưu trữ logic có thể sử dụng không gian đĩa trên một thiết bị vật lý hoặc trên một số thiết bị vật lý.
+- Datastore là một đơn vị lưu trữ logic có thể sử dụng không gian đĩa trên một thiết bị vật lý hoặc trên một số thiết bị vật lý. Nó gộp tất cả các thiết bị lưu trữ bên dưới hạ tầng của bạn thành một datastore đại diện duy nhất.
 - Datastore được sử dụng để chứa các tệp máy ảo (VM), Mẫu (Templates) và ISO images.
 - Một máy ảo được lưu trữ dưới dạng một tập hợp các tệp trong thư mục riêng của nó hoặc như một nhóm các đối tượng trong một datastore.
-
+- Datastore giống như một lớp trung gian giữa máy ảo và các thiết bị lưu trữ, giảm độ phức tạp về vấn đề giao tiếp.
 - vSphere hỗ trợ các loại Datastore sau:
 
 1. VM File System (VMFS)
@@ -42,27 +42,44 @@
 <a href="https://imgur.com/2fztNFq"><img src="https://i.imgur.com/2fztNFq.png" title="source: imgur.com" /></a>
 
 - ESXi hosts nên được cấu hình shared access tới datastores
-# vSphere Storage Technologies
+# vSphere Storage - Các công nghệ:
 
 - Trong môi trường vSphere, các máy chủ ESXi, vCenter hỗ trợ một số công nghệ lưu trữ sau:
 
 - **Direct Attached Storage (DAS):**
   - Các đĩa hoặc mảng lưu trữ bên trong hoặc bên ngoài (Just a Bunch of Disks -JBOD) được gắn vào máy chủ lưu trữ thông qua kết nối trực tiếp thay vì kết nối mạng.
+    - Các thiết bị lưu trữ internal hoặc external (các HDD, thiết bị lưu trữ) được gắn trực tiếp vào máy chủ qua các cổng SATA, SAS, SCSI... cung cấp hiệu suất truy cập cao.
+    - Ví dụ: Mỗi server đều có các HDD bên trong. Khi truy xuất dữ liệu trực tiếp lên HDD của chính server đó thì nó gọi là DAS
+    - DAS thường được thiết kế cho các doanh nghiệp vừa và nhỏ
+  - Ưu điểm: chi phí thấp, dễ lắp đặt, tốc độ truy suất tương đối tốt
+  - Nhược điểm: Khó mở rộng, không có tính linh hoạt.
+
 - **Fibre Channel (FC):**
   - Một giao thức truyền tải tốc độ cao được sử dụng cho SANS. Fibre Channel đóng gói các lệnh SCSI, được truyền giữa các nút Fibre Channel.
   - nút (node) Fibre Channel là một **Máy chủ**, một hệ thống lưu trữ (**storage system**) hoặc một ổ đĩa băng (tape drive).
   - Một FC Switch kết nối nhiều nút với nhau, tạo thành kết cấu trong mạng Fibre Channel.
+  - Việc truyền dữ liệu từ Server đến hệ thống lưu trữ SAN được sử dụng dựa trên các cổng quang để truyền dữ liệu: 1 GBb/s Fiber Channel, 2GB Fiber Channel, 1 GBb/s iSCSI,...
+  - Tính năng:
+    - Lưu trữ được truy cập theo Block qua SCSI
+    - Khả năng I/O với tốc độ cao
+    - Tách biệt thiết bị lưu trữ và Server
+
 - **FCOE:**
-  - Lưu lượng **Fibre Channel** được đóng gói thành các frame **Fibre Channel over Ethernet** (FCoE).
-  - Các frame FCOE này được hội tụ với các loại traffic khác trên mạng Ethernet.
+  - FCoE là 1 công nghệ mạng máy tính, nó thực hiện đóng gói thành các frame **Fibre Channel over Ethernet** (FCoE). Điều này cho phép Fibre channel sử dụng mạng Ethernet có tốc độ 10 Gigabit (hoặc cao hơn) trong khi vẫn giữ được giao thức Fibre channel.
+    - Data centers sử dụng Ethernet trên TCP/IP
+    - Fibre channel cho Storage Area Networks (SAN)
+  - Các frame FCOE này được truyền đi trên mạng Ethernet cùng với các loại traffic khác.
 - **iSCSI:**
   - Một giao thức truyền tải SCSI, cung cấp quyền truy cập vào các thiết bị lưu trữ và đi cáp qua mạng TCP/IP tiêu chuẩn.
+    - iSCSI (Internet Small Computer System Interface) là một chuẩn công nghiệp cho phép truyền tải các lệnh SCSI qua mạng IP hiện có bằng cách sử dụng giao thức TCP/IP.
   - iSCSI ánh xạ lưu trữ theo hướng block SCSI qua TCP/IP, Trình khởi tạo (Initiators), ví dụ như **iSCSI host bus adapter** (HBA) trong máy chủ ESXi, gửi lệnh SCSI đến các mục tiêu, nằm trong hệ thống lưu trữ iSCSI.
 
 - **Network Attached Storage (NAS)**
   - Storage được chia sẻ qua mạng Standard TCP/IP ở cấp hệ thống tệp.
   - Storage NAS được sử dụng để chứa các NFS datastore.
   - Giao thức NFS **không hỗ trợ** các lệnh SCSI.
+    - Ưu điểm: Khả năng mở rộng tương đối dễ ràng
+    - Nhược điểm: Việc truy xuất dữ liệu phụ thuộc vào đường truyền mạng nội bộ. Nếu dữ liệu lớn sẽ làm nghẽn đường truyền. Hỗ trợ lưu trữ theo dạng file chứ không phải dạng block nên không đáp ứng được các dịch vụ cần cấu trúc lưu trữ thoe dạng Block.
 - FCOE, ISCSI và NAS có thể chạy các mạng tốc độ cao (**high-speed network**), tăng mức hiệu suất lưu trữ và đảm bảo đủ băng thông.
 
 - Với đủ băng thông, nhiều loại lưu lượng giao thức băng thông cao có thể cùng tồn tại trên cùng một mạng.
