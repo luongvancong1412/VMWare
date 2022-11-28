@@ -1,6 +1,18 @@
 <h1>Session 3: iSCSI Storage Configuration & VMFS Datastore</h1>
 
-# VMFS Datastore - Overview
+<h2> Mục lục</h2>
+
+- [VMFS Datastore - Tổng quan](#vmfs-datastore---tổng-quan)
+- [So sánh VMFS5 và VMFS6](#so-sánh-vmfs5-và-vmfs6)
+- [iSCSI Storage Architecture](#iscsi-storage-architecture)
+  - [iSCSI Components](#iscsi-components)
+  - [iSCSI Addressing](#iscsi-addressing)
+  - [iSCSI Initiators](#iscsi-initiators)
+- [iSCSI Storage Configuration and Create a VMFS Datastore - Lab](#iscsi-storage-configuration-and-create-a-vmfs-datastore---lab)
+- [Tài liệu tham khảo](#tài-liệu-tham-khảo)
+
+
+# VMFS Datastore - Tổng quan
 
 - VMFS là một hệ thống file được nhóm thành cụm trong đó nhiều máy chủ ESXi có thể đọc và ghi đồng thời vào cùng một thiết bị lưu trữ.
 - Hệ thống file cluster cung cấp các dịch vụ dựa trên ảo hoá:
@@ -38,95 +50,94 @@ Lưu trữ vMotion trên các loại kho dữ liệu khác nhau|Có|Có
 Tính sẵn sàng cao và khả năng chịu lỗi|Có|Có
 DRS và Lưu trữ DRS|Có|Có
 RDM|Có|Có
-# iSCSI Storage Architecture - Components
-<a href="https://imgur.com/YEtQmJl"><img src="https://i.imgur.com/YEtQmJl.png" title="source: imgur.com" /></a>
-
-- An iSCSI SAN consists of an iSCSI storage system, which contains one or more LUNs and one or more storage processors (SPs). Communication between the host and the storage array occurs over a TCP/IP network.
-
-- The ESXi host is configured with an iSCSI initiator. An initiator can be hardware-based, in which case the initiator is an iSCSI host bus adapter (HBA).
-
-- The initiator can also be software-based; this is known as the iSCSI software initiator.
-
-- An initiator transmits SCSI commands over the IP network. A target receives SCSI commands from the IP network. You can have multiple initiators and targets in your ISCSI network. ISCSI Is SAN oriented because:
-  - The initiator finds one or more targets
-  - A target presents LUNs to the initiator
-  - The initiator sends SCSI commands to a target
-
-- An initiator resides in the ESXi host. Targets reside in the storage arrays that are supported by the ESXi host.
-- iSCSI arrays can use various mechanisms, including IP address, subnets, and authentication requirements, to restrict access to targets from hosts.
-
-# iSCSI Storage Architecture - Addressing
-
-- Other than the standard IP addresses, iSCSI targets are identified by names as well
-- The iSCSI Qualified Name (IQN) format takes the form iqn.yyyy-mm.naming-authority:unique name
-
-- The main addressable, discoverable entity is an iSCSI node. An iSCSI node can be an initiator or a target. An iSCSI node requires a name so that storage can be managed regardless of address.
-
-- The iSCSI name can use one of the following formats:
-  - The iSCSI qualified name (IQN) or the extended unique identifier (EUI).
-
-- The IQN can be up to 255 characters long. The naming convention
-  - The prefix "ign"
-  - A date code specifying the year and month in which the organization registered the domain or subdomain name used as the naming authority string
-  - The organizational naming authority string, which consists of a valid, reversed domain or subdomain name
-  - (Optional) A colon (:), followed by a string of the assigning organization's choosing, which must make each assigned ISCSI name unique
-
-- The EUI naming convention
-  - The prefix "eul,"
-  - followed by a 16-character name.
-  - The name includes 24 bits for a company name that is assigned by the IEEE and 40 bits for a unique ID, such as a serial number.
-
-# VMFS Datastore - Features and Functionalities
 # iSCSI Storage Architecture
 ## iSCSI Components
+<a href="https://imgur.com/YEtQmJl"><img src="https://i.imgur.com/YEtQmJl.png" title="source: imgur.com" /></a>
+
+- Một iSCSI SAN bao gồm một hệ thống lưu trữ iSCSI, chứa một hoặc nhiều LUN và một hoặc nhiều bộ xử lý lưu trữ (SP - Storage Processors). Máy chủ và mảng lưu trữ giao tiếp qua mạng TCP/IP.
+
+- Máy chủ ESXi được cấu hình với bộ khởi tạo iSCSI (iSCSI initiator). Initiator có thể dựa trên phần cứng, trong trường hợp đó Initiator là host bus adapter iSCSI (HBA).
+
+- Initiator cũng có thể dựa trên phần mềm; đây được gọi là trình khởi tạo phần mềm iSCSI (iSCSI software initiator).
+
+- Một Initiator truyền các lệnh SCSI qua mạng IP. Mục tiêu () nhận lệnh SCSI từ mạng IP. Có thể có nhiều initiator và mục tiêu (target) trong mạng ISCSI. ISCSI được định hướng theo SAN vì:
+  - Intiator tìm thấy một hoặc nhiều mục tiêu (target)
+  - Một Target LUN (Logical Unit Number) cho initiator
+  - Initiator gửi lệnh SCSI đến mục tiêu
+
+- Initiator nằm trong máy chủ ESXi. Các mục tiêu (target) nằm trong mảng lưu trữ được máy chủ ESXi hỗ trợ.
+- Các mảng iSCSI có thể sử dụng nhiều cơ chế khác nhau, bao gồm địa chỉ IP, mạng con và các yêu cầu xác thực để hạn chế quyền truy cập vào các Target từ máy chủ.
+
 ## iSCSI Addressing
+- Khác với các địa chỉ IP tiêu chuẩn, các Target iSCSI cũng được xác định bằng tên
+- Định dạng iSCSI Qualified Name (IQN) có dạng: `iqn.yyyy-mm.naming-authority:unique name`
+
+- Node iSCSI có thể là nút Initiator hoặc Target. Một nút iSCSI yêu cầu một tên để có thể quản lý bộ nhớ không cần địa chỉ.
+
+- `Tên iSCSI` có thể sử dụng một trong các định dạng sau:
+  - iSCSI qualified name (IQN) hoặc extended unique identifier (EUI).
+
+- IQN có thể dài tối đa 255 ký tự. Quy ước đặt tên
+  - Prefix: "ign"
+  - Date: xác định năm và tháng mà tổ chức đã đăng ký tên miền hoặc tên miền phụ được sử dụng làm naming authority string
+  - Organizational naming authority string: bao gồm một tên miền hoặc tên miền phụ hợp lệ, bị đảo ngược
+  - (Tùy chọn) Dấu hai chấm (:), theo sau là một chuỗi của tổ chức định ra, mỗi tên ISCSI là duy nhất
+
+- Quy ước đặt tên EUI:
+  - Prefix: "eul,"
+  - Theo sau là tên gồm 16 ký tự.
+  - Tên bao gồm 24 bit (tên công ty) được gán bởi IEEE và 40 bit cho ID duy nhất, chẳng hạn như số serial.
+
 ## iSCSI Initiators
-- We must set up software or hardware iSCSI adapters before an ESXi host can work with iSCSI Storage.
-- To access iSCSI targets, Our ESXi hosts uses iSCSI initiators
+- Phải thiết lập Adapter iSCSI phần mềm hoặc phần cứng trước khi host ESXi có thể hoạt động với iSCSI Storage.
+- Để truy cập các Target iSCSI, host ESXi sử dụng iSCSI initiator.
 
 <a href="https://imgur.com/CVrjSO6"><img src="https://i.imgur.com/CVrjSO6.png" title="source: imgur.com" /></a>
 
+- iSCSI initiator chuyển các yêu cầu và phản hồi SCSI giữa host và Tagert iSCSI được đóng gói trong giao thức iSCSI.
+- ESXi hỗ trợ hai loại initiator: 
+  - software iSCSI
+  - hardware iSCSI
+- Software iSCSI initiator là mã VMware được tích hợp sẵn trong VMkernel. Initiator cho phép host kết nối với thiết bị lưu trữ iSCSI thông qua `standard network adapters`. Phần mềm iSCSI Initiator xử lý quá trình iSCSI trong khi giao tiếp với network adapter. Với phần mềm iSCSI Initiator, chúng ta có thể sử dụng công nghệ iSCSI mà không cần mua phần cứng chuyên dụng.
 
-## ISCSI Storage Architecture - iSCSI Initiators
-
-- The iSCSI initiators transport SCSI requests and responses, encapsulated into the iSCSI protocol, between the host and the iSCSI target.
-- ESXi supports two types of initiators: software iSCSI and hardware iSCSI.
-- A software iSCSI initiator is VMware code built in to the VMkernel. The initiator enables our host to connect to the iSCSI storage device through standard network adapters. The software iSCSI initiator handles iSCSI processing while communicating with the network adapter. With the software iSCSI initiator, we can use iSCSI technology without purchasing specialized hardware.
-
-- A hardware iSCSI initiator is a specialized third-party adapter capable of accessing iSCSI storage over TCP/IP.
-- Hardware iSCSI initiators are divided into two categories: dependent hardware iSCSI and independent hardware iSCSI.
-- A dependent hardware iSCSI initiator, or adapter, depends on VMware networking and on iSCSI configuration and management interfaces that are provided by VMware. This type of adapter presents a standard network adapter and iSCSI offload function for the same port.
-- An independent hardware ISCSI adapter handles all iSCSI and network processing and management for your ESXi host
-- The final decision on the storage adapter to purchase can be driven by many factors cost, failover capabilities, CPU overhead, and whether booting from SAN is required
+- Hardware iSCSI initiator là adapter chuyên dụng của bên thứ ba có khả năng truy cập bộ lưu trữ iSCSI qua TCP/IP.
+- Hardware iSCSI initiator được chia thành hai loại: dependent (phụ thuộc) hardware iSCSI và independent (độc lập) hardware iSCSI.
+- Dependent hardware iSCSI initiator hoặc adapter phụ thuộc vào mạng VMware và cấu hình iSCSI và các giao diện quản lý do VMware cung cấp. Loại bộ điều hợp này trình bày một network adapter tiêu chuẩn và chức năng giảm tải iSCSI (iSCSI offload function) cho cùng một cổng.
+-  Independent (độc lập) hardware ISCSI adapter xử lý tất cả iSCSI và network processing cũng như quản lý cho host ESXi
 
 # iSCSI Storage Configuration and Create a VMFS Datastore - Lab
 
-iSCSI Storage Configuration and Create a VMFS Datastore
+Cấu hình iSCSI Storage và tạo một VMFS Datastore
 
 |iSCSI Storage > Pre-Configuration Steps|
 |---|
-|Setup iSCSI Storage Environment|
-|Install and configure any iSCSI adapters that our storage requires|
-|Create a VMKernel Portgroup|
-|Get the ISCSI Storage Addressing or IP Address & LUN details|
-|ISCSI SAN-required Credentials (CHAP)|
-|Verify that storage devices we are planning to use for our datastores are available.|
+|Thiết lập môi trường iSCSI Storage|
+|Cài đặt và cấu hình iSCSI adapters|
+|Tạo một VMKernel Portgroup|
+|Nhận địa chỉ ISCSI Storage hoặc địa chỉ IP & các chi tiết LUN|
+|Thông tin đăng nhập (CHAP) ISCSI SAN-required|
+|Xác định rằng các thiết bị lưu trữ định sử dụng cho kho dữ liệu|
 
-|iSCSI SAN> Configuration Procedure|
+|iSCSI SAN > Configuration Procedure|
 |---|
-|Add iSCSI Target Server role on Windows Server 2022|
-Create a folder or disk and provide iSCSI Storage permissions (Optional)
-Update the Dynamic Discovery Target details
-To discover newly added storage devices, perform a rescan.
-In the vSphere Client object navigator, browse to a host, a cluster, or a data center 
-From the right-click menu, select Storage > New Datastore
-Select VMFS as the datastore type
-Enter the Datastore Name and specify the datastore version.
-If we are creating a datastore at the data center or cluster level, select hosts that mount the datastore.(Optional)
-Review the configuration options and click Finish.
+|Thêm role iSCSI Target Server trên Windows Server 2022|
+|Tạo một thư mục hoặc disk và cung cấp quyền lưu trữ iSCSI (Tùy chọn)|
+|Update chi tiết Dynamic Discovery Target|
+|Để khám phá các thiết bị lưu trữ mới được thêm vào, cần thực hiện `rescan`.|
+|Trong trình điều hướng đối tượng vSphere Client, duyệt đến 1 host, 1 cluster hoặc data center|
+|Từ menu chuột phải, chọn Storage > New Datastore|
+|Chọn VMFS làm datastore type|
+|Nhập Datastore name và chỉ định phiên bản datastore.|
+|Nếu đang tạo datastore ở cấp data center hoặc cluster, hãy chọn host gắn kho dữ liệu. (Tùy chọn)
+|Xem lại các tùy chọn cấu hình và click vào `Finish`.|
 
-|iSCSI SAN> Post-Installation Steps|
+|iSCSI SAN > Post-Installation Steps|
 |---|
-Validate the new VMFS Datastore on the iSCSI-based storage device
-Make sure that new VMFS datastore is available to all hosts that have access to the iSCSI Target device.
-Create a VM and verify the VM files on VMFS Datastore.
+|Xác thực Datastore VMFS mới trên thiết bị lưu trữ dựa trên iSCSI|
+|Đảm bảo rằng Datastore VMFS mới có sẵn cho tất cả các host có quyền truy cập vào thiết bị iSCSI Target.|
+|Tạo một máy ảo và xác minh các tệp máy ảo trên VMFS Datastore.|
+
+# Tài liệu tham khảo
+
+1. https://www.youtube.com/watch?v=yRE3eD5mcUQ&list=PLjsBan7CwUQAFA9m2dYEL2FmeRdRiyWBD&index=18
+2. 
