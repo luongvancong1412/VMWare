@@ -1,14 +1,6 @@
 #!/bin/bash
-#
-# credits: based provied from https://github.com/tierrie/linux-scripts/blob/main/prepare-ubuntu-20.04.02-template.sh 
-#
-# synopsis: script patches an ubuntu machine, resets the hostname, resets the machine-id
-#           and prepares for it to be templatized for vm
-#           tested on ubuntu 22.04 LTS
-#
-# credits: base provided from https://github.com/jimangel/ubuntu-18.04-scripts
-#
 
+#neu khong root thi stop
 if [ `id -u` -ne 0 ]; then
 	echo Need sudo
 	exit 1
@@ -16,6 +8,7 @@ fi
 
 set -v
 
+userdel sun
 
 # install latest packages and securit updates
 sudo apt update -y
@@ -27,6 +20,7 @@ sudo apt install jq vim git dos2unix zip unzip curl wget dnsutils traceroute swa
 
 # install VMware agent package
 sudo apt install -y open-vm-tools
+vmware-toolbox-cmd config set deployPkg enable-custom-scripts true
 
 # cleanup
 sudo apt autoremove -y
@@ -71,18 +65,26 @@ cat << 'EOL' | sudo tee /etc/rc.local
 #
 # By default this script does nothing.
 
-# dynamically create hostname (optional)
-if hostname | grep localhost; then
-    hostnamectl set-hostname "$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
-fi
 
 test -f /etc/ssh/ssh_host_dsa_key || dpkg-reconfigure openssh-server
-exit 0
 
+#!/bin/sh
+id | grep root 1>/dev/null 2>&1
+if test 0 = 0; then
+   growpart /dev/sda 3 > /dev/null 2>&1
+   pvresize /dev/sda3 > /dev/null 2>&1
+   lvextend -l +100%FREE -r /dev/mapper/ubuntu--vg-ubuntu--lv > resize.txt 2>&1; cat resize.txt | grep GiB
+else
+  echo
+fi
+
+exit 0
 EOL
 
 # make sure the script is executable
 sudo chmod +x /etc/rc.local
+systemctl start rc-local.service
+systemctl enable rc-local
 
 # reset hostname
 # prevent cloudconfig from preserving the original hostname
@@ -106,20 +108,7 @@ sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 # cleans out all of the cloud-init cache / logs - this is mainly cleaning out networking info
 sudo cloud-init clean --logs
 
-# remove netplan file
-sudo rm /etc/netplan/*.yaml
-
 # cleanup shell history
 cat /dev/null > ~/.bash_history && history -c
 
-echo '
- ____                   _                 _ 
-/ ___| _   _ _ __   ___| | ___  _   _  __| |
-\___ \| | | | '_ \ / __| |/ _ \| | | |/ _` |
- ___) | |_| | | | | (__| | (_) | |_| | (_| |
-|____/ \__,_|_| |_|\___|_|\___/ \__,_|\__,_|
-                                            
-********************************************
-Website: https://suncloud.vn/
-********************************************' >> /etc/motd
 #echo "run 'sudo shutdown -h now'"
