@@ -78,6 +78,7 @@ fi
 
 test -f /etc/ssh/ssh_host_dsa_key || dpkg-reconfigure openssh-server
 exit 0
+
 EOL
 
 # make sure the script is executable
@@ -111,4 +112,14 @@ sudo rm /etc/netplan/*.yaml
 # cleanup shell history
 cat /dev/null > ~/.bash_history && history -c
 
-echo "run 'sudo shutdown -h now'"
+echo '
+ ____                   _                 _ 
+/ ___| _   _ _ __   ___| | ___  _   _  __| |
+\___ \| | | | '_ \ / __| |/ _ \| | | |/ _` |
+ ___) | |_| | | | | (__| | (_) | |_| | (_| |
+|____/ \__,_|_| |_|\___|_|\___/ \__,_|\__,_|
+                                            
+********************************************
+Website: https://suncloud.vn/
+********************************************' >> /etc/motd
+#echo "run 'sudo shutdown -h now'"
