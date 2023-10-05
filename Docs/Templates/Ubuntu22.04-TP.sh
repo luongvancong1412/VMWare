@@ -72,28 +72,17 @@ sudo chmod +x /etc/rc.local
 systemctl start rc-local.service
 systemctl enable rc-local
 
-# reset hostname
-# prevent cloudconfig from preserving the original hostname
 sudo sed -i 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.cfg
 sudo truncate -s0 /etc/hostname
 sudo hostnamectl set-hostname localhost
 
-# disable swap
 sudo swapoff --all
 sudo sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 
-# make machine-id unique and symlink it - ubuntu 20.04 uses machine id in the dhcp identifier and not mac addresses
 sudo truncate -s 0 /etc/machine-id
 sudo rm /var/lib/dbus/machine-id
 sudo ln -s /etc/machine-id /var/lib/dbus/machine-id
 
-# set dhcp to use mac - this is a little bit of a hack but I need this to be placed under the active nic settings
-# also look in /etc/netplan for other config files
-#sudo sed -i 's/optional: true/dhcp-identifier: mac/g' /etc/netplan/50-cloud-init.yaml
-
-# cleans out all of the cloud-init cache / logs - this is mainly cleaning out networking info
 sudo cloud-init clean --logs
 
-# cleanup shell history
 cat /dev/null > ~/.bash_history && history -c
-#echo "run 'sudo shutdown -h now'"
