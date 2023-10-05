@@ -52,8 +52,7 @@ sudo rm -f /etc/ssh/ssh_host_*
 
 # add check for ssh keys on reboot...regenerate if neccessary
 cat << 'EOL' | sudo tee /etc/rc.local
-#!/bin/sh -e
-
+#!/bin/sh
 test -f /etc/ssh/ssh_host_dsa_key || dpkg-reconfigure openssh-server
 
 id | grep root 1>/dev/null 2>&1
@@ -64,8 +63,6 @@ if test 0 = 0; then
 else
   echo
 fi
-
-exit 0
 EOL
 
 # make sure the script is executable
