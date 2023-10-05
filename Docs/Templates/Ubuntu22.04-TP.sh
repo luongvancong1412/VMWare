@@ -110,5 +110,4 @@ sudo cloud-init clean --logs
 
 # cleanup shell history
 cat /dev/null > ~/.bash_history && history -c
-
 #echo "run 'sudo shutdown -h now'"
